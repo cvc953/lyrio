@@ -5,7 +5,14 @@ class SongTile extends StatelessWidget {
   final Song song;
   final VoidCallback onDownload;
 
-  const SongTile({super.key, required this.song, required this.onDownload});
+  final bool downloading;
+
+  const SongTile({
+    super.key,
+    required this.song,
+    required this.onDownload,
+    required this.downloading,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +79,19 @@ class SongTile extends StatelessWidget {
           const SizedBox(width: 12),
 
           // Download button
-          IconButton(
-            onPressed: onDownload,
-            icon: const Icon(Icons.download_rounded, color: Colors.blueAccent),
-          ),
+          downloading
+              ? const SizedBox(
+                  width: 28,
+                  height: 28,
+                  child: CircularProgressIndicator(color: Colors.orange),
+                )
+              : IconButton(
+                  onPressed: onDownload,
+                  icon: const Icon(
+                    Icons.download_rounded,
+                    color: Colors.orangeAccent,
+                  ),
+                ),
         ],
       ),
     );

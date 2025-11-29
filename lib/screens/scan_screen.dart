@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/folder_picker.dart';
 import '../services/file_service.dart';
 import '../services/lrclib_service.dart';
-import '../widgets/song_title.dart';
+import '../widgets/song_tile.dart';
 import '../widgets/gradient_background.dart';
 import '../models/song.dart';
 import '../utils/permissions.dart';
@@ -23,6 +23,8 @@ class _ScanScreenState extends State<ScanScreen> {
   double progress = 0;
 
   String? folderPath;
+
+  final Set<String> downloadingSongs = {};
 
   @override
   void initState() {
@@ -73,6 +75,8 @@ class _ScanScreenState extends State<ScanScreen> {
   }
 
   Future<void> downloadSong(Song song) async {
+    setState(() => downloadingSongs.add(song.path));
+
     final result = await LRCLibService.getLyrics(
       artist: song.artist,
       title: song.title,
@@ -90,6 +94,7 @@ class _ScanScreenState extends State<ScanScreen> {
         await FileService.saveLRC(song.path, lyrics);
       }
     }
+    setState(() => downloadingSongs.remove(song.path));
   }
 
   @override
@@ -140,6 +145,7 @@ class _ScanScreenState extends State<ScanScreen> {
                         final song = songs[i];
                         return SongTile(
                           song: song,
+                          downloading: downloadingSongs.contains(song.path),
                           onDownload: () => downloadSong(song),
                         );
                       },
