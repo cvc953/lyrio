@@ -7,6 +7,7 @@ import '../widgets/gradient_background.dart';
 import '../models/song.dart';
 import '../utils/permissions.dart';
 import '../utils/app_storage.dart';
+import '../utils/lyrics_utils.dart';
 
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
@@ -80,7 +81,14 @@ class _ScanScreenState extends State<ScanScreen> {
     );
 
     if (result != null) {
-      await FileService.saveLRC(song.path, result.syncedLyrics);
+      final lyrics = pickBestLyrics(
+        result.syncedLyrics ?? "",
+        result.plainLyrics ?? "",
+      );
+
+      if (lyrics.isNotEmpty) {
+        await FileService.saveLRC(song.path, lyrics);
+      }
     }
   }
 

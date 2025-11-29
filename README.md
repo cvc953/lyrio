@@ -1,6 +1,7 @@
 
 ````markdown
-# 📱 **Lyrio – Music Lyrics Downloader (Flutter)**
+
+## 📱 **Lyrio – Music Lyrics Downloader (Flutter)**
 
 **Lyrio** es una aplicación Android construida con **Flutter** que escanea tu biblioteca musical, lee metadata real de audio (ID3/FLAC/M4A/WAV) y descarga automáticamente letras sincronizadas (`.lrc`) desde **LRCLIB**.  
 Funciona como un **LRCGET para Android**, pero moderno, rápido y completamente libre.
@@ -23,7 +24,7 @@ Funciona como un **LRCGET para Android**, pero moderno, rápido y completamente 
 
 ## 🏗 Tecnologías utilizadas
 
-- **Flutter 3.22+**
+- **Flutter 3.35+**
 - **Dart 3.9+**
 - [`metadata_god`](https://pub.dev/packages/metadata_god) – lectura de metadata  
 - [`file_picker`](https://pub.dev/packages/file_picker) – selección de carpetas  
@@ -41,7 +42,7 @@ Funciona como un **LRCGET para Android**, pero moderno, rápido y completamente 
 ```bash
 git clone https://github.com/tuusuario/lyrio.git
 cd lyrio
-````
+```
 
 ### 2. Instalar dependencias
 
