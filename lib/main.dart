@@ -6,5 +6,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MetadataGod.initialize(); // 🔥 obligatorio
 
-  runApp(const HomeScreen());
+  runApp(const MyApp()); // <-- vuelve tu estructura original
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const HomeScreen(),
+    );
+  }
 }
