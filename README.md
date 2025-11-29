@@ -87,7 +87,7 @@ flutter run
 Se utiliza la API pública de LRCLIB:
 
 ```
-https://lrclib.net/api/get?artist=ARTIST&title=TITLE
+https://lrclib.net/api/get?artist_name=ARTIST&track_name=TITLE&album_name=ALBUM_NAME&duration=DURATION
 ```
 
 Campos importantes:
