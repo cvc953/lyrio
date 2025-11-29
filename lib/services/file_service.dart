@@ -3,6 +3,7 @@ import 'package:metadata_god/metadata_god.dart';
 import '../models/song.dart';
 
 class FileService {
+  static List<Song> librarySongs = [];
   static Future<List<Song>> scanMusic(String rootPath) async {
     final dir = Directory(rootPath);
     List<Song> songs = [];
@@ -53,7 +54,7 @@ class FileService {
         }
       }
     }
-
+    librarySongs = songs;
     return songs;
   }
 
