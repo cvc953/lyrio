@@ -1,41 +1,49 @@
 
-````markdown
+---
 
-## 📱 **Lyrio – Music Lyrics Downloader (Flutter)**
+# 🎵 **Lyrio – Descarga letras sincronizadas (.lrc) para tu música**
 
-**Lyrio** es una aplicación Android construida con **Flutter** que escanea tu biblioteca musical, lee metadata real de audio (ID3/FLAC/M4A/WAV) y descarga automáticamente letras sincronizadas (`.lrc`) desde **LRCLIB**.  
-Funciona como un **LRCGET para Android**, pero moderno, rápido y completamente libre.
+### *Un LRCGET moderno para Android, hecho en Flutter*
+
+[![Flutter](https://img.shields.io/badge/Flutter-3.35+-blue?logo=flutter)](https://flutter.dev)
+[![Platform](https://img.shields.io/badge/Platform-Android-green?logo=android)]()
+[![License](https://img.shields.io/badge/License-MIT-yellow)]()
+
+**Lyrio** escanea tu biblioteca musical, obtiene metadata real de los archivos de audio y descarga automáticamente letras sincronizadas (.lrc) usando **LRCLIB**.
+
+Rápido. Simple. Open Source.
 
 ---
 
-## ⭐ Características
+## 🔥 **Características principales**
 
-- 📁 **Selector de carpetas** (Storage Access Framework – compatible con Android 11+)  
-- 🔍 **Escaneo inteligente** de música (`.mp3`, `.flac`, `.m4a`, `.wav`)  
-- 🧠 **Lectura de metadata real** con `metadata_god`  
-- 🎵 **Descarga de letras sincronizadas** desde **LRCLIB API**  
-- 📥 **Descargar todas las letras con un solo clic**  
-- 💾 **Guarda la carpeta seleccionada automáticamente**  
-- 🗂 Genera archivos `.lrc` junto a cada canción  
-- 🔄 Barra de progreso durante la descarga masiva  
-- 📱 Interfaz simple y rápida  
-
----
-
-## 🏗 Tecnologías utilizadas
-
-- **Flutter 3.35+**
-- **Dart 3.9+**
-- [`metadata_god`](https://pub.dev/packages/metadata_god) – lectura de metadata  
-- [`file_picker`](https://pub.dev/packages/file_picker) – selección de carpetas  
-- `shared_preferences` – almacenamiento local  
-- `http` – consumo de la API de LRCLIB  
-- `permission_handler` – permisos Android  
-- `path_provider` – rutas internas  
+* 📁 Selector de carpetas compatible con **Android 11+** (SAF)
+* 🔍 Escaneo inteligente de música (`mp3`, `flac`, `m4a`, `wav`)
+* 🧠 Lee metadata **real** con `metadata_god`
+* 🎵 Descarga **automática** de letras sincronizadas desde LRCLIB
+* 📥 **Descargar todas las letras con un solo clic**
+* 💾 Guarda la carpeta seleccionada automáticamente
+* ⏳ Progreso en tiempo real durante descarga masiva
+* 📂 Los `.lrc` se guardan junto a la canción
+* 🎨 Interfaz minimalista y rápida
 
 ---
 
-## 📥 Instalación
+## 🛠 **Tecnologías utilizadas**
+
+| Tecnología             | Descripción                 |
+| ---------------------- | --------------------------- |
+| **Flutter 3.35+**      | Framework principal         |
+| **metadata_god**       | Lectura de ID3/FLAC/M4A/WAV |
+| **file_picker**        | Selección de carpetas       |
+| **permission_handler** | Manejo de permisos Android  |
+| **shared_preferences** | Configuración persistente   |
+| **http**               | API de LRCLIB               |
+| **path_provider**      | Rutas internas              |
+
+---
+
+## 📥 **Instalación**
 
 ### 1. Clonar repositorio
 
@@ -58,36 +66,38 @@ flutter run
 
 ---
 
-## 🔧 Configuración Android
+## 📱 **Permisos Android requeridos**
 
-Asegúrate de incluir en `android/app/src/main/AndroidManifest.xml`:
+`android/app/src/main/AndroidManifest.xml`:
 
 ```xml
-<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
+<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 ```
 
-Lyrio utiliza SAF, por lo que es compatible con Android 10, 11, 12, 13 y 14.
+✔ Compatible con Android 10–14
+✔ Usa SAF, por lo que funciona incluso con restricciones modernas
 
 ---
 
-## 🌐 API utilizada: LRCLIB
+## 🌐 **API utilizada: LRCLIB**
 
-Lyrio utiliza la API pública de **LRCLIB**:
+Se utiliza la API pública de LRCLIB:
 
 ```
 https://lrclib.net/api/get?artist=ARTIST&title=TITLE
 ```
 
-Parámetros devueltos:
+Campos importantes:
 
-* `syncedLyrics` → letra sincronizada para `.lrc`
+* `syncedLyrics` → letra con timestamps (para .lrc)
 * `plainLyrics` → letra sin sincronizar
 
 ---
 
-## 📂 Estructura del proyecto
+## 📂 **Estructura del proyecto**
 
 ```
 lib/
@@ -108,43 +118,51 @@ lib/
 
 ---
 
-## 🚀 Cómo usar Lyrio
+## 🚀 **Cómo usar Lyrio**
 
 1. Abre la app
 2. Pulsa **“Seleccionar carpeta”**
-3. Elige tu carpeta de música (Music u otra)
-4. Pulsa **“Escanear”**
-5. Verás una lista de canciones con metadata real
-6. Puedes:
+3. Elige tu carpeta de música
+4. Escanea tus archivos de audio
+5. Obtén metadata real
+6. Descarga letras:
 
-   * Descargar la letra individual
-   * O pulsar **“Descargar todas las letras”** para hacerlo masivamente
-7. Los archivos `.lrc` se guardan junto al archivo de audio original
+   * Individualmente
+   * **O todas con un clic**
+7. Los archivos `.lrc` se guardan automáticamente junto a cada canción
 
 ---
 
-## 🎯 Roadmap / Próximas características
+## 🧭 **Roadmap**
 
-* 🎨 UI estilo Musixmatch
+* 🎨 Rediseño completo estilo Musixmatch
 * 🎵 Mostrar carátula del álbum
-* ⚡ Cache de metadata para aperturas instantáneas
-* 🔄 Actualizador automático de letras
-* 👀 Editor de `.lrc` integrado
-* ☁️ Integración con nubes (Drive / Dropbox)
+* ⚡ Cache de metadata
+* 🔁 Actualización automática de letras
+* ✏️ Editor de `.lrc` integrado
+* ☁️ Integración con Drive / Dropbox
 
 ---
 
-## 🤝 Contribuciones
+## 🤝 **Contribuciones**
 
-Las contribuciones son bienvenidas.
-Puedes abrir Issues o Pull Requests con mejoras o correcciones.
-
----
-
-## 📜 Licencia
-
-Este proyecto está bajo la licencia **MIT**.
-Puedes usarlo, modificarlo y distribuirlo libremente.
+¡Las contribuciones son bienvenidas!
+Puedes abrir Issues o Pull Requests en GitHub.
 
 ---
 
+## 📜 **Licencia**
+
+Distribuido bajo licencia **MIT**.
+Libre para usar, modificar y compartir.
+
+---
+
+Si quieres, también puedo generarte:
+
+✅ Logo para la app
+✅ Capturas falsas (mockups) para el README
+✅ Un workflow de GitHub Actions para compilar APK automáticamente
+✅ Un changelog o releases automáticos
+
+¿Quieres alguna de estas cosas?
