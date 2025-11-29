@@ -4,6 +4,9 @@ import 'library_screen.dart';
 import 'lyrics_screen.dart';
 import 'search_screen.dart';
 import 'more_screen.dart';
+import '../utils/default_music_path.dart';
+import '../utils/app_storage.dart';
+import '../services/file_service.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -22,8 +25,57 @@ class _MainScreenState extends State<MainScreen> {
     MoreScreen(),
   ];
 
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeLibrary();
+  }
+
+  Future<void> _initializeLibrary() async {
+    final firstRun = await AppStorage.isFirstRun();
+    String? folder = await AppStorage.loadFolder();
+
+    if (firstRun || folder == null) {
+      folder = DefaultMusicPath.defaultPath;
+      await AppStorage.saveFolder(folder);
+      await AppStorage.setFirstRunFalse();
+    }
+
+    // escaneo automático
+    await FileService.scanMusic(folder);
+
+    setState(() {
+      _loading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Si está cargando (primer escaneo automático)
+    if (_loading) {
+      return const GradientBackground(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(color: Colors.white),
+                SizedBox(height: 20),
+                Text(
+                  "Escaneando tu música...",
+                  style: TextStyle(fontSize: 18, color: Colors.white70),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    // Si YA terminó de cargar
     return GradientBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,

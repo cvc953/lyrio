@@ -17,4 +17,16 @@ class AppStorage {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(folderKey);
   }
+
+  static const String firstRunKey = "first_run";
+
+  static Future<bool> isFirstRun() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(firstRunKey) ?? true;
+  }
+
+  static Future<void> setFirstRunFalse() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(firstRunKey, false);
+  }
 }
