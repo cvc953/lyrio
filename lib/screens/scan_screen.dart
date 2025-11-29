@@ -150,7 +150,7 @@ class _ScanScreenState extends State<ScanScreen> {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: downloadAll,
-          backgroundColor: Colors.orange,
+          backgroundColor: Colors.blue,
           label: const Text("Descargar todo"),
           icon: const Icon(Icons.download),
         ),

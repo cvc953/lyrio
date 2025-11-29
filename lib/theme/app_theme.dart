@@ -9,7 +9,11 @@ class AppTheme {
     ),
     useMaterial3: true,
     textTheme: const TextTheme(
-      titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+      titleLarge: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
       bodyLarge: TextStyle(fontSize: 14),
       bodyMedium: TextStyle(fontSize: 12, color: Colors.white70),
     ),
