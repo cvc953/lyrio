@@ -57,6 +57,23 @@ class _ScanScreenState extends State<ScanScreen> {
     setState(() => loading = false);
   }
 
+  Future<void> resetFolder() async {
+    await AppStorage.clearFolder();
+
+    setState(() {
+      folderPath = null;
+      songs = [];
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          "Carpeta restablecida. Selecciona una nueva desde el menú.",
+        ),
+      ),
+    );
+  }
+
   Future<void> downloadAll() async {
     setState(() {
       downloadingAll = true;
@@ -102,9 +119,34 @@ class _ScanScreenState extends State<ScanScreen> {
     return GradientBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
+
         appBar: AppBar(
           title: const Text("Tus canciones"),
           backgroundColor: Colors.transparent,
+          actions: [
+            PopupMenuButton<String>(
+              icon: const Icon(Icons.more_vert, color: Colors.white),
+              onSelected: (value) {
+                if (value == "pick") pickFolder();
+                if (value == "scan") scan();
+                if (value == "reset") resetFolder();
+              },
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: "pick",
+                  child: Text("Seleccionar carpeta"),
+                ),
+                const PopupMenuItem(
+                  value: "scan",
+                  child: Text("Escanear carpeta"),
+                ),
+                const PopupMenuItem(
+                  value: "reset",
+                  child: Text("Restablecer carpeta"),
+                ),
+              ],
+            ),
+          ],
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: downloadAll,
@@ -114,17 +156,6 @@ class _ScanScreenState extends State<ScanScreen> {
         ),
         body: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: pickFolder,
-                  child: const Text("Seleccionar carpeta"),
-                ),
-                const SizedBox(width: 10),
-                ElevatedButton(onPressed: scan, child: const Text("Escanear")),
-              ],
-            ),
             const SizedBox(height: 10),
             if (downloadingAll)
               Padding(

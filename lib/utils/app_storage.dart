@@ -12,4 +12,9 @@ class AppStorage {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(folderKey);
   }
+
+  static Future<void> clearFolder() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(folderKey);
+  }
 }
