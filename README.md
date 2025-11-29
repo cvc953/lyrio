@@ -157,12 +157,3 @@ Distribuido bajo licencia **MIT**.
 Libre para usar, modificar y compartir.
 
 ---
-
-Si quieres, también puedo generarte:
-
-✅ Logo para la app
-✅ Capturas falsas (mockups) para el README
-✅ Un workflow de GitHub Actions para compilar APK automáticamente
-✅ Un changelog o releases automáticos
-
-¿Quieres alguna de estas cosas?
