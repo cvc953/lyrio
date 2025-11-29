@@ -74,10 +74,7 @@ class SongTile extends StatelessWidget {
           // Download button
           IconButton(
             onPressed: onDownload,
-            icon: const Icon(
-              Icons.download_rounded,
-              color: Colors.orangeAccent,
-            ),
+            icon: const Icon(Icons.download_rounded, color: Colors.blueAccent),
           ),
         ],
       ),

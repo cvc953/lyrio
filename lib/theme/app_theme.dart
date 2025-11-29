@@ -10,8 +10,8 @@ class AppTheme {
     useMaterial3: true,
     textTheme: const TextTheme(
       titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(fontSize: 16),
-      bodyMedium: TextStyle(fontSize: 14, color: Colors.white70),
+      bodyLarge: TextStyle(fontSize: 14),
+      bodyMedium: TextStyle(fontSize: 12, color: Colors.white70),
     ),
   );
 }

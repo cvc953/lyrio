@@ -14,7 +14,7 @@ class LRCLibService {
   }) async {
     //construir Url con parametros exactos para lrclib
     final uri = Uri.parse(
-      "$base/get?artist_name=${Uri.encodeComponent(artist)}"
+      "$base?artist_name=${Uri.encodeComponent(artist)}"
       "&track_name=${Uri.encodeComponent(title)}"
       "&album_name=${Uri.encodeComponent(album)}"
       "&duration=$durationSeconds",
