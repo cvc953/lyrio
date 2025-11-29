@@ -1,133 +1,122 @@
 import 'package:flutter/material.dart';
 import '../widgets/gradient_background.dart';
-import 'scan_screen.dart';
 import '../models/song.dart';
 import '../services/file_service.dart';
 import '../utils/app_storage.dart';
+import '../widgets/song_tile.dart';
 
-class LibraryScreen extends StatelessWidget {
+class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
+
+  @override
+  State<LibraryScreen> createState() => _LibraryScreenState();
+}
+
+class _LibraryScreenState extends State<LibraryScreen> {
+  List<Song> _songs = [];
+  bool _loading = true;
+  String? _folderPath;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSongs();
+  }
+
+  Future<void> _loadSongs() async {
+    setState(() => _loading = true);
+
+    // Carpeta que ya guardaste en AppStorage (la misma que usa MainScreen)
+    _folderPath = await AppStorage.loadFolder();
+
+    if (_folderPath != null) {
+      _songs = await FileService.scanMusic(_folderPath!);
+    } else {
+      _songs = [];
+    }
+
+    setState(() => _loading = false);
+  }
+
+  Future<void> _refresh() async {
+    await _loadSongs();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GradientBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        extendBodyBehindAppBar: true,
         appBar: AppBar(
-          backgroundColor: Colors.black.withOpacity(0.15),
+          backgroundColor: Colors.transparent,
           elevation: 0,
+          centerTitle: false,
           title: const Text(
             "Biblioteca",
             style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.w700,
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
-          centerTitle: false,
         ),
-        body: const _LibraryContent(),
-      ),
-    );
-  }
-}
-
-class _LibraryContent extends StatefulWidget {
-  const _LibraryContent();
-
-  @override
-  State<_LibraryContent> createState() => _LibraryContentState();
-}
-
-class _LibraryContentState extends State<_LibraryContent> {
-  List<Song> songs = [];
-
-  @override
-  void initState() {
-    super.initState();
-    loadSongs();
-  }
-
-  Future<void> loadSongs() async {
-    final folderPath = await AppStorage.loadFolder();
-
-    if (folderPath == null) {
-      setState(() => songs = []);
-      return;
-    }
-
-    final result = await FileService.scanMusic(folderPath);
-    setState(() => songs = result);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 110.0),
-      child: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Text(
-              "Canciones",
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Colors.white70,
-              ),
-            ),
-          ),
-
-          ...songs.map((song) => _SongTile(song: song)).toList(),
-        ],
-      ),
-    );
-  }
-}
-
-class _SongTile extends StatelessWidget {
-  final Song song;
-
-  const _SongTile({required this.song});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: song.artwork != null
-            ? Image.memory(
-                song.artwork!,
-                width: 55,
-                height: 55,
-                fit: BoxFit.cover,
+        body: _loading
+            ? const Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircularProgressIndicator(color: Colors.white),
+                    SizedBox(height: 16),
+                    Text(
+                      "Cargando tus canciones...",
+                      style: TextStyle(color: Colors.white70),
+                    ),
+                  ],
+                ),
               )
-            : Container(
-                width: 55,
-                height: 55,
-                color: Colors.white12,
-                child: const Icon(Icons.music_note, color: Colors.white54),
+            : RefreshIndicator(
+                onRefresh: _refresh,
+                child: _songs.isEmpty
+                    ? const Center(
+                        child: Text(
+                          "No se encontraron canciones",
+                          style: TextStyle(color: Colors.white70, fontSize: 16),
+                        ),
+                      )
+                    : ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 80),
+                        itemCount: _songs.length + 1,
+                        itemBuilder: (context, index) {
+                          // Primera “sección” con el texto "Canciones"
+                          if (index == 0) {
+                            return const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              child: Text(
+                                "Canciones",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          }
+
+                          final song = _songs[index - 1];
+
+                          return SongTile(
+                            song: song,
+                            // En Biblioteca solo mostramos, no descargamos
+                            downloading: false,
+                            onDownload: () {},
+                          );
+                        },
+                      ),
               ),
       ),
-      title: Text(
-        song.title.trim().isNotEmpty ? song.title : song.path.split("/").last,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      subtitle: Text(
-        song.artist.trim().isNotEmpty ? song.artist : "Artista desconocido",
-        style: const TextStyle(color: Colors.white54, fontSize: 15),
-      ),
-      trailing: Icon(Icons.more_horiz, color: Colors.white.withOpacity(0.7)),
-      onTap: () {
-        // abrir pantalla reproductor próximamente
-      },
     );
   }
 }
