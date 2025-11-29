@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/gradient_background.dart';
-import 'scan_screen2.dar';
+import 'scan_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
