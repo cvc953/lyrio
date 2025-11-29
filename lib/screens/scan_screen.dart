@@ -72,7 +72,12 @@ class _ScanScreenState extends State<ScanScreen> {
   }
 
   Future<void> downloadSingle(Song song) async {
-    final result = await LRCLibService.getLyrics(song.artist, song.title);
+    final result = await LRCLibService.getLyrics(
+      artist: song.artist,
+      title: song.title,
+      album: song.album,
+      durationSeconds: song.durationSeconds,
+    );
     if (result != null) {
       await FileService.saveLRC(song.path, result.syncedLyrics);
     }
@@ -190,4 +195,3 @@ class _ScanScreenState extends State<ScanScreen> {
     );
   }
 }
-

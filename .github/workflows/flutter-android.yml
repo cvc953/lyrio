@@ -11,35 +11,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Flutter
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.35.7'
-          cache: true
 
-      - name: Install Flutter dependencies
+      - name: Flutter pub get
         run: flutter pub get
 
-      - name: Accept Android licenses
-        run: yes | sdkmanager --licenses || true
-
-      - name: Install Android NDK 27
+      - name: Fix Android SDK (install cmdline-tools manually)
         run: |
-          sudo $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "ndk;27.0.12077973"
+          mkdir -p /usr/local/lib/android/sdk/cmdline-tools/latest
+          cd /usr/local/lib/android/sdk/cmdline-tools/latest
+          curl -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip sdk.zip
+          rm sdk.zip
+
+      - name: Install Android packages required
+        run: |
+          yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --install \
+            "platform-tools" \
+            "build-tools;34.0.0" \
+            "platforms;android-33" \
+            "platforms;android-34" \
+            "ndk;27.0.12077973"
 
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release

@@ -24,8 +24,18 @@ class FileService {
               );
 
           final artist = metadata.artist ?? "Unknown Artist";
+          final album = metadata.album ?? "Unknown Album";
+          final durationMs = metadata.durationMs ?? 0;
 
-          songs.add(Song(path: entity.path, title: title, artist: artist));
+          songs.add(
+            Song(
+              path: entity.path,
+              title: title,
+              artist: artist,
+              album: album,
+              durationSeconds: (durationMs / 1000).round(),
+            ),
+          );
         } catch (e) {
           final filename = entity.uri.pathSegments.last;
           songs.add(
@@ -33,6 +43,8 @@ class FileService {
               path: entity.path,
               title: filename.replaceAll(RegExp(r'\.(mp3|flac|m4a|wav)$'), ''),
               artist: "",
+              album: "",
+              durationSeconds: 0,
             ),
           );
         }
