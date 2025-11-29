@@ -4,7 +4,7 @@ class AppTheme {
   static ThemeData musixmatch = ThemeData(
     brightness: Brightness.dark,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.orange,
+      seedColor: Colors.blue,
       brightness: Brightness.dark,
     ),
     useMaterial3: true,

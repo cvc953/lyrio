@@ -26,14 +26,24 @@ class SongTile extends StatelessWidget {
       child: Row(
         children: [
           // Album Art Placeholder
-          Container(
-            width: 55,
-            height: 55,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white12,
-            ),
-            child: const Icon(Icons.music_note, color: Colors.white70),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: song.artwork != null
+                ? Image.memory(
+                    song.artwork!,
+                    width: 55,
+                    height: 55,
+                    fit: BoxFit.cover,
+                  )
+                : Container(
+                    width: 55,
+                    height: 55,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white12,
+                    ),
+                    child: const Icon(Icons.music_note, color: Colors.white70),
+                  ),
           ),
           const SizedBox(width: 15),
 

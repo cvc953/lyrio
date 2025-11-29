@@ -1,9 +1,12 @@
+import 'package:flutter/foundation.dart';
+
 class Song {
   final String path;
   final String title;
   final String artist;
   final String album;
   final int durationSeconds;
+  final Uint8List? artwork;
 
   Song({
     required this.path,
@@ -11,5 +14,6 @@ class Song {
     required this.artist,
     required this.album,
     required this.durationSeconds,
+    required this.artwork,
   });
 }

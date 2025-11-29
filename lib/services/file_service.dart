@@ -26,6 +26,7 @@ class FileService {
           final artist = metadata.artist ?? "Unknown Artist";
           final album = metadata.album ?? "Unknown Album";
           final durationMs = metadata.durationMs ?? 0;
+          final artworkBytes = metadata.picture?.data;
 
           songs.add(
             Song(
@@ -34,6 +35,7 @@ class FileService {
               artist: artist,
               album: album,
               durationSeconds: (durationMs / 1000).round(),
+              artwork: metadata.picture?.data,
             ),
           );
         } catch (e) {
@@ -45,6 +47,7 @@ class FileService {
               artist: "",
               album: "",
               durationSeconds: 0,
+              artwork: null,
             ),
           );
         }
