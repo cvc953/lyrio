@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/folder_picker.dart';
 import '../services/file_service.dart';
 import '../services/lrclib_service.dart';
-import '../widgets/song_title.dart';
+import '../widgets/song_tile.dart';
 import '../widgets/gradient_background.dart';
 import '../models/song.dart';
 import '../utils/permissions.dart';

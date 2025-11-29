@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/gradient_background.dart';
 import 'scan_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,17 +7,52 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("LRC Downloader")),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text("Escanear y descargar letras"),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const ScanScreen()),
-            );
-          },
+    return GradientBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.lyrics_rounded, size: 120, color: Colors.white),
+              const SizedBox(height: 20),
+              const Text(
+                "Lyrio",
+                style: TextStyle(
+                  fontSize: 48,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              const Text(
+                "Encuentra letras sincronizadas\npara toda tu música",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, color: Colors.white70),
+              ),
+              const SizedBox(height: 40),
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black87,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                ),
+                child: const Text("Comenzar"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ScanScreen()),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
