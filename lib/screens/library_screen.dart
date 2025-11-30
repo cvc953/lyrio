@@ -78,15 +78,20 @@ class _LibraryScreenState extends State<LibraryScreen> {
       progress = 0;
     });
 
-    for (int i = 0; i < allSongs.length; i++) {
-      await LyricsService.downloadAndSave(allSongs[i]);
+    final listToDownload = List<Song>.from(
+      filteredSongs.isNotEmpty ? filteredSongs : allSongs,
+    );
+
+    for (int i = 0; i < listToDownload.length; i++) {
+      await LyricsService.downloadAndSave(listToDownload[i]);
       setState(() {
-        progress = (i + 1) / allSongs.length;
+        progress = (i + 1) / listToDownload.length;
       });
     }
 
     setState(() {
       downloadingAll = false;
+      progress = 0;
     });
 
     ScaffoldMessenger.of(
