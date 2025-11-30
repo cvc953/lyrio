@@ -50,10 +50,43 @@ jobs:
         run: flutter build apk --release
 
 
+
+      - name: Compress and Split Android SDK
+        run: |
+          cd /usr/local/lib/android/
+          tar -czf android-sdk.tar.gz sdk
+          split -b 1000m android-sdk.tar.gz android-sdk.tar.gz.part-
+          mv android-sdk.tar.gz.part-* $GITHUB_WORKSPACE/
+
+      - name: Upload Android SDK Parts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-sdk
+          path: android-sdk.tar.gz.part-*
+
+
       # ------------------------------
       # EXPORTAR TODO PARA DESCARGA
       # ------------------------------
-  
+
+      - name: Export Android SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-sdk
+          path: /usr/local/lib/android/sdk
+
+      - name: Export Gradle Cache
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-cache
+          path: /home/runner/.gradle
+
+      - name: Export Pub Cache
+        uses: actions/upload-artifact@v4
+        with:
+          name: pub-cache
+          path: /home/runner/.pub-cache
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
