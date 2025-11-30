@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                   await AppStorage.setFirstRunFalse();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const MainScreen()),
+                    MaterialPageRoute(builder: (_) => const ScanScreen()),
                   );
                 },
               ),
