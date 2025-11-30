@@ -6,6 +6,7 @@ import 'more_screen.dart';
 import '../utils/default_music_path.dart';
 import '../utils/app_storage.dart';
 import '../services/file_service.dart';
+import '../utils/song_cache.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

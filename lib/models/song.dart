@@ -29,7 +29,7 @@ class Song {
     };
   }
 
-  factory Song.fromMap(Map<String, dynamic> json) {
+  factory Song.fromJson(Map<String, dynamic> json) {
     return Song(
       path: json['path'],
       title: json['title'],
