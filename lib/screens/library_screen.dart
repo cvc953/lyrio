@@ -4,6 +4,7 @@ import '../widgets/gradient_background.dart';
 import '../services/file_service.dart';
 import '../services/lyrics_service.dart';
 import '../models/song.dart';
+import 'lyrics_viewer.dart';
 
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
@@ -182,28 +183,39 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         final lrcExists = hasLrc(song);
 
                         return ListTile(
-                          leading: song.artwork != null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.memory(
-                                    song.artwork!,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => LyricsViewer(song: song),
+                              ),
+                            );
+                          },
+                          leading: Hero(
+                            tag: song.path,
+                            child: song.artwork != null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.memory(
+                                      song.artwork!,
+                                      width: 55,
+                                      height: 55,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Container(
                                     width: 55,
                                     height: 55,
-                                    fit: BoxFit.cover,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white12,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: const Icon(
+                                      Icons.music_note,
+                                      color: Colors.white70,
+                                    ),
                                   ),
-                                )
-                              : Container(
-                                  width: 55,
-                                  height: 55,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white12,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: const Icon(
-                                    Icons.music_note,
-                                    color: Colors.white70,
-                                  ),
-                                ),
+                          ),
 
                           title: Text(
                             song.title,
