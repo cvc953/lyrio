@@ -52,22 +52,31 @@ jobs:
 
 
       
+      
       - name: Compress and Split Android SDK
         run: |
+          echo "Current workspace:"
+          pwd
+          ls -lha
+
+          echo "Creating android-sdk.tar.gz..."
           sudo tar -czf android-sdk.tar.gz -C /usr/local/lib/android sdk
+
+          echo "File created:"
+          ls -lha android-sdk.tar.gz || echo "NOT FOUND"
+
+          echo "Splitting..."
           split -b 1000m android-sdk.tar.gz android-sdk.tar.gz.part-
 
-      - name: Upload Android SDK Parts
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-sdk
-          path: android-sdk.tar.gz.part-*
-      - name: Upload Android SDK Parts
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-sdk
-          path: android-sdk.tar.gz.part-*
+          echo "Parts generated:"
+          ls -lha android-sdk.tar.gz.part-* || echo "NO PARTS FOUND"
 
+
+      - name: Upload Android SDK Parts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-sdk
+          path: android-sdk.tar.gz.part-*
 
       # ------------------------------
       # EXPORTAR TODO PARA DESCARGA
