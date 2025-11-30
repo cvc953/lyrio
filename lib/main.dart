@@ -1,48 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:lyrio/screens/home_screen.dart';
 import 'package:metadata_god/metadata_god.dart';
+import 'package:lyrio/screens/home_screen.dart';
+import 'package:lyrio/screens/main_screen.dart';
 import 'utils/app_storage.dart';
-import 'widgets/gradient_background.dart';
-import 'screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await MetadataGod.initialize(); // 🔥 obligatorio
 
-  runApp(const MyApp()); // <-- vuelve tu estructura original
+  await MetadataGod.initialize();
+
+  final bool firstRun = await AppStorage.isFirstRun();
+
+  runApp(MyApp(firstRun: firstRun));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool firstRun;
+
+  const MyApp({super.key, required this.firstRun});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: "Lyrio",
 
-      home: FutureBuilder(
-        future: AppStorage.isFirstRun(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const GradientBackground(
-              child: Scaffold(
-                backgroundColor: Colors.transparent,
-                body: Center(
-                  child: CircularProgressIndicator(color: Colors.white),
-                ),
-              ),
-            );
-          }
-
-          final firstRun = snapshot.data as bool;
-
-          if (firstRun) {
-            return const HomeScreen(); // 👈 bienvenida
-          }
-
-          return const MainScreen(); // 👈 app normal
-        },
-      ),
+      home: firstRun ? const HomeScreen() : const MainScreen(),
     );
   }
 }

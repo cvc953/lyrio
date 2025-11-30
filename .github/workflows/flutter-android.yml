@@ -1,3 +1,4 @@
+
 name: Build Flutter Android APK
 
 on:
@@ -29,16 +30,16 @@ jobs:
 
       - name: Fix Android SDK (install cmdline-tools manually)
         run: |
-          mkdir -p /usr/local/lib/android/sdk/cmdline-tools/latest
-          cd /usr/local/lib/android/sdk/cmdline-tools/latest
+          mkdir -p $ANDROID_HOME/cmdline-tools/latest
+          cd $ANDROID_HOME/cmdline-tools/latest
           curl -L -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
           unzip sdk.zip
           rm sdk.zip
 
       - name: Install Android packages required
         run: |
-          yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
-          /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --install \
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install \
             "platform-tools" \
             "build-tools;34.0.0" \
             "platforms;android-33" \
@@ -50,35 +51,37 @@ jobs:
         run: flutter build apk --release
 
       # -------------------------------
-      # EXPORTAR TODOS LOS ARCHIVOS
+      # EXPORTAR TODO
       # -------------------------------
 
       - name: Export Flutter SDK
         uses: actions/upload-artifact@v4
         with:
           name: flutter-sdk
-          path: ${{ runner.tool_cache }}/flutter
+          path: /opt/hostedtoolcache/flutter
 
       - name: Export Android SDK
         uses: actions/upload-artifact@v4
         with:
           name: android-sdk
-          path: /usr/local/lib/android/sdk
+          path: $ANDROID_HOME
 
       - name: Export Gradle Cache
-        uses: actions/upload-artifact@v4
+        run: echo "GRADLE_USER_HOME=$HOME/.gradle"
+      - uses: actions/upload-artifact@v4
         with:
           name: gradle-cache
-          path: ~/.gradle
+          path: ${{ env.HOME }}/.gradle
 
       - name: Export Pub Cache
         uses: actions/upload-artifact@v4
         with:
           name: pub-cache
-          path: ~/.pub-cache
+          path: /home/runner/.pub-cache
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
+
