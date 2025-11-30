@@ -74,17 +74,28 @@ class _LibraryScreenState extends State<LibraryScreen> {
   Future<void> downloadAll() async {
     if (allSongs.isEmpty) return;
 
+    final listToDownload = List<Song>.from(
+      filteredSongs.isNotEmpty ? filteredSongs : allSongs,
+    );
+
     setState(() {
       downloadingAll = true;
       progress = 0;
     });
 
-    final listToDownload = List<Song>.from(
-      filteredSongs.isNotEmpty ? filteredSongs : allSongs,
-    );
-
     for (int i = 0; i < listToDownload.length; i++) {
-      await LyricsService.downloadAndSave(listToDownload[i]);
+      final song = listToDownload[i];
+
+      setState(() {
+        downloadingSongs.add(song.path);
+      });
+
+      await LyricsService.downloadAndSave(song);
+
+      setState(() {
+        downloadingSongs.remove(song.path);
+      });
+
       setState(() {
         progress = (i + 1) / listToDownload.length;
       });

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lyrio/screens/main_screen.dart';
+import 'package:lyrio/services/file_service.dart';
 import 'package:lyrio/utils/app_storage.dart';
 import 'package:lyrio/utils/permissions.dart';
 import '../widgets/gradient_background.dart';
 import 'scan_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../utils/default_music_path.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -58,7 +60,12 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     );
+                    return;
                   }
+
+                  final defaultFolder = DefaultMusicPath.defaultPath;
+                  await FileService.scanMusic(defaultFolder);
+
                   await AppStorage.setFirstRunFalse();
                   Navigator.push(
                     context,
