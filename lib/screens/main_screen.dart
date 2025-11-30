@@ -29,6 +29,13 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _initializeLibrary();
+    loadCachedSongs();
+  }
+
+  Future<void> loadCachedSongs() async {
+    final cached = await SongCache.loadSongs();
+    FileService.librarySongs = cached;
+    setState(() {});
   }
 
   Future<void> _initializeLibrary() async {

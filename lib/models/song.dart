@@ -17,4 +17,28 @@ class Song {
     required this.durationSeconds,
     required this.artwork,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'path': path,
+      'title': title,
+      'artist': artist,
+      'album': album,
+      'durationSeconds': durationSeconds,
+      'artwork': artwork != null ? artwork!.toList() : null,
+    };
+  }
+
+  factory Song.fromMap(Map<String, dynamic> json) {
+    return Song(
+      path: json['path'],
+      title: json['title'],
+      artist: json['artist'],
+      album: json['album'],
+      durationSeconds: json['durationSeconds'],
+      artwork: json['artwork'] != null
+          ? Uint8List.fromList(List<int>.from(json['artwork']))
+          : null,
+    );
+  }
 }

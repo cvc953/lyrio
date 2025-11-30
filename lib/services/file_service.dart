@@ -55,6 +55,7 @@ class FileService {
       }
     }
     librarySongs = songs;
+    await SongCache.saveSongs(songs);
     return songs;
   }
 
