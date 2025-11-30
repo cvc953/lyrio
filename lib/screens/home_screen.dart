@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lyrio/screens/main_screen.dart';
+import 'package:lyrio/utils/app_storage.dart';
 import '../widgets/gradient_background.dart';
 import 'scan_screen.dart';
 
@@ -45,7 +46,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 child: const Text("Comenzar"),
-                onPressed: () {
+                onPressed: () async {
+                  await AppStorage.setFirstRunFalse();
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (_) => const MainScreen()),

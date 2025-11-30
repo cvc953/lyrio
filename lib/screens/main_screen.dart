@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/gradient_background.dart';
 import 'library_screen.dart';
-import 'lyrics_screen.dart';
 import 'search_screen.dart';
 import 'more_screen.dart';
-import 'welcome_screen.dart';
 import '../utils/default_music_path.dart';
 import '../utils/app_storage.dart';
 import '../services/file_service.dart';
@@ -21,28 +19,16 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = const [
     LibraryScreen(),
-    LyricsScreen(),
     SearchScreen(),
     MoreScreen(),
   ];
 
   bool _loading = true;
-  bool _showWelcome = false;
 
   @override
   void initState() {
     super.initState();
-    _checkFirstRun();
-  }
-
-  Future<void> _checkFirstRun() async {
-    final firstRun = await AppStorage.isFirstRun();
-
-    if (firstRun) {
-      setState(() => _showWelcome = true);
-    } else {
-      await _initializeLibrary();
-    }
+    _initializeLibrary();
   }
 
   Future<void> _initializeLibrary() async {
@@ -53,7 +39,6 @@ class _MainScreenState extends State<MainScreen> {
       await AppStorage.saveFolder(folder);
     }
 
-    // Escaneo automático
     await FileService.scanMusic(folder);
 
     setState(() => _loading = false);
@@ -61,18 +46,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // PANTALLA DE BIENVENIDA
-    if (_showWelcome) {
-      return WelcomeScreen(
-        onStart: () async {
-          await AppStorage.setFirstRunFalse();
-          await _initializeLibrary();
-          setState(() => _showWelcome = false);
-        },
-      );
-    }
-
-    // PANTALLA DE CARGA
     if (_loading) {
       return const GradientBackground(
         child: Scaffold(
@@ -94,7 +67,6 @@ class _MainScreenState extends State<MainScreen> {
       );
     }
 
-    // PANTALLA NORMAL
     return GradientBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -111,11 +83,6 @@ class _MainScreenState extends State<MainScreen> {
               icon: Icon(Icons.library_music_outlined),
               selectedIcon: Icon(Icons.library_music),
               label: "Biblioteca",
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.lyrics_outlined),
-              selectedIcon: Icon(Icons.lyrics),
-              label: "Letras",
             ),
             NavigationDestination(
               icon: Icon(Icons.search),
