@@ -7,6 +7,6 @@ class DefaultMusicPath {
       return musicPath;
     }
     // fallback
-    return "/storage/emulated/0";
+    return "/storage/emulated/0/Music";
   }
 }
