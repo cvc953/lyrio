@@ -51,13 +51,17 @@ jobs:
 
 
 
+      
       - name: Compress and Split Android SDK
         run: |
-          cd /usr/local/lib/android/
-          tar -czf android-sdk.tar.gz sdk
+          sudo tar -czf android-sdk.tar.gz -C /usr/local/lib/android sdk
           split -b 1000m android-sdk.tar.gz android-sdk.tar.gz.part-
-          mv android-sdk.tar.gz.part-* $GITHUB_WORKSPACE/
 
+      - name: Upload Android SDK Parts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-sdk
+          path: android-sdk.tar.gz.part-*
       - name: Upload Android SDK Parts
         uses: actions/upload-artifact@v4
         with:
