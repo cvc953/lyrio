@@ -1,4 +1,56 @@
 
+name: Build Flutter Android APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Fix Android SDK (install cmdline-tools manually)
+        run: |
+          mkdir -p $ANDROID_HOME/cmdline-tools/latest
+          cd $ANDROID_HOME/cmdline-tools/latest
+          curl -L -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip sdk.zip
+          rm sdk.zip
+
+      - name: Install Android packages required
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install \
+            "platform-tools" \
+            "build-tools;34.0.0" \
+            "platforms;android-33" \
+            "platforms;android-34" \
+            "ndk;27.0.12077973" \
+            "cmake;3.22.1"
+
+      - name: Build APK
+        run: flutter build apk --release
+
+
 
       - name: Show Flutter SDK location
         run: |
@@ -20,4 +72,39 @@
         run: |
           echo "PUB PATHS:"
           find /home/runner/ -maxdepth 3 -type d -name ".pub-cache" || true
+
+      # -------------------------------
+      # EXPORTAR TODO
+      # -------------------------------
+
+      - name: Export Flutter SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-sdk
+          path: /opt/hostedtoolcache/flutter
+
+      - name: Export Android SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-sdk
+          path: $ANDROID_HOME
+
+      - name: Export Gradle Cache
+        run: echo "GRADLE_USER_HOME=$HOME/.gradle"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gradle-cache
+          path: ${{ env.HOME }}/.gradle
+
+      - name: Export Pub Cache
+        uses: actions/upload-artifact@v4
+        with:
+          name: pub-cache
+          path: /home/runner/.pub-cache
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
 
