@@ -1,7 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lyrio">
 
-    <!-- 🔥 PERMISOS AQUÍ (fuera de application) -->
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -10,7 +9,7 @@
     
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <!-- 🔥 Queries (esto está bien aquí) -->
+    
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT" />

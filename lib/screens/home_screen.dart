@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lyrio/screens/main_screen.dart';
 import 'package:lyrio/utils/app_storage.dart';
+import 'package:lyrio/utils/permissions.dart';
 import '../widgets/gradient_background.dart';
 import 'scan_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -47,6 +49,16 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: const Text("Comenzar"),
                 onPressed: () async {
+                  final granted = await AppPermissions.requestStorage();
+                  if (!granted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Se requieren permisos de almacenamiento para continuar.",
+                        ),
+                      ),
+                    );
+                  }
                   await AppStorage.setFirstRunFalse();
                   Navigator.push(
                     context,
