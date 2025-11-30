@@ -53,31 +53,7 @@ jobs:
       # ------------------------------
       # EXPORTAR TODO PARA DESCARGA
       # ------------------------------
-
-      - name: Export Flutter SDK
-        uses: actions/upload-artifact@v4
-        with:
-          name: flutter-sdk
-          path: /opt/hostedtoolcache/flutter
-
-      - name: Export Android SDK
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-sdk
-          path: /usr/local/lib/android/sdk
-
-      - name: Export Gradle Cache
-        uses: actions/upload-artifact@v4
-        with:
-          name: gradle-cache
-          path: /home/runner/.gradle
-
-      - name: Export Pub Cache
-        uses: actions/upload-artifact@v4
-        with:
-          name: pub-cache
-          path: /home/runner/.pub-cache
-
+  
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
