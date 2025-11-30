@@ -13,9 +13,11 @@ class LibraryScreen extends StatefulWidget {
 }
 
 class _LibraryScreenState extends State<LibraryScreen> {
-  List<Song> songs = [];
+  List<Song> allSongs = [];
+  List<Song> filteredSongs = [];
   bool downloadingAll = false;
   double progress = 0.0;
+  Set<String> downloadingSongs = {};
 
   @override
   void initState() {
@@ -24,8 +26,21 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   void loadSongs() {
-    songs = FileService.librarySongs;
+    allSongs = FileService.librarySongs;
+    filteredSongs = List.from(allSongs);
     setState(() {});
+  }
+
+  void filterSongs(String query) {
+    query = query.toLowerCase();
+
+    setState(() {
+      filteredSongs = allSongs.where((song) {
+        return song.title.toLowerCase().contains(query) ||
+            song.artist.toLowerCase().contains(query) ||
+            song.album.toLowerCase().contains(query);
+      }).toList();
+    });
   }
 
   bool hasLrc(Song song) {
@@ -35,7 +50,15 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   Future<void> downloadOne(Song song) async {
+    setState(() {
+      downloadingSongs.add(song.path);
+    });
+
     final ok = await LyricsService.downloadAndSave(song);
+
+    setState(() {
+      downloadingSongs.remove(song.path);
+    });
 
     if (!ok) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -48,17 +71,17 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   Future<void> downloadAll() async {
-    if (songs.isEmpty) return;
+    if (allSongs.isEmpty) return;
 
     setState(() {
       downloadingAll = true;
       progress = 0;
     });
 
-    for (int i = 0; i < songs.length; i++) {
-      final ok = await LyricsService.downloadAndSave(songs[i]);
+    for (int i = 0; i < allSongs.length; i++) {
+      await LyricsService.downloadAndSave(allSongs[i]);
       setState(() {
-        progress = (i + 1) / songs.length;
+        progress = (i + 1) / allSongs.length;
       });
     }
 
@@ -69,6 +92,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(const SnackBar(content: Text("Descarga completa.")));
+
+    loadSongs();
   }
 
   @override
@@ -86,7 +111,28 @@ class _LibraryScreenState extends State<LibraryScreen> {
         ),
         body: Column(
           children: [
-            // ===== BOTÓN DESCARGAR TODAS =====
+            // 🔍 BUSCADOR
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: TextField(
+                onChanged: filterSongs,
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: "Buscar canción, artista o álbum...",
+                  hintStyle: const TextStyle(color: Colors.white54),
+                  filled: true,
+                  fillColor: Colors.white12,
+                  prefixIcon: const Icon(Icons.search, color: Colors.white70),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                ),
+              ),
+            ),
+
+            // BOTÓN DESCARGAR TODAS
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: ElevatedButton(
@@ -102,7 +148,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
               ),
             ),
 
-            // ===== PROGRESO =====
+            // PROGRESO GLOBAL
             if (downloadingAll)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -115,20 +161,19 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
             const SizedBox(height: 10),
 
-            // ===== LISTA DE CANCIONES =====
+            // LISTA FILTRADA
             Expanded(
-              child: songs.isEmpty
+              child: filteredSongs.isEmpty
                   ? const Center(
                       child: Text(
-                        "No hay canciones.\nEscanea desde Más.",
-                        textAlign: TextAlign.center,
+                        "No se encontraron canciones.",
                         style: TextStyle(color: Colors.white70),
                       ),
                     )
                   : ListView.builder(
-                      itemCount: songs.length,
+                      itemCount: filteredSongs.length,
                       itemBuilder: (_, i) {
-                        final song = songs[i];
+                        final song = filteredSongs[i];
                         final lrcExists = hasLrc(song);
 
                         return ListTile(
@@ -154,6 +199,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                     color: Colors.white70,
                                   ),
                                 ),
+
                           title: Text(
                             song.title,
                             overflow: TextOverflow.ellipsis,
@@ -162,15 +208,26 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+
                           subtitle: Text(
                             song.artist,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(color: Colors.white70),
                           ),
+
                           trailing: lrcExists
                               ? const Icon(
                                   Icons.check_circle,
                                   color: Colors.greenAccent,
+                                )
+                              : downloadingSongs.contains(song.path)
+                              ? const SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.white,
+                                  ),
                                 )
                               : IconButton(
                                   icon: const Icon(
