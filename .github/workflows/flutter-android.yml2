@@ -1,3 +1,4 @@
+
 name: Build Flutter Android APK
 
 on:
@@ -31,7 +32,7 @@ jobs:
         run: |
           mkdir -p /usr/local/lib/android/sdk/cmdline-tools/latest
           cd /usr/local/lib/android/sdk/cmdline-tools/latest
-          curl -L -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          curl -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
           unzip sdk.zip
           rm sdk.zip
 
@@ -49,36 +50,9 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
 
-      # -------------------------------
-      # EXPORTAR TODOS LOS ARCHIVOS
-      # -------------------------------
-
-      - name: Export Flutter SDK
-        uses: actions/upload-artifact@v4
-        with:
-          name: flutter-sdk
-          path: ${{ runner.tool_cache }}/flutter
-
-      - name: Export Android SDK
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-sdk
-          path: /usr/local/lib/android/sdk
-
-      - name: Export Gradle Cache
-        uses: actions/upload-artifact@v4
-        with:
-          name: gradle-cache
-          path: ~/.gradle
-
-      - name: Export Pub Cache
-        uses: actions/upload-artifact@v4
-        with:
-          name: pub-cache
-          path: ~/.pub-cache
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
+
