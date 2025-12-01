@@ -7,8 +7,7 @@ plugins {
 
 android {
     namespace = "com.cvc953.lyrio"
-    //compileSdk = flutter.compileSdkVersion
-    compileSdk = 34
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -27,8 +26,7 @@ android {
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         //minSdk = flutter.minSdkVersion
         minSdk = flutter.minSdkVersion
-        //targetSdk = flutter.targetSdkVersion
-        targetSdk = 34
+        targetSdk = flutter.targetSdkVersion 
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }

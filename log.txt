@@ -1,0 +1,610 @@
+[  +11 ms] executing: uname -m
+[   +3 ms] Exit code 0 from: uname -m
+[        ] x86_64
+[   +4 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[   +5 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterEngineStamp' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[   +1 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[  +18 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterEngineStamp' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[  +36 ms] Skipping pub get: version match.
+[  +34 ms] Found plugin shared_preferences at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences-2.5.3/
+[   +2 ms] Found plugin shared_preferences_windows at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.4.1/
+[   +2 ms] Found plugin path_provider_windows at /home/christian/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0/
+[   +3 ms] Found plugin shared_preferences_web at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_web-2.4.3/
+[   +1 ms] Found plugin shared_preferences_linux at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.4.1/
+[   +1 ms] Found plugin path_provider_linux at /home/christian/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
+[   +1 ms] Found plugin shared_preferences_foundation at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.5.6/
+[   +1 ms] Found plugin shared_preferences_android at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_android-2.4.17/
+[   +1 ms] Found plugin permission_handler at /home/christian/.pub-cache/hosted/pub.dev/permission_handler-12.0.1/
+[        ] Found plugin permission_handler_windows at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.1/
+[   +1 ms] Found plugin permission_handler_html at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.3+5/
+[        ] Found plugin permission_handler_apple at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_apple-9.4.7/
+[        ] Found plugin permission_handler_android at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_android-13.0.1/
+[   +1 ms] Found plugin path_provider at /home/christian/.pub-cache/hosted/pub.dev/path_provider-2.1.5/
+[   +1 ms] Found plugin path_provider_foundation at /home/christian/.pub-cache/hosted/pub.dev/path_provider_foundation-2.5.1/
+[        ] Found plugin path_provider_android at /home/christian/.pub-cache/hosted/pub.dev/path_provider_android-2.2.22/
+[        ] Found plugin metadata_god at /home/christian/.pub-cache/hosted/pub.dev/metadata_god-1.1.0/
+[  +12 ms] Found plugin file_picker at /home/christian/.pub-cache/hosted/pub.dev/file_picker-10.3.7/
+[   +2 ms] Found plugin flutter_plugin_android_lifecycle at /home/christian/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.33/
+[  +30 ms] Found plugin shared_preferences at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences-2.5.3/
+[        ] Found plugin shared_preferences_windows at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.4.1/
+[   +1 ms] Found plugin path_provider_windows at /home/christian/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0/
+[   +2 ms] Found plugin shared_preferences_web at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_web-2.4.3/
+[   +1 ms] Found plugin shared_preferences_linux at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.4.1/
+[        ] Found plugin path_provider_linux at /home/christian/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
+[   +1 ms] Found plugin shared_preferences_foundation at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.5.6/
+[        ] Found plugin shared_preferences_android at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_android-2.4.17/
+[        ] Found plugin permission_handler at /home/christian/.pub-cache/hosted/pub.dev/permission_handler-12.0.1/
+[        ] Found plugin permission_handler_windows at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.1/
+[   +1 ms] Found plugin permission_handler_html at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.3+5/
+[        ] Found plugin permission_handler_apple at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_apple-9.4.7/
+[        ] Found plugin permission_handler_android at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_android-13.0.1/
+[        ] Found plugin path_provider at /home/christian/.pub-cache/hosted/pub.dev/path_provider-2.1.5/
+[        ] Found plugin path_provider_foundation at /home/christian/.pub-cache/hosted/pub.dev/path_provider_foundation-2.5.1/
+[        ] Found plugin path_provider_android at /home/christian/.pub-cache/hosted/pub.dev/path_provider_android-2.2.22/
+[        ] Found plugin metadata_god at /home/christian/.pub-cache/hosted/pub.dev/metadata_god-1.1.0/
+[   +4 ms] Found plugin file_picker at /home/christian/.pub-cache/hosted/pub.dev/file_picker-10.3.7/
+[   +1 ms] Found plugin flutter_plugin_android_lifecycle at /home/christian/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.33/
+[   +8 ms] Skipping generating web_plugin_registrant.dart because it is up-to-date.
+[  +10 ms] Found plugin shared_preferences at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences-2.5.3/
+[        ] Found plugin shared_preferences_windows at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.4.1/
+[        ] Found plugin path_provider_windows at /home/christian/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0/
+[   +1 ms] Found plugin shared_preferences_web at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_web-2.4.3/
+[        ] Found plugin shared_preferences_linux at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.4.1/
+[        ] Found plugin path_provider_linux at /home/christian/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
+[        ] Found plugin shared_preferences_foundation at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.5.6/
+[        ] Found plugin shared_preferences_android at /home/christian/.pub-cache/hosted/pub.dev/shared_preferences_android-2.4.17/
+[        ] Found plugin permission_handler at /home/christian/.pub-cache/hosted/pub.dev/permission_handler-12.0.1/
+[        ] Found plugin permission_handler_windows at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.1/
+[   +2 ms] Found plugin permission_handler_html at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.3+5/
+[        ] Found plugin permission_handler_apple at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_apple-9.4.7/
+[        ] Found plugin permission_handler_android at /home/christian/.pub-cache/hosted/pub.dev/permission_handler_android-13.0.1/
+[        ] Found plugin path_provider at /home/christian/.pub-cache/hosted/pub.dev/path_provider-2.1.5/
+[        ] Found plugin path_provider_foundation at /home/christian/.pub-cache/hosted/pub.dev/path_provider_foundation-2.5.1/
+[        ] Found plugin path_provider_android at /home/christian/.pub-cache/hosted/pub.dev/path_provider_android-2.2.22/
+[        ] Found plugin metadata_god at /home/christian/.pub-cache/hosted/pub.dev/metadata_god-1.1.0/
+[   +3 ms] Found plugin file_picker at /home/christian/.pub-cache/hosted/pub.dev/file_picker-10.3.7/
+[   +1 ms] Found plugin flutter_plugin_android_lifecycle at /home/christian/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.33/
+[   +3 ms] Generating /home/christian/lyrio/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+[        ] Skipping generating GeneratedPluginRegistrant.java because it is up-to-date.
+[   +2 ms] Skipping generating generated_plugin_registrant.h because it is up-to-date.
+[        ] Skipping generating generated_plugin_registrant.cc because it is up-to-date.
+[        ] Skipping generating generated_plugins.cmake because it is up-to-date.
+[   +1 ms] Skipping generating generated_plugin_registrant.h because it is up-to-date.
+[        ] Skipping generating generated_plugin_registrant.cc because it is up-to-date.
+[        ] Skipping generating generated_plugins.cmake because it is up-to-date.
+[   +1 ms] Skipping generating GeneratedPluginRegistrant.h because it is up-to-date.
+[        ] Skipping generating GeneratedPluginRegistrant.m because it is up-to-date.
+[        ] Skipping generating GeneratedPluginRegistrant.swift because it is up-to-date.
+[  +22 ms] Top-level Gradle build file not found, skipping migration of task "clean".
+[        ] Android Studio version could not be detected, skipping Gradle-Java version compatibility check.
+[  +10 ms] CMake project not found, skipping support Android 15 16k page size migration.
+[   +2 ms] Using gradle from /home/christian/lyrio/android/gradlew.
+[  +35 ms] LocalFile: '/home/christian/lyrio/android/build.gradle.kts' doesn't provide an AGP version. Checking settings.
+[   +6 ms] LocalFile: '/home/christian/lyrio/android/settings.gradle.kts' provides AGP version: 8.11.1
+[        ] Running Gradle task 'assembleRelease'...
+[        ] executing: [/home/christian/lyrio/android/] /home/christian/lyrio/android/gradlew --full-stacktrace --info -Pverbose=true -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib/main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9WRVJTSU9OPTMuMzUuNw==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049YWRjOTAxMDYyNQ==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049MDM1MzE2NTY1YQ==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My45LjI= -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=true assembleRelease
+[ +248 ms] Initialized native services in: /home/christian/.gradle/native
+[        ] Initialized jansi services in: /home/christian/.gradle/native
+[ +211 ms] The client will now receive all logging from the daemon (pid: 49377). The daemon log file: /home/christian/.gradle/daemon/8.14/daemon-49377.out.log
+[        ] Starting 27th build in daemon [uptime: 3 hrs 0 mins 6.486 secs, performance: 100%, GC rate: 0.00/s, heap usage: 2% of 8 GiB, non-heap usage: 5% of 4 GiB]
+[        ] Using 12 worker leases.
+[        ] Now considering [/home/christian/lyrio/android, /home/christian/flutter-linux/packages/flutter_tools/gradle] as hierarchies to watch
+[        ] Watching the file system is configured to be enabled if available
+[        ] File system watching is active
+[        ] Starting Build
+[        ] Now considering [/home/christian/flutter-linux/packages/flutter_tools/gradle, /home/christian/lyrio/android] as hierarchies to watch
+[  +98 ms] > Configure project :gradle
+[        ] Evaluating project ':gradle' using build file '/home/christian/flutter-linux/packages/flutter_tools/gradle/build.gradle.kts'.
+[        ] Resolved plugin [id: 'org.gradle.java-gradle-plugin']
+[        ] Resolved plugin [id: 'org.gradle.groovy']
+[        ] Resolved plugin [id: 'org.gradle.kotlin.kotlin-dsl', version: '5.2.0']
+[        ] Resolved plugin [id: 'org.jetbrains.kotlin.jvm', version: '1.9.20']
+[        ] Using Kotlin Gradle Plugin gradle85 variant
+[        ] kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+[        ] kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+[        ] file or directory '/home/christian/flutter-linux/packages/flutter_tools/gradle/src/main/java', not found
+[        ] Resolved plugin [id: 'dev.flutter.flutter-plugin-loader', version: '1.0.0']
+[        ] Resolved plugin [id: 'com.android.application', version: '8.11.1', apply: false]
+[        ] Resolved plugin [id: 'org.jetbrains.kotlin.android', version: '2.2.20', apply: false]
+[        ] Resolve mutations for :gradle:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker,5,main]) started.
+[        ] :gradle:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 6,5,main]) started.
+[        ] > Task :gradle:checkKotlinGradlePluginConfigurationErrors SKIPPED
+[        ] Skipping task ':gradle:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+[        ] Resolve mutations for :gradle:compileKotlin (Thread[Execution worker Thread 6,5,main]) started.
+[        ] :gradle:compileKotlin (Thread[Execution worker Thread 6,5,main]) started.
+[        ] > Task :gradle:compileKotlin UP-TO-DATE
+[        ] Caching disabled for task ':gradle:compileKotlin' because:
+[        ]   Build cache is disabled
+[        ] Skipping task ':gradle:compileKotlin' as it is up-to-date.
+[        ] Resolve mutations for :gradle:compileJava (Thread[Execution worker Thread 6,5,main]) started.
+[        ] :gradle:compileJava (Thread[Execution worker Thread 6,5,main]) started.
+[        ] > Task :gradle:compileJava NO-SOURCE
+[        ] Skipping task ':gradle:compileJava' as it has no source files and no previous output files.
+[        ] Resolve mutations for :gradle:compileGroovy (Thread[Execution worker Thread 6,5,main]) started.
+[        ] :gradle:compileGroovy (Thread[Execution worker Thread 6,5,main]) started.
+[        ] > Task :gradle:compileGroovy NO-SOURCE
+[        ] Skipping task ':gradle:compileGroovy' as it has no source files and no previous output files.
+[        ] Resolve mutations for :gradle:pluginDescriptors (Thread[Execution worker Thread 6,5,main]) started.
+[        ] :gradle:pluginDescriptors (Thread[Execution worker Thread 6,5,main]) started.
+[        ] > Task :gradle:pluginDescriptors UP-TO-DATE
+[        ] Caching disabled for task ':gradle:pluginDescriptors' because:
+[        ]   Build cache is disabled
+[        ]   Not worth caching
+[        ] Skipping task ':gradle:pluginDescriptors' as it is up-to-date.
+[        ] Resolve mutations for :gradle:processResources (Thread[Execution worker Thread 6,5,main]) started.
+[        ] :gradle:processResources (Thread[Execution worker Thread 6,5,main]) started.
+[        ] > Task :gradle:processResources UP-TO-DATE
+[        ] Caching disabled for task ':gradle:processResources' because:
+[        ]   Build cache is disabled
+[        ]   Not worth caching
+[        ] Skipping task ':gradle:processResources' as it is up-to-date.
+[        ] Resolve mutations for :gradle:classes (Thread[Execution worker Thread 6,5,main]) started.
+[        ] :gradle:classes (Thread[Execution worker Thread 10,5,main]) started.
+[        ] > Task :gradle:classes UP-TO-DATE
+[        ] Skipping task ':gradle:classes' as it has no actions.
+[        ] Resolve mutations for :gradle:jar (Thread[Execution worker Thread 10,5,main]) started.
+[        ] :gradle:jar (Thread[Execution worker Thread 10,5,main]) started.
+[        ] > Task :gradle:jar UP-TO-DATE
+[        ] Caching disabled for task ':gradle:jar' because:
+[        ]   Build cache is disabled
+[        ]   Not worth caching
+[        ] Skipping task ':gradle:jar' as it is up-to-date.
+[        ] Settings evaluated using settings file '/home/christian/lyrio/android/settings.gradle.kts'.
+[        ] Projects loaded. Root project using build file '/home/christian/lyrio/android/build.gradle.kts'.
+[        ] Included projects: [root project 'android', project ':app', project ':file_picker', project ':flutter_plugin_android_lifecycle', project ':metadata_god', project ':path_provider_android', project ':permission_handler_android', project ':shared_preferences_android']
+[  +94 ms] > Configure project :app
+[        ] Evaluating project ':app' using build file '/home/christian/lyrio/android/app/build.gradle.kts'.
+[        ] Resolved plugin [id: 'com.android.application']
+[        ] Resolved plugin [id: 'kotlin-android']
+[        ] Resolved plugin [id: 'dev.flutter.flutter-gradle-plugin']
+[        ] Using default execution profile
+[        ] Build d150c24c-5b21-4457-b3f2-197c8307b05d is started
+[        ] Using Kotlin Gradle Plugin gradle813 variant
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] C/C++: android.ndkVersion from module build.gradle is [27.0.12077973]
+[        ] C/C++: android.ndkPath from module build.gradle is not set
+[        ] C/C++: ndk.dir in local.properties is not set
+[        ] C/C++: Not considering ANDROID_NDK_HOME because support was removed after deprecation period.
+[        ] C/C++: sdkFolder is /home/christian/Android/Sdk
+[        ] > Configure project :
+[        ] Evaluating root project 'android' using build file '/home/christian/lyrio/android/build.gradle.kts'.
+[  +93 ms] > Configure project :file_picker
+[        ] Evaluating project ':file_picker' using build file '/home/christian/.pub-cache/hosted/pub.dev/file_picker-10.3.7/android/build.gradle'.
+[        ] Using default execution profile
+[        ] Using Kotlin Gradle Plugin gradle813 variant
+[        ] Warning: The plugin file_picker requires Android SDK version 36 or higher.
+[        ] For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+[        ] > Configure project :flutter_plugin_android_lifecycle
+[        ] Evaluating project ':flutter_plugin_android_lifecycle' using build file '/home/christian/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.33/android/build.gradle'.
+[        ] Using default execution profile
+[        ] Warning: The plugin flutter_plugin_android_lifecycle requires Android SDK version 36 or higher.
+[        ] For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+[  +98 ms] > Configure project :metadata_god
+[        ] Evaluating project ':metadata_god' using build file '/home/christian/.pub-cache/hosted/pub.dev/metadata_god-1.1.0/android/build.gradle'.
+[        ] Using default execution profile
+[        ] > Configure project :path_provider_android
+[        ] Evaluating project ':path_provider_android' using build file '/home/christian/.pub-cache/hosted/pub.dev/path_provider_android-2.2.22/android/build.gradle'.
+[        ] Using default execution profile
+[        ] Warning: The plugin path_provider_android requires Android SDK version 36 or higher.
+[        ] For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+[        ] > Configure project :permission_handler_android
+[        ] Evaluating project ':permission_handler_android' using build file '/home/christian/.pub-cache/hosted/pub.dev/permission_handler_android-13.0.1/android/build.gradle'.
+[        ] Using default execution profile
+[        ] Warning: The plugin permission_handler_android requires Android SDK version 35 or higher.
+[        ] For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+[  +98 ms] > Configure project :shared_preferences_android
+[        ] Evaluating project ':shared_preferences_android' using build file '/home/christian/.pub-cache/hosted/pub.dev/shared_preferences_android-2.4.17/android/build.gradle'.
+[        ] Using default execution profile
+[        ] Using Kotlin Gradle Plugin gradle813 variant
+[        ] Warning: The plugin shared_preferences_android requires Android SDK version 36 or higher.
+[        ] For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+[        ] All projects evaluated.
+[        ] Task name matched 'assembleRelease'
+[        ] Selected primary task 'assembleRelease' from project :
+[        ] Parsing legacy package: /home/christian/Android/Sdk/cmdline-tools/latest
+[   +1 ms] Your project is configured to compile against Android SDK 34, but the following plugin(s) require to be compiled against a higher Android SDK version:
+[   +1 ms] - file_picker compiles against Android SDK 36
+[        ] - flutter_plugin_android_lifecycle compiles against Android SDK 36
+[        ] - path_provider_android compiles against Android SDK 36
+[        ] - permission_handler_android compiles against Android SDK 35
+[        ] - shared_preferences_android compiles against Android SDK 36
+[        ] Fix this issue by compiling against the highest Android SDK version (they are backward compatible).
+[        ] Add the following to /home/christian/lyrio/android/app/build.gradle.kts:
+[        ]     android {
+[        ]         compileSdk = 36
+[        ]         ...
+[        ]     }
+[  +95 ms] SDK Manager found the following installed packages: build-tools;34.0.0 build-tools;35.0.0 ndk;27.0.12077973 platform-tools platforms;android-33 platforms;android-34
+[  +99 ms] Checking the license for package Android SDK Platform 36 in /home/christian/Android/Sdk/licenses
+[        ] Warning: License for package Android SDK Platform 36 not accepted.
+[        ] Build d150c24c-5b21-4457-b3f2-197c8307b05d is closed
+[        ] [Incubating] Problems report is available at: file:///home/christian/lyrio/build/reports/problems/problems-report.html
+[        ] FAILURE: Build failed with an exception.
+[        ] * What went wrong:
+[        ] Could not determine the dependencies of task ':file_picker:compileReleaseJavaWithJavac'.
+[        ] > Failed to install the following Android SDK packages as some licences have not been accepted.
+[        ]      platforms;android-36 Android SDK Platform 36
+[        ]   To build this project, accept the SDK license agreements and install the missing components using the Android Studio SDK Manager.
+[        ]   All licenses can be accepted using the sdkmanager command line tool:
+[        ]   sdkmanager.bat --licenses
+[        ]   Or, to transfer the license agreements from one workstation to another, see https://developer.android.com/studio/intro/update.html#download-with-gradle
+[        ]   Using Android SDK: /home/christian/Android/Sdk
+[        ] * Try:
+[        ] > Run with --debug option to get more log output.
+[        ] > Run with --scan to get full insights.
+[        ] > Get more help at https://help.gradle.org.
+[        ] * Exception is:
+[        ] org.gradle.api.internal.tasks.TaskDependencyResolveException: Could not determine the dependencies of task ':file_picker:compileReleaseJavaWithJavac'.
+[        ] 	at org.gradle.api.internal.tasks.CachingTaskDependencyResolveContext.getDependencies(CachingTaskDependencyResolveContext.java:70)
+[        ] 	at org.gradle.execution.plan.TaskDependencyResolver.resolveDependenciesFor(TaskDependencyResolver.java:49)
+[        ] 	at org.gradle.execution.plan.LocalTaskNode.getDependencies(LocalTaskNode.java:151)
+[        ] 	at org.gradle.execution.plan.LocalTaskNode.resolveDependencies(LocalTaskNode.java:125)
+[        ] 	at org.gradle.execution.plan.DefaultExecutionPlan.discoverNodeRelationships(DefaultExecutionPlan.java:182)
+[        ] 	at org.gradle.execution.plan.DefaultExecutionPlan.doAddEntryNodes(DefaultExecutionPlan.java:154)
+[        ] 	at org.gradle.execution.plan.DefaultExecutionPlan.addEntryTasks(DefaultExecutionPlan.java:129)
+[        ] 	at org.gradle.execution.plan.DefaultExecutionPlan.addEntryTasks(DefaultExecutionPlan.java:121)
+[        ] 	at org.gradle.execution.TaskNameResolvingBuildTaskScheduler.scheduleRequestedTasks(TaskNameResolvingBuildTaskScheduler.java:61)
+[        ] 	at org.gradle.execution.DefaultTasksBuildTaskScheduler.scheduleRequestedTasks(DefaultTasksBuildTaskScheduler.java:72)
+[        ] 	at org.gradle.initialization.DefaultTaskExecutionPreparer.lambda$scheduleRequestedTasks$0(DefaultTaskExecutionPreparer.java:48)
+[        ] 	at org.gradle.internal.Factories$1.create(Factories.java:31)
+[        ] 	at org.gradle.internal.work.DefaultWorkerLeaseService.withReplacedLocks(DefaultWorkerLeaseService.java:359)
+[        ] 	at org.gradle.api.internal.project.DefaultProjectStateRegistry$DefaultBuildProjectRegistry.withMutableStateOfAllProjects(DefaultProjectStateRegistry.java:239)
+[        ] 	at org.gradle.api.internal.project.DefaultProjectStateRegistry$DefaultBuildProjectRegistry.withMutableStateOfAllProjects(DefaultProjectStateRegistry.java:232)
+[        ] 	at org.gradle.initialization.DefaultTaskExecutionPreparer.scheduleRequestedTasks(DefaultTaskExecutionPreparer.java:47)
+[        ] 	at org.gradle.initialization.VintageBuildModelController.lambda$scheduleRequestedTasks$0(VintageBuildModelController.java:76)
+[        ] 	at org.gradle.internal.model.StateTransitionController.lambda$inState$1(StateTransitionController.java:99)
+[        ] 	at org.gradle.internal.model.StateTransitionController.lambda$inState$2(StateTransitionController.java:114)
+[        ] 	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:46)
+[        ] 	at org.gradle.internal.model.StateTransitionController.inState(StateTransitionController.java:110)
+[        ] 	at org.gradle.internal.model.StateTransitionController.inState(StateTransitionController.java:98)
+[        ] 	at org.gradle.initialization.VintageBuildModelController.scheduleRequestedTasks(VintageBuildModelController.java:76)
+[        ] 	at org.gradle.internal.build.DefaultBuildLifecycleController$DefaultWorkGraphBuilder.addRequestedTasks(DefaultBuildLifecycleController.java:404)
+[        ] 	at org.gradle.internal.buildtree.DefaultBuildTreeWorkPreparer.lambda$scheduleRequestedTasks$0(DefaultBuildTreeWorkPreparer.java:41)
+[        ] 	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$populateWorkGraph$7(DefaultBuildLifecycleController.java:189)
+[        ] 	at org.gradle.internal.build.DefaultBuildWorkPreparer.populateWorkGraph(DefaultBuildWorkPreparer.java:42)
+[        ] 	at org.gradle.internal.build.BuildOperationFiringBuildWorkPreparer$PopulateWorkGraph.populateTaskGraph(BuildOperationFiringBuildWorkPreparer.java:106)
+[        ] 	at org.gradle.internal.build.BuildOperationFiringBuildWorkPreparer$PopulateWorkGraph.run(BuildOperationFiringBuildWorkPreparer.java:92)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+[        ] 	at org.gradle.internal.build.BuildOperationFiringBuildWorkPreparer.populateWorkGraph(BuildOperationFiringBuildWorkPreparer.java:67)
+[        ] 	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$populateWorkGraph$8(DefaultBuildLifecycleController.java:189)
+[        ] 	at org.gradle.internal.model.StateTransitionController.lambda$inState$1(StateTransitionController.java:99)
+[        ] 	at org.gradle.internal.model.StateTransitionController.lambda$inState$2(StateTransitionController.java:114)
+[        ] 	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:46)
+[        ] 	at org.gradle.internal.model.StateTransitionController.inState(StateTransitionController.java:110)
+[        ] 	at org.gradle.internal.model.StateTransitionController.inState(StateTransitionController.java:98)
+[        ] 	at org.gradle.internal.build.DefaultBuildLifecycleController.populateWorkGraph(DefaultBuildLifecycleController.java:189)
+[        ] 	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.populateWorkGraph(DefaultBuildWorkGraphController.java:169)
+[        ] 	at org.gradle.composite.internal.DefaultBuildController.populateWorkGraph(DefaultBuildController.java:76)
+[        ] 	at org.gradle.composite.internal.DefaultIncludedBuildTaskGraph$DefaultBuildTreeWorkGraphBuilder.withWorkGraph(DefaultIncludedBuildTaskGraph.java:153)
+[        ] 	at org.gradle.internal.buildtree.DefaultBuildTreeWorkPreparer.lambda$scheduleRequestedTasks$1(DefaultBuildTreeWorkPreparer.java:41)
+[        ] 	at org.gradle.composite.internal.DefaultIncludedBuildTaskGraph$DefaultBuildTreeWorkGraph$1.run(DefaultIncludedBuildTaskGraph.java:209)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+[        ] 	at org.gradle.composite.internal.DefaultIncludedBuildTaskGraph$DefaultBuildTreeWorkGraph.scheduleWork(DefaultIncludedBuildTaskGraph.java:204)
+[        ] 	at org.gradle.internal.buildtree.DefaultBuildTreeWorkPreparer.scheduleRequestedTasks(DefaultBuildTreeWorkPreparer.java:37)
+[        ] 	at org.gradle.internal.cc.impl.VintageBuildTreeWorkController$scheduleAndRunRequestedTasks$1.apply(VintageBuildTreeWorkController.kt:36)
+[        ] 	at org.gradle.internal.cc.impl.VintageBuildTreeWorkController$scheduleAndRunRequestedTasks$1.apply(VintageBuildTreeWorkController.kt:35)
+[        ] 	at org.gradle.composite.internal.DefaultIncludedBuildTaskGraph.withNewWorkGraph(DefaultIncludedBuildTaskGraph.java:112)
+[        ] 	at org.gradle.internal.cc.impl.VintageBuildTreeWorkController.scheduleAndRunRequestedTasks(VintageBuildTreeWorkController.kt:35)
+[        ] 	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.lambda$scheduleAndRunTasks$1(DefaultBuildTreeLifecycleController.java:77)
+[        ] 	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.lambda$runBuild$4(DefaultBuildTreeLifecycleController.java:120)
+[        ] 	at org.gradle.internal.model.StateTransitionController.lambda$transition$6(StateTransitionController.java:169)
+[        ] 	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+[        ] 	at org.gradle.internal.model.StateTransitionController.lambda$transition$7(StateTransitionController.java:169)
+[        ] 	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:46)
+[        ] 	at org.gradle.internal.model.StateTransitionController.transition(StateTransitionController.java:169)
+[        ] 	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.runBuild(DefaultBuildTreeLifecycleController.java:117)
+[        ] 	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.scheduleAndRunTasks(DefaultBuildTreeLifecycleController.java:77)
+[        ] 	at org.gradle.internal.buildtree.DefaultBuildTreeLifecycleController.scheduleAndRunTasks(DefaultBuildTreeLifecycleController.java:72)
+[        ] 	at org.gradle.tooling.internal.provider.ExecuteBuildActionRunner.run(ExecuteBuildActionRunner.java:31)
+[        ] 	at org.gradle.launcher.exec.ChainingBuildActionRunner.run(ChainingBuildActionRunner.java:35)
+[        ] 	at org.gradle.internal.buildtree.ProblemReportingBuildActionRunner.run(ProblemReportingBuildActionRunner.java:49)
+[        ] 	at org.gradle.launcher.exec.BuildOutcomeReportingBuildActionRunner.run(BuildOutcomeReportingBuildActionRunner.java:71)
+[        ] 	at org.gradle.tooling.internal.provider.FileSystemWatchingBuildActionRunner.run(FileSystemWatchingBuildActionRunner.java:135)
+[        ] 	at org.gradle.launcher.exec.BuildCompletionNotifyingBuildActionRunner.run(BuildCompletionNotifyingBuildActionRunner.java:41)
+[        ] 	at org.gradle.launcher.exec.RootBuildLifecycleBuildActionExecutor.lambda$execute$0(RootBuildLifecycleBuildActionExecutor.java:54)
+[        ] 	at org.gradle.composite.internal.DefaultRootBuildState.run(DefaultRootBuildState.java:130)
+[        ] 	at org.gradle.launcher.exec.RootBuildLifecycleBuildActionExecutor.execute(RootBuildLifecycleBuildActionExecutor.java:54)
+[        ] 	at org.gradle.internal.buildtree.InitDeprecationLoggingActionExecutor.execute(InitDeprecationLoggingActionExecutor.java:62)
+[        ] 	at org.gradle.internal.buildtree.InitProblems.execute(InitProblems.java:36)
+[        ] 	at org.gradle.internal.buildtree.DefaultBuildTreeContext.execute(DefaultBuildTreeContext.java:40)
+[        ] 	at org.gradle.launcher.exec.BuildTreeLifecycleBuildActionExecutor.lambda$execute$0(BuildTreeLifecycleBuildActionExecutor.java:71)
+[        ] 	at org.gradle.internal.buildtree.BuildTreeState.run(BuildTreeState.java:60)
+[        ] 	at org.gradle.launcher.exec.BuildTreeLifecycleBuildActionExecutor.execute(BuildTreeLifecycleBuildActionExecutor.java:71)
+[        ] 	at org.gradle.launcher.exec.RunAsBuildOperationBuildActionExecutor$2.call(RunAsBuildOperationBuildActionExecutor.java:67)
+[        ] 	at org.gradle.launcher.exec.RunAsBuildOperationBuildActionExecutor$2.call(RunAsBuildOperationBuildActionExecutor.java:63)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+[        ] 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+[        ] 	at org.gradle.launcher.exec.RunAsBuildOperationBuildActionExecutor.execute(RunAsBuildOperationBuildActionExecutor.java:63)
+[        ] 	at org.gradle.launcher.exec.RunAsWorkerThreadBuildActionExecutor.lambda$execute$0(RunAsWorkerThreadBuildActionExecutor.java:36)
+[        ] 	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:263)
+[        ] 	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:127)
+[        ] 	at org.gradle.launcher.exec.RunAsWorkerThreadBuildActionExecutor.execute(RunAsWorkerThreadBuildActionExecutor.java:36)
+[        ] 	at org.gradle.tooling.internal.provider.continuous.ContinuousBuildActionExecutor.execute(ContinuousBuildActionExecutor.java:110)
+[        ] 	at org.gradle.tooling.internal.provider.SubscribableBuildActionExecutor.execute(SubscribableBuildActionExecutor.java:64)
+[        ] 	at org.gradle.internal.session.DefaultBuildSessionContext.execute(DefaultBuildSessionContext.java:46)
+[        ] 	at org.gradle.internal.buildprocess.execution.BuildSessionLifecycleBuildActionExecutor$ActionImpl.apply(BuildSessionLifecycleBuildActionExecutor.java:92)
+[        ] 	at org.gradle.internal.buildprocess.execution.BuildSessionLifecycleBuildActionExecutor$ActionImpl.apply(BuildSessionLifecycleBuildActionExecutor.java:80)
+[        ] 	at org.gradle.internal.session.BuildSessionState.run(BuildSessionState.java:73)
+[        ] 	at org.gradle.internal.buildprocess.execution.BuildSessionLifecycleBuildActionExecutor.execute(BuildSessionLifecycleBuildActionExecutor.java:62)
+[        ] 	at org.gradle.internal.buildprocess.execution.BuildSessionLifecycleBuildActionExecutor.execute(BuildSessionLifecycleBuildActionExecutor.java:41)
+[        ] 	at org.gradle.internal.buildprocess.execution.StartParamsValidatingActionExecutor.execute(StartParamsValidatingActionExecutor.java:64)
+[        ] 	at org.gradle.internal.buildprocess.execution.StartParamsValidatingActionExecutor.execute(StartParamsValidatingActionExecutor.java:32)
+[        ] 	at org.gradle.internal.buildprocess.execution.SessionFailureReportingActionExecutor.execute(SessionFailureReportingActionExecutor.java:51)
+[        ] 	at org.gradle.internal.buildprocess.execution.SessionFailureReportingActionExecutor.execute(SessionFailureReportingActionExecutor.java:39)
+[        ] 	at org.gradle.internal.buildprocess.execution.SetupLoggingActionExecutor.execute(SetupLoggingActionExecutor.java:47)
+[        ] 	at org.gradle.internal.buildprocess.execution.SetupLoggingActionExecutor.execute(SetupLoggingActionExecutor.java:31)
+[        ] 	at org.gradle.launcher.daemon.server.exec.ExecuteBuild.doBuild(ExecuteBuild.java:70)
+[        ] 	at org.gradle.launcher.daemon.server.exec.BuildCommandOnly.execute(BuildCommandOnly.java:37)
+[        ] 	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+[        ] 	at org.gradle.launcher.daemon.server.exec.WatchForDisconnection.execute(WatchForDisconnection.java:39)
+[        ] 	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+[        ] 	at org.gradle.launcher.daemon.server.exec.ResetDeprecationLogger.execute(ResetDeprecationLogger.java:29)
+[        ] 	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+[        ] 	at org.gradle.launcher.daemon.server.exec.RequestStopIfSingleUsedDaemon.execute(RequestStopIfSingleUsedDaemon.java:35)
+[        ] 	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+[        ] 	at org.gradle.launcher.daemon.server.exec.ForwardClientInput.lambda$execute$0(ForwardClientInput.java:40)
+[        ] 	at org.gradle.internal.daemon.clientinput.ClientInputForwarder.forwardInput(ClientInputForwarder.java:80)
+[        ] 	at org.gradle.launcher.daemon.server.exec.ForwardClientInput.execute(ForwardClientInput.java:37)
+[        ] 	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+[        ] 	at org.gradle.launcher.daemon.server.exec.LogAndCheckHealth.execute(LogAndCheckHealth.java:64)
+[        ] 	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+[        ] 	at org.gradle.launcher.daemon.server.exec.LogToClient.doBuild(LogToClient.java:63)
+[        ] 	at org.gradle.launcher.daemon.server.exec.BuildCommandOnly.execute(BuildCommandOnly.java:37)
+[        ] 	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+[        ] 	at org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment.doBuild(EstablishBuildEnvironment.java:84)
+[        ] 	at org.gradle.launcher.daemon.server.exec.BuildCommandOnly.execute(BuildCommandOnly.java:37)
+[        ] 	at org.gradle.launcher.daemon.server.api.DaemonCommandExecution.proceed(DaemonCommandExecution.java:104)
+[        ] 	at org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy$1.run(StartBuildOrRespondWithBusy.java:52)
+[        ] 	at org.gradle.launcher.daemon.server.DaemonStateCoordinator.lambda$runCommand$0(DaemonStateCoordinator.java:321)
+[        ] 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+[        ] 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
+[        ] 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+[        ] 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+[        ] 	at java.base/java.lang.Thread.run(Thread.java:840)
+[        ] Caused by: com.android.builder.errors.EvalIssueException: Failed to install the following Android SDK packages as some licences have not been accepted.
+[        ]    platforms;android-36 Android SDK Platform 36
+[        ] To build this project, accept the SDK license agreements and install the missing components using the Android Studio SDK Manager.
+[        ] All licenses can be accepted using the sdkmanager command line tool:
+[        ] sdkmanager.bat --licenses
+[        ] Or, to transfer the license agreements from one workstation to another, see https://developer.android.com/studio/intro/update.html#download-with-gradle
+[        ] Using Android SDK: /home/christian/Android/Sdk
+[        ] 	at com.android.builder.errors.IssueReporter.reportError(IssueReporter.kt:119)
+[        ] 	at com.android.builder.errors.IssueReporter.reportError$default(IssueReporter.kt:114)
+[        ] 	at com.android.builder.errors.IssueReporter.reportError(IssueReporter.kt)
+[        ] 	at com.android.build.gradle.internal.SdkHandler.initTarget(SdkHandler.java:138)
+[        ] 	at com.android.build.gradle.internal.SdkFullLoadingStrategy.init(SdkFullLoadingStrategy.kt:49)
+[        ] 	at com.android.build.gradle.internal.SdkFullLoadingStrategy.getFileFromTarget(SdkFullLoadingStrategy.kt:64)
+[        ] 	at com.android.build.gradle.internal.SdkFullLoadingStrategy.getCoreForSystemModulesJar(SdkFullLoadingStrategy.kt:102)
+[        ] 	at com.android.build.gradle.internal.SdkLoadingStrategy.getCoreForSystemModulesJar(SdkLoadingStrategy.kt:53)
+[        ] 	at com.android.build.gradle.internal.SdkComponentsBuildService$VersionedSdkLoader$coreForSystemModulesProvider$1.call(SdkComponents.kt:292)
+[        ] 	at com.android.build.gradle.internal.SdkComponentsBuildService$VersionedSdkLoader$coreForSystemModulesProvider$1.call(SdkComponents.kt:291)
+[        ] 	at org.gradle.api.internal.provider.DefaultProvider.calculateOwnValue(DefaultProvider.java:73)
+[        ] 	at org.gradle.api.internal.provider.AbstractMinimalProvider.calculateValue(AbstractMinimalProvider.java:117)
+[        ] 	at org.gradle.api.internal.provider.FlatMapProvider.calculateOwnValue(FlatMapProvider.java:54)
+[        ] 	at org.gradle.api.internal.provider.AbstractMinimalProvider.calculateOwnPresentValue(AbstractMinimalProvider.java:82)
+[        ] 	at org.gradle.api.internal.provider.AbstractMinimalProvider.get(AbstractMinimalProvider.java:102)
+[        ] 	at org.gradle.api.internal.provider.ProviderResolutionStrategy$2.resolve(ProviderResolutionStrategy.java:33)
+[        ] 	at org.gradle.api.internal.file.collections.ProviderBackedFileCollection.visitDependencies(ProviderBackedFileCollection.java:56)
+[        ] 	at org.gradle.api.internal.AbstractTaskDependencyContainerVisitingContext.add(AbstractTaskDependencyContainerVisitingContext.java:46)
+[        ] 	at org.gradle.api.internal.file.collections.UnpackingVisitor.add(UnpackingVisitor.java:76)
+[        ] 	at org.gradle.api.internal.file.collections.DefaultConfigurableFileCollection$UnresolvedItemsCollector.visitContents(DefaultConfigurableFileCollection.java:635)
+[        ] 	at org.gradle.api.internal.file.collections.DefaultConfigurableFileCollection.visitChildren(DefaultConfigurableFileCollection.java:448)
+[        ] 	at org.gradle.api.internal.file.CompositeFileCollection.visitDependencies(CompositeFileCollection.java:101)
+[        ] 	at org.gradle.api.internal.file.collections.DefaultConfigurableFileCollection.visitDependencies(DefaultConfigurableFileCollection.java:454)
+[        ] 	at org.gradle.api.internal.AbstractTaskDependencyContainerVisitingContext.add(AbstractTaskDependencyContainerVisitingContext.java:46)
+[        ] 	at org.gradle.api.internal.file.AbstractFileCollection.lambda$getBuildDependencies$0(AbstractFileCollection.java:99)
+[        ] 	at org.gradle.api.internal.tasks.DefaultTaskDependency.visitDependencies(DefaultTaskDependency.java:151)
+[        ] 	at org.gradle.api.internal.AbstractTaskDependencyContainerVisitingContext.add(AbstractTaskDependencyContainerVisitingContext.java:46)
+[        ] 	at org.gradle.api.internal.artifacts.ivyservice.resolveengine.artifact.LocalFileDependencyBackedArtifactSet.visitDependencies(LocalFileDependencyBackedArtifactSet.java:180)
+[        ] 	at org.gradle.api.internal.AbstractTaskDependencyContainerVisitingContext.add(AbstractTaskDependencyContainerVisitingContext.java:46)
+[        ] 	at org.gradle.api.internal.artifacts.ivyservice.resolveengine.artifact.DefaultSelectedArtifactSet.visitDependencies(DefaultSelectedArtifactSet.java:47)
+[        ] 	at org.gradle.api.internal.artifacts.configurations.ResolutionResultProviderBackedSelectedArtifactSet.visitDependencies(ResolutionResultProviderBackedSelectedArtifactSet.java:44)
+[        ] 	at org.gradle.api.internal.artifacts.configurations.ResolutionBackedFileCollection.visitDependencies(ResolutionBackedFileCollection.java:58)
+[        ] 	at org.gradle.api.internal.provider.BuildableBackedProvider$1.visitDependencies(BuildableBackedProvider.java:57)
+[        ] 	at org.gradle.api.internal.file.collections.ProviderBackedFileCollection.visitDependencies(ProviderBackedFileCollection.java:52)
+[        ] 	at org.gradle.api.internal.tasks.CachingTaskDependencyResolveContext$TaskGraphImpl.getNodeValues(CachingTaskDependencyResolveContext.java:108)
+[        ] 	at org.gradle.internal.graph.CachingDirectedGraphWalker$GraphWithEmptyEdges.getNodeValues(CachingDirectedGraphWalker.java:219)
+[        ] 	at org.gradle.internal.graph.CachingDirectedGraphWalker.doSearch(CachingDirectedGraphWalker.java:127)
+[        ] 	at org.gradle.internal.graph.CachingDirectedGraphWalker.findValues(CachingDirectedGraphWalker.java:79)
+[        ] 	at org.gradle.api.internal.tasks.CachingTaskDependencyResolveContext.getDependencies(CachingTaskDependencyResolveContext.java:67)
+[        ] 	... 142 more
+[        ] BUILD FAILED in 1s
+[        ] Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+[        ] You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+[        ] For more on this, please refer to https://docs.gradle.org/8.14/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+[        ] 4 actionable tasks: 4 up-to-date
+[  +21 ms] Running Gradle task 'assembleRelease'... (completed in 1.198ms)
+[   +1 ms] "flutter apk" took 1.514ms.
+[   +5 ms] Gradle task assembleRelease failed with exit code 1
+[        ] 
+           #0      throwToolExit (package:flutter_tools/src/base/common.dart:34:3)
+           #1      AndroidGradleBuilder.buildGradleApp (package:flutter_tools/src/android/gradle.dart:600:7)
+           <asynchronous suspension>
+           #2      AndroidGradleBuilder.buildApk (package:flutter_tools/src/android/gradle.dart:239:5)
+           <asynchronous suspension>
+           #3      BuildApkCommand.runCommand (package:flutter_tools/src/commands/build_apk.dart:131:5)
+           <asynchronous suspension>
+           #4      FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1581:27)
+           <asynchronous suspension>
+           #5      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+           <asynchronous suspension>
+           #6      CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+           <asynchronous suspension>
+           #7      FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:503:9)
+           <asynchronous suspension>
+           #8      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+           <asynchronous suspension>
+           #9      FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:438:5)
+           <asynchronous suspension>
+           #10     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:98:11)
+           <asynchronous suspension>
+           #11     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+           <asynchronous suspension>
+           #12     main (package:flutter_tools/executable.dart:101:3)
+           <asynchronous suspension>
+
+
+[        ] Running 1 shutdown hook
+[        ] Shutdown hooks complete
+[        ] exiting with code 1

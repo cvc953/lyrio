@@ -1,0 +1,65 @@
+name: Export Android SDK Files
+
+on:
+  workflow_dispatch:
+
+jobs:
+  export-sdk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        run: |
+          sudo mkdir -p /usr/local/lib/android/sdk
+          echo "y" | sudo apt-get install unzip
+
+      - name: Download cmdline-tools
+        run: |
+          mkdir -p cmd
+          curl -o cmd.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip cmd.zip -d cmd
+          sudo mkdir -p /usr/local/lib/android/sdk/cmdline-tools/latest
+          sudo mv cmd/* /usr/local/lib/android/sdk/cmdline-tools/latest
+
+      - name: Install required Android SDK packages
+        run: |
+          sudo /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=/usr/local/lib/android/sdk \
+            "platforms;android-34" \
+            "build-tools;35.0.0"
+
+      - name: Verify directories
+        run: |
+          echo "### platforms"
+          ls -lha /usr/local/lib/android/sdk/platforms
+          echo "### build-tools"
+          ls -lha /usr/local/lib/android/sdk/build-tools
+
+      - name: Compress selected SDK components
+        run: |
+          cd /usr/local/lib/android/sdk
+          sudo zip -r android-platforms.zip platforms/android-34
+          sudo zip -r android-buildtools.zip build-tools/35.0.0
+
+      - name: Upload Android Platform (android-34)
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-platform-34
+          path: /usr/local/lib/android/sdk/android-platforms.zip
+
+      - name: Upload Android Build-Tools (35.0.0)
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-buildtools-35
+          path: /usr/local/lib/android/sdk/android-buildtools.zip
+      - name: Upload Gradle cache
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-cache
+          path: ~/.gradle
+
