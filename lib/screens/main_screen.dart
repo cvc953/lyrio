@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lyrio/utils/song_database.dart';
 import '../widgets/gradient_background.dart';
 import 'library_screen.dart';
 import 'search_screen.dart';
@@ -33,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Future<void> loadCachedSongs() async {
-    final cached = await SongCache.loadSongs();
+    final cached = await SongDatabase.load();
     FileService.librarySongs = cached;
 
     String? folder = await AppStorage.loadFolder();
@@ -74,30 +75,45 @@ class _MainScreenState extends State<MainScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: _pages[_currentIndex],
-        bottomNavigationBar: NavigationBar(
-          backgroundColor: const Color(0xFF0D1B2A),
-          indicatorColor: Colors.blueAccent.withOpacity(0.25),
-          selectedIndex: _currentIndex,
-          onDestinationSelected: (i) {
-            setState(() => _currentIndex = i);
-          },
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.library_music_outlined),
-              selectedIcon: Icon(Icons.library_music),
-              label: "Biblioteca",
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.search),
-              selectedIcon: Icon(Icons.search_rounded),
-              label: "Buscar",
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.more_horiz),
-              selectedIcon: Icon(Icons.more),
-              label: "Más",
-            ),
-          ],
+        bottomNavigationBar: NavigationBarTheme(
+          data: NavigationBarThemeData(
+            backgroundColor: const Color(0xFF0D1B2A),
+            indicatorColor: Colors.blueAccent.withOpacity(0.25),
+
+            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
+              states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
+                return const TextStyle(color: Colors.white, fontSize: 12);
+              }
+              return const TextStyle(color: Colors.white70, fontSize: 12);
+            }),
+          ),
+          child: NavigationBar(
+            backgroundColor: const Color(0xFF0D1B2A),
+            indicatorColor: Colors.blueAccent.withOpacity(0.25),
+            selectedIndex: _currentIndex,
+            onDestinationSelected: (i) {
+              setState(() => _currentIndex = i);
+            },
+            destinations: const [
+              NavigationDestination(
+                icon: Icon(Icons.library_music_outlined, color: Colors.white70),
+                selectedIcon: Icon(Icons.library_music, color: Colors.white),
+                label: "Biblioteca",
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.search, color: Colors.white70),
+                selectedIcon: Icon(Icons.search_rounded, color: Colors.white),
+                label: "Buscar",
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.more_horiz, color: Colors.white70),
+                selectedIcon: Icon(Icons.more, color: Colors.white),
+                label: "Más",
+              ),
+            ],
+          ),
         ),
       ),
     );

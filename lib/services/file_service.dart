@@ -3,6 +3,7 @@ import 'package:lyrio/utils/song_database.dart';
 import 'package:metadata_god/metadata_god.dart';
 import '../models/song.dart';
 import '../utils/song_cache.dart';
+import 'dart:typed_data';
 
 class FileService {
   static List<Song> librarySongs = [];
@@ -59,7 +60,7 @@ class FileService {
               artist: metadata.artist ?? "",
               album: metadata.album ?? "",
               durationSeconds: (metadata.durationMs ?? 0) ~/ 1000,
-              artwork: metadata.picture?.data,
+              artwork: null,
             ),
           );
         } catch (_) {}
@@ -78,5 +79,14 @@ class FileService {
 
     final lrcFile = File(lrcPath);
     await lrcFile.writeAsString(lyrics);
+  }
+
+  static Future<Uint8List?> loadArtwork(String path) async {
+    try {
+      final meta = await MetadataGod.readMetadata(file: path);
+      return meta.picture?.data;
+    } catch (_) {
+      return null;
+    }
   }
 }

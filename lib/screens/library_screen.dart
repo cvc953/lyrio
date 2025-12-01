@@ -5,6 +5,7 @@ import '../services/file_service.dart';
 import '../services/lyrics_service.dart';
 import '../models/song.dart';
 import 'lyrics_viewer.dart';
+import 'dart:typed_data';
 
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
@@ -123,7 +124,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
           elevation: 0,
           title: const Text(
             "Biblioteca",
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
         body: Column(
@@ -141,7 +146,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   fillColor: Colors.white12,
                   prefixIcon: const Icon(Icons.search, color: Colors.white70),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(14),
                     borderSide: BorderSide.none,
                   ),
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
@@ -156,16 +161,17 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 onPressed: downloadingAll ? null : downloadAll,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent.withOpacity(0.9),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                 ),
                 child: Text(
                   downloadingAll ? "Descargando..." : "Descargar todas",
                   style: const TextStyle(
-                    fontSize: 17,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -224,29 +230,58 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                 // Portada
                                 Hero(
                                   tag: song.path,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: song.artwork != null
-                                        ? Image.memory(
-                                            song.artwork!,
-                                            width: 65,
-                                            height: 65,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : Container(
-                                            width: 65,
-                                            height: 65,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white12,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: const Icon(
-                                              Icons.music_note,
-                                              color: Colors.white70,
-                                              size: 32,
+                                  child: FutureBuilder<Uint8List?>(
+                                    future: FileService.loadArtwork(song.path),
+                                    builder: (context, snapshot) {
+                                      final art = snapshot.data;
+
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return Container(
+                                          width: 65,
+                                          height: 65,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white12,
+                                            borderRadius: BorderRadius.circular(
+                                              20,
                                             ),
                                           ),
+                                          child: const Center(
+                                            child: SizedBox(
+                                              width: 20,
+                                              height: 20,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 2.0,
+                                                color: Colors.white54,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      if (art != null) {
+                                        return Image.memory(
+                                          art,
+                                          width: 65,
+                                          height: 65,
+                                          fit: BoxFit.cover,
+                                        );
+                                      }
+                                      return Container(
+                                        width: 65,
+                                        height: 65,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white12,
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.music_note,
+                                          color: Colors.white70,
+                                          size: 32,
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
 
@@ -312,79 +347,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
                             ),
                           ),
                         );
-
-                        /*return ListTile(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => LyricsViewer(song: song),
-                              ),
-                            );
-                          },
-                          leading: Hero(
-                            tag: song.path,
-                            child: song.artwork != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.memory(
-                                      song.artwork!,
-                                      width: 55,
-                                      height: 55,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : Container(
-                                    width: 55,
-                                    height: 55,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white12,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: const Icon(
-                                      Icons.music_note,
-                                      color: Colors.white70,
-                                    ),
-                                  ),
-                          ),
-
-                          title: Text(
-                            song.title,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-
-                          subtitle: Text(
-                            song.artist,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(color: Colors.white70),
-                          ),
-
-                          trailing: lrcExists
-                              ? const Icon(
-                                  Icons.check_circle,
-                                  color: Colors.greenAccent,
-                                )
-                              : downloadingSongs.contains(song.path)
-                              ? const SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : IconButton(
-                                  icon: const Icon(
-                                    Icons.download,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () => downloadOne(song),
-                                ),
-                        );*/
                       },
                     ),
             ),

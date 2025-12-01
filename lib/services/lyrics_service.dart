@@ -1,6 +1,6 @@
 import '../models/song.dart';
 import '../services/lrclib_service.dart';
-import '../services/file_service.dart';
+import 'file_service.dart';
 import '../models/lyric_result.dart';
 
 class LyricsService {
