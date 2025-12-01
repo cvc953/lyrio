@@ -63,13 +63,10 @@ class HomeScreen extends StatelessWidget {
                     return;
                   }
 
-                  final defaultFolder = DefaultMusicPath.defaultPath;
-                  await FileService.scanMusic(defaultFolder);
-
                   await AppStorage.setFirstRunFalse();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const MainScreen()),
+                    MaterialPageRoute(builder: (_) => const ScanScreen()),
                   );
                 },
               ),

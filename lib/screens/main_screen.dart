@@ -29,27 +29,22 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeLibrary();
     loadCachedSongs();
   }
 
   Future<void> loadCachedSongs() async {
     final cached = await SongCache.loadSongs();
     FileService.librarySongs = cached;
-    setState(() {});
-  }
 
-  Future<void> _initializeLibrary() async {
     String? folder = await AppStorage.loadFolder();
 
     if (folder == null) {
       folder = DefaultMusicPath.defaultPath;
       await AppStorage.saveFolder(folder);
     }
-
-    await FileService.scanMusic(folder);
-
-    setState(() => _loading = false);
+    setState(() {
+      _loading = false;
+    });
   }
 
   @override

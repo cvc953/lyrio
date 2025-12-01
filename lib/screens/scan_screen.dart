@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import '../utils/folder_picker.dart';
 import '../services/file_service.dart';
-import '../services/lrclib_service.dart';
-import '../widgets/song_tile.dart';
+import '../utils/default_music_path.dart';
+import 'main_screen.dart';
 import '../widgets/gradient_background.dart';
-import '../models/song.dart';
-import '../utils/permissions.dart';
-import '../utils/app_storage.dart';
-import '../utils/lyrics_utils.dart';
 
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
@@ -17,101 +12,41 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
-  List<Song> songs = [];
-  bool loading = false;
-  bool downloadingAll = false;
-  double progress = 0;
-
-  String? folderPath;
-
-  final Set<String> downloadingSongs = {};
+  String currentPath = "";
+  int scannedFiles = 0;
+  int foundSongs = 0;
+  bool done = false;
 
   @override
   void initState() {
     super.initState();
-    loadSavedFolder();
+    startScan();
   }
 
-  Future<void> loadSavedFolder() async {
-    final saved = await AppStorage.loadFolder();
-    if (saved != null) setState(() => folderPath = saved);
-  }
+  Future<void> startScan() async {
+    final path = DefaultMusicPath.defaultPath;
 
-  Future<void> pickFolder() async {
-    final path = await FolderPicker.pickFolder();
-
-    if (path != null) {
-      setState(() => folderPath = path);
-      await AppStorage.saveFolder(path);
-    }
-  }
-
-  Future<void> scan() async {
-    if (folderPath == null) return;
-
-    setState(() => loading = true);
-
-    await AppPermissions.requestStorage();
-    songs = await FileService.scanMusic(folderPath!);
-
-    setState(() => loading = false);
-  }
-
-  Future<void> resetFolder() async {
-    await AppStorage.clearFolder();
-
-    setState(() {
-      folderPath = null;
-      songs = [];
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(
-          "Carpeta restablecida. Selecciona una nueva desde el menú.",
-        ),
-      ),
-    );
-  }
-
-  Future<void> downloadAll() async {
-    setState(() {
-      downloadingAll = true;
-      progress = 0;
-    });
-
-    int done = 0;
-
-    for (final s in songs) {
-      await downloadSong(s);
-      done++;
-      setState(() => progress = done / songs.length);
-    }
-
-    setState(() => downloadingAll = false);
-  }
-
-  Future<void> downloadSong(Song song) async {
-    setState(() => downloadingSongs.add(song.path));
-
-    final result = await LRCLibService.getLyrics(
-      artist: song.artist,
-      title: song.title,
-      album: song.album,
-      durationSeconds: song.durationSeconds,
+    await FileService.scanMusicWithCallback(
+      path,
+      onScan: (path, scanned, songs) {
+        setState(() {
+          currentPath = path;
+          scannedFiles = scanned;
+          foundSongs = songs;
+        });
+      },
     );
 
-    if (result != null) {
-      final lyrics = pickBestLyrics(
-        result.syncedLyrics ?? "",
-        result.plainLyrics ?? "",
-      );
+    if (!mounted) return;
 
-      if (lyrics.isNotEmpty) {
-        await FileService.saveLRC(song.path, lyrics);
-      }
-    }
-    setState(() => downloadingSongs.remove(song.path));
+    setState(() => done = true);
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const MainScreen()),
+    );
   }
 
   @override
@@ -119,70 +54,33 @@ class _ScanScreenState extends State<ScanScreen> {
     return GradientBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-
-        appBar: AppBar(
-          title: const Text("Tus canciones"),
-          backgroundColor: Colors.transparent,
-          actions: [
-            PopupMenuButton<String>(
-              icon: const Icon(Icons.more_vert, color: Colors.white),
-              onSelected: (value) {
-                if (value == "pick") pickFolder();
-                if (value == "scan") scan();
-                if (value == "reset") resetFolder();
-              },
-              itemBuilder: (context) => [
-                const PopupMenuItem(
-                  value: "pick",
-                  child: Text("Seleccionar carpeta"),
-                ),
-                const PopupMenuItem(
-                  value: "scan",
-                  child: Text("Escanear carpeta"),
-                ),
-                const PopupMenuItem(
-                  value: "reset",
-                  child: Text("Restablecer carpeta"),
-                ),
-              ],
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: downloadAll,
-          backgroundColor: Colors.blue,
-          label: const Text("Descargar todo"),
-          icon: const Icon(Icons.download),
-        ),
-        body: Column(
-          children: [
-            const SizedBox(height: 10),
-            if (downloadingAll)
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    const Text("Descargando letras..."),
-                    LinearProgressIndicator(value: progress),
-                  ],
-                ),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(color: Colors.white),
+              const SizedBox(height: 20),
+              Text(
+                "Escaneando archivos...",
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
-            Expanded(
-              child: loading
-                  ? const Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      itemCount: songs.length,
-                      itemBuilder: (_, i) {
-                        final song = songs[i];
-                        return SongTile(
-                          song: song,
-                          downloading: downloadingSongs.contains(song.path),
-                          onDownload: () => downloadSong(song),
-                        );
-                      },
-                    ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Text(
+                "Escaneados: $scannedFiles",
+                style: const TextStyle(color: Colors.white70),
+              ),
+              Text(
+                "Canciones encontradas: $foundSongs",
+                style: const TextStyle(color: Colors.white70),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                currentPath,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.white38, fontSize: 12),
+              ),
+            ],
+          ),
         ),
       ),
     );
