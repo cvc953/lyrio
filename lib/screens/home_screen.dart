@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lyrio/screens/library_screen.dart';
 import 'package:lyrio/screens/main_screen.dart';
 import 'package:lyrio/services/file_service.dart';
 import 'package:lyrio/utils/app_storage.dart';
@@ -69,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                   await AppStorage.setFirstRunFalse();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const ScanScreen()),
+                    MaterialPageRoute(builder: (_) => const MainScreen()),
                   );
                 },
               ),
