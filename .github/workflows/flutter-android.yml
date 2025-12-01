@@ -1,6 +1,9 @@
 name: Export Android SDK Files
 
+
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
