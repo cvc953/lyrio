@@ -6,6 +6,7 @@ import '../services/lyrics_service.dart';
 import '../models/song.dart';
 import 'lyrics_viewer.dart';
 import 'dart:typed_data';
+import '../services/download_manager.dart';
 
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
@@ -72,21 +73,16 @@ class _LibraryScreenState extends State<LibraryScreen> {
     setState(() {}); // refrescar check verde
   }
 
-  Future<void> downloadAll() async {
-    if (allSongs.isEmpty) return;
+  Future<void> downloadPool(List<Song> songs, int poolSize) async {
+    final pending = List<Song>.from(songs);
 
-    final listToDownload = List<Song>.from(
-      filteredSongs.isNotEmpty ? filteredSongs : allSongs,
-    );
+    // tareas activas
+    final active = <Future>[];
 
-    setState(() {
-      downloadingAll = true;
-      progress = 0;
-    });
+    // contador para actualizar progreso
+    int completed = 0;
 
-    for (int i = 0; i < listToDownload.length; i++) {
-      final song = listToDownload[i];
-
+    Future<void> startTask(Song song) async {
       setState(() {
         downloadingSongs.add(song.path);
       });
@@ -97,10 +93,44 @@ class _LibraryScreenState extends State<LibraryScreen> {
         downloadingSongs.remove(song.path);
       });
 
+      completed++;
+
       setState(() {
-        progress = (i + 1) / listToDownload.length;
+        progress = completed / songs.length;
       });
     }
+
+    while (pending.isNotEmpty || active.isNotEmpty) {
+      // Llenar el pool con máximo poolSize descargas
+      while (pending.isNotEmpty && active.length < poolSize) {
+        final song = pending.removeAt(0);
+        final task = startTask(song);
+        active.add(task);
+
+        // Cuando termine → eliminar del pool
+        task.whenComplete(() {
+          active.remove(task);
+        });
+      }
+
+      // Esperar 20ms entre ciclos (suave y eficiente)
+      await Future.delayed(const Duration(milliseconds: 20));
+    }
+  }
+
+  Future<void> downloadAll() async {
+    final listToDownload = filteredSongs.isNotEmpty ? filteredSongs : allSongs;
+
+    // Escuchar progreso
+    DownloadManager().progressStream.listen((p) {
+      setState(() => progress = p);
+    });
+
+    setState(() {
+      downloadingAll = true;
+    });
+
+    await DownloadManager().downloadAll(listToDownload);
 
     setState(() {
       downloadingAll = false;
@@ -161,7 +191,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 onPressed: downloadingAll ? null : downloadAll,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent.withOpacity(0.9),
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 20,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -169,7 +202,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 child: Text(
                   downloadingAll ? "Descargando..." : "Descargar todas",
                   style: const TextStyle(
-                    fontSize: 15,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -185,6 +218,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   value: progress,
                   color: Colors.greenAccent,
                   backgroundColor: Colors.white24,
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
 
@@ -259,11 +293,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                         );
                                       }
                                       if (art != null) {
-                                        return Image.memory(
-                                          art,
+                                        return Container(
                                           width: 65,
                                           height: 65,
-                                          fit: BoxFit.cover,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                            image: DecorationImage(
+                                              image: MemoryImage(art),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         );
                                       }
                                       return Container(
