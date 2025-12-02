@@ -8,6 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await MetadataGod.initialize();
+  //await NotificationService.init();
 
   final bool firstRun = await AppStorage.isFirstRun();
 

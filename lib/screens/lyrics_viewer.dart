@@ -91,7 +91,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
             child: Container(color: Colors.black.withOpacity(0.4)),
           ),
 
-          // 🎵 Contenido principal
+          // Contenido principal
           SafeArea(
             child: Column(
               children: [
@@ -104,7 +104,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
                   ),
                 ),
 
-                // 🎨 Portada
+                // Portada
                 Hero(
                   tag: widget.song.path,
                   child: ClipRRect(
@@ -112,13 +112,13 @@ class _LyricsViewerState extends State<LyricsViewer> {
                     child: widget.song.artwork != null
                         ? Image.memory(
                             widget.song.artwork!,
-                            height: 220,
-                            width: 220,
+                            height: 150,
+                            width: 150,
                             fit: BoxFit.cover,
                           )
                         : Container(
-                            height: 220,
-                            width: 220,
+                            height: 150,
+                            width: 150,
                             decoration: BoxDecoration(
                               color: Colors.white12,
                               borderRadius: BorderRadius.circular(20),
@@ -132,7 +132,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
 
                 // Titulo
                 Text(
@@ -152,9 +152,9 @@ class _LyricsViewerState extends State<LyricsViewer> {
                   style: const TextStyle(fontSize: 18, color: Colors.white70),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
 
-                // 🔽 Botón descagar letra si no existe LRC
+                // Botón descagar letra si no existe LRC
                 downloading
                     ? const CircularProgressIndicator(color: Colors.white)
                     : ElevatedButton.icon(
@@ -164,13 +164,16 @@ class _LyricsViewerState extends State<LyricsViewer> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueAccent,
                         ),
-                        icon: const Icon(Icons.download),
-                        label: const Text("Descargar letra"),
+                        icon: const Icon(Icons.download, color: Colors.white),
+                        label: const Text(
+                          "Descargar letra",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
 
                 const SizedBox(height: 15),
 
-                // 📜 Letra
+                // Letra
                 Expanded(
                   child: loading
                       ? const Center(

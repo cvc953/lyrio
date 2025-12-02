@@ -19,14 +19,22 @@ class DownloadManager {
 
     isRunning = true;
 
+    const notificationId = 1;
     int completed = 0;
     const int poolSize = 3;
+
     final pending = List<Song>.from(songs);
     final active = <Future>[];
 
     Future<void> startTask(Song song) async {
       await LyricsService.downloadAndSave(song);
       completed++;
+
+      /* NotificationService.showProgress(
+        id: notificationId,
+        progress: completed,
+        max: songs.length,
+      );*/
       _progressController.add(completed / songs.length);
     }
 
@@ -43,6 +51,8 @@ class DownloadManager {
 
       await Future.delayed(const Duration(milliseconds: 20));
     }
+
+    //NotificationService.complete(notificationId);
 
     isRunning = false;
   }
