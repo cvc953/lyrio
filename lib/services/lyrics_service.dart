@@ -11,7 +11,7 @@ class LyricsService {
   static Future<String?> fetchLyrics(Song song) async {
     try {
       // Llamada a LRCLib
-      final LyricResult? result = await LRCLibService.getLyrics(
+      final result = await LRCLibService.getLyrics(
         artist: song.artist,
         title: song.title,
         album: song.album,
@@ -38,6 +38,33 @@ class LyricsService {
       return null;
     } catch (e) {
       print(">>> Error en fetchLyrics: $e");
+      return null;
+    }
+  }
+
+  static Future<String?> fetchManualLyrics(Song song) async {
+    try {
+      // Llamada a LRCLib
+      final result = await LRCLibService.getManualLyrics(
+        artist: song.artist,
+        title: song.title,
+        album: song.album,
+      );
+
+      if (result == null) {
+        print(">>> No se encontró letra para ${song.title}");
+        return null;
+      }
+
+      // Usar plainLyrics
+      if (result.plainLyrics.isNotEmpty &&
+          result.plainLyrics.trim().isNotEmpty) {
+        return result.plainLyrics.trim();
+      }
+
+      return null;
+    } catch (e) {
+      print(">>> Error en fetchManualLyrics: $e");
       return null;
     }
   }

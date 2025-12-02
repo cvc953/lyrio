@@ -21,14 +21,15 @@ class _LibraryScreenState extends State<LibraryScreen> {
   List<Song> allSongs = [];
   List<Song> filteredSongs = [];
   bool downloadingAll = false;
-  double progress = 0.0;
+  //double progress = 0.0;
   Set<String> downloadingSongs = {};
-  final ScrollController _scrollController = ScrollController();
+  //final ScrollController _scrollController = ScrollController();
   final Map<String, Uint8List?> artworkCache = {};
+  final dm = DownloadManager.instance;
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    //_scrollController.dispose();
     super.dispose();
   }
 
@@ -111,7 +112,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
       completed++;
 
       setState(() {
-        progress = completed / songs.length;
+        dm.progress = completed / songs.length;
       });
     }
 
@@ -136,20 +137,23 @@ class _LibraryScreenState extends State<LibraryScreen> {
   Future<void> downloadAll() async {
     final listToDownload = filteredSongs.isNotEmpty ? filteredSongs : allSongs;
 
+    final listToDownloadFiltered = listToDownload
+        .where((song) => !hasLrc(song))
+        .toList();
     // Escuchar progreso
     DownloadManager().progressStream.listen((p) {
-      setState(() => progress = p);
+      setState(() => dm.progress = p);
     });
 
     setState(() {
       downloadingAll = true;
     });
 
-    await DownloadManager().downloadAll(listToDownload);
+    await DownloadManager().downloadAll(listToDownloadFiltered);
 
     setState(() {
       downloadingAll = false;
-      progress = 0;
+      dm.progress = 0;
     });
 
     ScaffoldMessenger.of(
@@ -159,6 +163,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final primary = PrimaryScrollController.of(context);
     return GradientBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -180,7 +185,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(),
                 child: ElevatedButton(
-                  onPressed: downloadingAll ? null : downloadAll,
+                  onPressed: dm.isRunning ? null : downloadAll,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
                     padding: const EdgeInsets.symmetric(
@@ -192,7 +197,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     ),
                   ),
                   child: Text(
-                    downloadingAll ? "Descargando..." : "Descargar todas",
+                    dm.isRunning ? "Descargando..." : "Descargar todas",
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -205,42 +210,42 @@ class _LibraryScreenState extends State<LibraryScreen> {
           ),
         ),
         body: NestedScrollView(
+          floatHeaderSlivers: true,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [
               SliverAppBar(
-                title: Container(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 10,
-                        ),
-                        child: TextField(
-                          onChanged: filterSongs,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            hintText: "Buscar canción, artista o álbum...",
-                            hintStyle: const TextStyle(color: Colors.white54),
-                            filled: true,
-                            fillColor: Colors.white12,
-                            prefixIcon: const Icon(
-                              Icons.search,
-                              color: Colors.white70,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(14),
-                              borderSide: BorderSide.none,
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 0,
-                            ),
+                title: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
+                      child: TextField(
+                        onChanged: filterSongs,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: "Buscar canción, artista o álbum...",
+                          hintStyle: const TextStyle(color: Colors.white54),
+                          filled: true,
+                          fillColor: Colors.white12,
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: Colors.white70,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(14),
+                            borderSide: BorderSide.none,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 0,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+
                 backgroundColor: Colors.transparent,
                 pinned: false,
                 floating: true,
@@ -256,11 +261,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
               // BUSCADOR
 
               // PROGRESO GLOBAL
-              if (downloadingAll)
+              if (dm.isRunning)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: LinearProgressIndicator(
-                    value: progress,
+                    value: dm.progress,
                     color: Colors.greenAccent,
                     backgroundColor: Colors.white24,
                     borderRadius: BorderRadius.circular(10),
@@ -282,15 +287,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         behavior: const MaterialScrollBehavior().copyWith(
                           dragDevices: {PointerDeviceKind.touch},
                         ),
+
                         child: Scrollbar(
-                          controller: _scrollController,
+                          controller: primary,
+                          //controller: _scrollController,
                           thumbVisibility: true,
                           thickness: 7,
                           interactive: true,
                           radius: Radius.circular(10),
                           child: RepaintBoundary(
                             child: ListView.builder(
-                              controller: _scrollController,
+                              //controller: _scrollController,
+                              controller: primary,
                               physics: const BouncingScrollPhysics(),
                               itemCount: filteredSongs.length,
                               itemBuilder: (_, i) {
@@ -376,7 +384,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                               ),
                                               const SizedBox(height: 4),
                                               Text(
-                                                song.artist,
+                                                "${song.artist} • ${song.album}",
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: const TextStyle(

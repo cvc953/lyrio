@@ -34,17 +34,18 @@ class LRCLibService {
     if (r.statusCode == 200 && r.body.isNotEmpty && r.body != "{}") {
       return LyricResult.fromJson(json.decode(r.body));
     }
-
+    return null;
     // Si la consulta exacta falla → hacer fallback a search
-    return await _fallbackSearch(safeArtist, safeTitle);
+    //return await _fallbackSearch(safeArtist, safeTitle, safeAlbum);
   }
 
   // Búsqueda alternativa si get no encuentra nada
-  static Future<LyricResult?> _fallbackSearch(
-    String artist,
-    String title,
-  ) async {
-    final query = Uri.encodeComponent("$artist $title");
+  static Future<LyricResult?> getManualLyrics({
+    required String artist,
+    required String title,
+    required String album,
+  }) async {
+    final query = Uri.encodeComponent("$artist+$title+$album");
 
     final searchUri = Uri.parse("https://lrclib.net/api/search?q=$query");
     final r = await http.get(searchUri);

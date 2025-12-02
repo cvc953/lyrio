@@ -3,11 +3,12 @@ import '../models/song.dart';
 import 'lyrics_service.dart';
 
 class DownloadManager {
-  static final DownloadManager _instance = DownloadManager._internal();
-  factory DownloadManager() => _instance;
   DownloadManager._internal();
+  static final DownloadManager instance = DownloadManager._internal();
+  factory DownloadManager() => instance;
 
   bool isRunning = false;
+  double progress = 0.0;
 
   final StreamController<double> _progressController =
       StreamController<double>.broadcast();
