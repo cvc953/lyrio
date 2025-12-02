@@ -24,14 +24,15 @@ class LyricsService {
       }
 
       // Preferir syncedLyrics
-      if (result.syncedLyrics != null &&
-          result.syncedLyrics!.trim().isNotEmpty) {
-        return result.syncedLyrics!.trim();
+      if (result.syncedLyrics.isNotEmpty &&
+          result.syncedLyrics.trim().isNotEmpty) {
+        return result.syncedLyrics.trim();
       }
 
       // Si no hay synced, usar plainLyrics
-      if (result.plainLyrics != null && result.plainLyrics!.trim().isNotEmpty) {
-        return result.plainLyrics!.trim();
+      if (result.plainLyrics.isNotEmpty &&
+          result.plainLyrics.trim().isNotEmpty) {
+        return result.plainLyrics.trim();
       }
 
       return null;
