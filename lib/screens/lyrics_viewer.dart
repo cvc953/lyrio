@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:lyrio/utils/artwork_cache.dart';
 import '../models/song.dart';
 import '../services/lyrics_service.dart';
 import '../services/file_service.dart';
+import '../utils/song_cache.dart';
+import 'dart:typed_data';
 
 class LyricsViewer extends StatefulWidget {
   final Song song;
@@ -18,6 +21,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
   String? lyrics;
   bool loading = true;
   bool downloading = false;
+  Uint8List? artwork;
 
   @override
   void initState() {
@@ -68,12 +72,12 @@ class _LyricsViewerState extends State<LyricsViewer> {
     return Scaffold(
       body: Stack(
         children: [
-          // 💠 Fondo con blur elegante
+          // Fondo con blur
           Container(
             decoration: BoxDecoration(
-              image: widget.song.artwork != null
+              image: artwork != null
                   ? DecorationImage(
-                      image: MemoryImage(widget.song.artwork!),
+                      image: MemoryImage(artwork!),
                       fit: BoxFit.cover,
                       opacity: 0.35,
                     )
@@ -109,9 +113,9 @@ class _LyricsViewerState extends State<LyricsViewer> {
                   tag: widget.song.path,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: widget.song.artwork != null
+                    child: artwork != null
                         ? Image.memory(
-                            widget.song.artwork!,
+                            artwork!,
                             height: 150,
                             width: 150,
                             fit: BoxFit.cover,

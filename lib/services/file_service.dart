@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:lyrio/utils/artwork_cache.dart';
 import 'package:lyrio/utils/song_database.dart';
 import 'package:metadata_god/metadata_god.dart';
 import '../models/song.dart';
@@ -48,6 +49,12 @@ class FileService {
         try {
           final metadata = await MetadataGod.readMetadata(file: entity.path);
 
+          final art = metadata.picture?.data;
+
+          if (metadata.picture?.data != null) {
+            ArtworkCache.save(entity.path, metadata.picture!.data);
+          }
+
           songs.add(
             Song(
               path: entity.path,
@@ -60,7 +67,6 @@ class FileService {
               artist: metadata.artist ?? "",
               album: metadata.album ?? "",
               durationSeconds: (metadata.durationMs ?? 0) ~/ 1000,
-              artwork: null,
             ),
           );
         } catch (_) {}
@@ -69,6 +75,7 @@ class FileService {
 
     librarySongs = songs;
     await SongDatabase.save(songs);
+    final art = await ArtworkCache.load(songs[0].path);
   }
 
   static Future<void> saveLRC(String songPath, String lyrics) async {

@@ -22,6 +22,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
   double progress = 0.0;
   Set<String> downloadingSongs = {};
   final ScrollController _scrollController = ScrollController();
+  Map<String, Uint8List?> artworkCache = {};
 
   @override
   void dispose() {
@@ -33,6 +34,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
   void initState() {
     super.initState();
     loadSongs();
+    loadArtworkCache();
+
+    print(">>> ArtworkCache.init() ejecutado");
+
+    print(">>> ArtworkCache.init() fue llamado");
+  }
+
+  Future<void> loadArtworkCache() async {
+    for (var song in allSongs) {
+      artworkCache[song.path] = await FileService.loadArtwork(song.path);
+    }
+    setState(() {});
   }
 
   void loadSongs() {
@@ -277,71 +290,32 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               child: Row(
                                 children: [
                                   // Portada
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    //Hero(
-                                    //tag: song.path,
-                                    child: FutureBuilder<Uint8List?>(
-                                      future: FileService.loadArtwork(
-                                        song.path,
-                                      ),
-                                      builder: (context, snapshot) {
-                                        final art = snapshot.data;
-
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Container(
-                                            width: 65,
+                                  //ClipRRect(
+                                  //borderRadius: BorderRadius.circular(12),
+                                  Hero(
+                                    tag: song.path,
+                                    child: artworkCache[song.path] != null
+                                        ? Image.memory(
+                                            artworkCache[song.path]!,
                                             height: 65,
+                                            width: 65,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Container(
+                                            height: 65,
+                                            width: 65,
                                             decoration: BoxDecoration(
                                               color: Colors.white12,
                                               borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: const Center(
-                                              child: SizedBox(
-                                                width: 20,
-                                                height: 20,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                      strokeWidth: 2.0,
-                                                      color: Colors.white54,
-                                                    ),
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        if (art != null) {
-                                          return Container(
-                                            width: 65,
-                                            height: 65,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
                                                   BorderRadius.circular(12),
-                                              image: DecorationImage(
-                                                image: MemoryImage(art),
-                                                fit: BoxFit.cover,
-                                              ),
                                             ),
-                                          );
-                                        }
-                                        return Container(
-                                          width: 65,
-                                          height: 65,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white12,
-                                            borderRadius: BorderRadius.circular(
-                                              12,
+                                            child: const Icon(
+                                              Icons.music_note,
+                                              color: Colors.white70,
+                                              size: 32,
                                             ),
                                           ),
-                                          child: const Icon(
-                                            Icons.music_note,
-                                            color: Colors.white70,
-                                            size: 32,
-                                          ),
-                                        );
-                                      },
-                                    ),
+                                    //),
                                   ),
 
                                   const SizedBox(width: 14),

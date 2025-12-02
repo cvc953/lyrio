@@ -7,7 +7,6 @@ class Song {
   final String artist;
   final String album;
   final int durationSeconds;
-  final Uint8List? artwork;
 
   Song({
     required this.path,
@@ -15,7 +14,6 @@ class Song {
     required this.artist,
     required this.album,
     required this.durationSeconds,
-    required this.artwork,
   });
 
   Map<String, dynamic> toJson() {
@@ -25,7 +23,6 @@ class Song {
       'artist': artist,
       'album': album,
       'durationSeconds': durationSeconds,
-      'artwork': artwork != null ? artwork!.toList() : null,
     };
   }
 
@@ -36,9 +33,6 @@ class Song {
       artist: json['artist'],
       album: json['album'],
       durationSeconds: json['durationSeconds'],
-      artwork: json['artwork'] != null
-          ? Uint8List.fromList(List<int>.from(json['artwork']))
-          : null,
     );
   }
 }

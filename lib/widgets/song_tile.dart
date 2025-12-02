@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import '../models/song.dart';
+import 'dart:typed_data';
 
 class SongTile extends StatelessWidget {
   final Song song;
   final VoidCallback onDownload;
 
   final bool downloading;
+  final Uint8List? artwork;
 
   const SongTile({
     super.key,
     required this.song,
     required this.onDownload,
     required this.downloading,
+    required this.artwork,
   });
 
   @override
@@ -35,9 +38,9 @@ class SongTile extends StatelessWidget {
           // Album Art Placeholder
           ClipRRect(
             borderRadius: BorderRadius.circular(50),
-            child: song.artwork != null
+            child: artwork != null
                 ? Image.memory(
-                    song.artwork!,
+                    artwork!,
                     width: 55,
                     height: 55,
                     fit: BoxFit.cover,
