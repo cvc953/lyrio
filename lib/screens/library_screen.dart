@@ -295,11 +295,16 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   Hero(
                                     tag: song.path,
                                     child: artworkCache[song.path] != null
-                                        ? Image.memory(
-                                            artworkCache[song.path]!,
-                                            height: 65,
-                                            width: 65,
-                                            fit: BoxFit.cover,
+                                        ? ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                            child: Image.memory(
+                                              artworkCache[song.path]!,
+                                              height: 65,
+                                              width: 65,
+                                              fit: BoxFit.cover,
+                                            ),
                                           )
                                         : Container(
                                             height: 65,

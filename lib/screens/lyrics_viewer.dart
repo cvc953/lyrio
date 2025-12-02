@@ -2,11 +2,13 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:lyrio/utils/artwork_cache.dart';
+import 'package:lyrio/utils/song_database.dart';
 import '../models/song.dart';
 import '../services/lyrics_service.dart';
 import '../services/file_service.dart';
 import '../utils/song_cache.dart';
 import 'dart:typed_data';
+import '../utils/artwork_cache.dart';
 
 class LyricsViewer extends StatefulWidget {
   final Song song;
@@ -108,12 +110,62 @@ class _LyricsViewerState extends State<LyricsViewer> {
                   ),
                 ),
 
-                // Portada
                 Hero(
+                  tag: widget.song.path,
+                  child: FutureBuilder<Uint8List?>(
+                    future: ArtworkCache.load(widget.song.path),
+                    builder: (context, snapshot) {
+                      final art = snapshot.data;
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container(
+                          width: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            color: Colors.white12,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white70,
+                            ),
+                          ),
+                        );
+                      }
+                      if (art != null) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.memory(
+                            art,
+                            width: 150,
+                            height: 150,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      }
+                      return Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.white12,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Icon(
+                          Icons.music_note,
+                          color: Colors.white70,
+                          size: 80,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                // Portada
+                /*Hero(
                   tag: widget.song.path,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: artwork != null
+                    child: ArtworkCache.load(widget.song.path) != null
                         ? Image.memory(
                             artwork!,
                             height: 150,
@@ -134,8 +186,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
                             ),
                           ),
                   ),
-                ),
-
+                ),*/
                 const SizedBox(height: 15),
 
                 // Titulo
