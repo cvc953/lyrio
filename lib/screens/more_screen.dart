@@ -12,7 +12,14 @@ class MoreScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Más', style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Más',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: ListView(

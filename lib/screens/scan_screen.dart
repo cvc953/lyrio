@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../services/file_service.dart';
-import '../utils/default_music_path.dart';
 import 'main_screen.dart';
 import '../widgets/gradient_background.dart';
 
 class ScanScreen extends StatefulWidget {
-  const ScanScreen({super.key});
+  final String rootPath;
+  const ScanScreen({super.key, required this.rootPath});
 
   @override
   State<ScanScreen> createState() => _ScanScreenState();
@@ -24,7 +24,7 @@ class _ScanScreenState extends State<ScanScreen> {
   }
 
   Future<void> startScan() async {
-    final path = DefaultMusicPath.defaultPath;
+    final path = widget.rootPath;
 
     await FileService.scanMusicWithCallback(
       path,
@@ -41,7 +41,7 @@ class _ScanScreenState extends State<ScanScreen> {
 
     setState(() => done = true);
 
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 100));
 
     Navigator.pushReplacement(
       context,

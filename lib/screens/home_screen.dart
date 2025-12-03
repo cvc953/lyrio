@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lyrio/screens/library_screen.dart';
-import 'package:lyrio/screens/main_screen.dart';
-import 'package:lyrio/services/file_service.dart';
 import 'package:lyrio/utils/app_storage.dart';
 import 'package:lyrio/utils/permissions.dart';
 import '../widgets/gradient_background.dart';
 import 'scan_screen.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../utils/default_music_path.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -67,7 +63,10 @@ class HomeScreen extends StatelessWidget {
                   await AppStorage.setFirstRunFalse();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const ScanScreen()),
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          ScanScreen(rootPath: DefaultMusicPath.defaultPath),
+                    ),
                   );
                 },
               ),

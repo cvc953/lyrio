@@ -32,11 +32,13 @@ class SelectDirectory extends StatelessWidget {
             backgroundColor: Colors.blueAccent,
             foregroundColor: Colors.black87,
           ),
-          onPressed: () {
+          onPressed: () async {
             //falta integrarlo con el scaneo de archivos
-            FilePicker.platform.getDirectoryPath().then((selectedPath) {
-              Navigator.of(context).pop(selectedPath);
-            });
+            final newPath = await FilePicker.platform.getDirectoryPath();
+            if (newPath != null) {
+              SelectDirectory.selectedPath = newPath;
+              Navigator.of(context).pop(newPath);
+            }
           },
           child: const Text(
             'Seleccionar Carpeta',

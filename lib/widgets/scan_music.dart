@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lyrio/screens/main_screen.dart';
-import 'package:lyrio/services/file_service.dart';
+import 'package:lyrio/screens/scan_screen.dart';
 import '../utils/default_music_path.dart';
 import 'select_directory.dart';
+import '../screens/library_screen.dart';
 
 class ScanMusic extends StatelessWidget {
   const ScanMusic({super.key});
@@ -36,13 +36,11 @@ class ScanMusic extends StatelessWidget {
             foregroundColor: Colors.black87,
           ),
           onPressed: () {
+            final path = rootPath;
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const MainScreen()),
+              MaterialPageRoute(builder: (_) => ScanScreen(rootPath: path)),
             );
-            //FileService.scanMusicWithCallback(rootPath, onScan: onScan);
-
-            Navigator.of(context).pop(false);
           },
           child: const Text(
             'Escanear Música',
