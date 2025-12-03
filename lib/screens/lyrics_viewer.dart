@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:lyrio/screens/search_screen.dart';
+import 'package:lyrio/utils/artwork_cache.dart';
 import '../models/song.dart';
 import '../services/lyrics_service.dart';
-import '../services/file_service.dart';
+import 'dart:typed_data';
 
 class LyricsViewer extends StatefulWidget {
   final Song song;
@@ -18,6 +20,8 @@ class _LyricsViewerState extends State<LyricsViewer> {
   String? lyrics;
   bool loading = true;
   bool downloading = false;
+  Uint8List? artwork;
+  bool noLyricsFound = false;
 
   @override
   void initState() {
@@ -55,6 +59,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
         context,
       ).showSnackBar(SnackBar(content: Text("Letra descargada.")));
     } else {
+      setState(() => noLyricsFound = true);
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("No se encontró letra.")));
@@ -68,12 +73,12 @@ class _LyricsViewerState extends State<LyricsViewer> {
     return Scaffold(
       body: Stack(
         children: [
-          // 💠 Fondo con blur elegante
+          // Fondo con blur
           Container(
             decoration: BoxDecoration(
-              image: widget.song.artwork != null
+              image: artwork != null
                   ? DecorationImage(
-                      image: MemoryImage(widget.song.artwork!),
+                      image: MemoryImage(artwork!),
                       fit: BoxFit.cover,
                       opacity: 0.35,
                     )
@@ -91,7 +96,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
             child: Container(color: Colors.black.withOpacity(0.4)),
           ),
 
-          // 🎵 Contenido principal
+          // Contenido principal
           SafeArea(
             child: Column(
               children: [
@@ -104,35 +109,57 @@ class _LyricsViewerState extends State<LyricsViewer> {
                   ),
                 ),
 
-                // 🎨 Portada
                 Hero(
                   tag: widget.song.path,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: widget.song.artwork != null
-                        ? Image.memory(
-                            widget.song.artwork!,
-                            height: 220,
-                            width: 220,
-                            fit: BoxFit.cover,
-                          )
-                        : Container(
-                            height: 220,
-                            width: 220,
-                            decoration: BoxDecoration(
-                              color: Colors.white12,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: const Icon(
-                              Icons.music_note,
+                  child: FutureBuilder<Uint8List?>(
+                    future: ArtworkCache.load(widget.song.path),
+                    builder: (context, snapshot) {
+                      final art = snapshot.data;
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container(
+                          width: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            color: Colors.white12,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Center(
+                            child: CircularProgressIndicator(
                               color: Colors.white70,
-                              size: 80,
                             ),
                           ),
+                        );
+                      }
+                      if (art != null) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.memory(
+                            art,
+                            width: 150,
+                            height: 150,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      }
+                      return Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.white12,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Icon(
+                          Icons.music_note,
+                          color: Colors.white70,
+                          size: 80,
+                        ),
+                      );
+                    },
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
 
                 // Titulo
                 Text(
@@ -151,26 +178,67 @@ class _LyricsViewerState extends State<LyricsViewer> {
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 18, color: Colors.white70),
                 ),
+                Text(
+                  widget.song.album,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16, color: Colors.white54),
+                ),
+                Text(
+                  "${widget.song.durationSeconds ~/ 60}:${(widget.song.durationSeconds % 60).toString().padLeft(2, '0')} min",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16, color: Colors.white54),
+                ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
 
-                // 🔽 Botón descagar letra si no existe LRC
+                // Botón descagar letra si no existe LRC
                 downloading
                     ? const CircularProgressIndicator(color: Colors.white)
-                    : ElevatedButton.icon(
-                        onPressed: lyrics != null
-                            ? null
-                            : () => downloadLyrics(),
+                    : noLyricsFound
+                    ? ElevatedButton.icon(
+                        onPressed: () async {
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => SearchScreen(
+                                initialTitle: widget.song.title,
+                                initialAlbum: widget.song.album,
+                                initialArtist: widget.song.artist,
+                              ),
+                            ),
+                          );
+                          if (result != null) {
+                            await LyricsService.saveManualResult(
+                              widget.song,
+                              result,
+                            );
+                            await loadLyrics();
+                          }
+                        },
+                        icon: const Icon(Icons.search, color: Colors.white),
+                        label: const Text(
+                          "Buscar letra manualmente",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueAccent,
                         ),
-                        icon: const Icon(Icons.download),
-                        label: const Text("Descargar letra"),
+                      )
+                    : ElevatedButton.icon(
+                        onPressed: () => downloadLyrics(),
+                        icon: const Icon(Icons.download, color: Colors.white),
+                        label: const Text(
+                          "Descargar letra",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueAccent,
+                        ),
                       ),
 
                 const SizedBox(height: 15),
 
-                // 📜 Letra
+                // Letra
                 Expanded(
                   child: loading
                       ? const Center(

@@ -1,103 +1,99 @@
 import 'dart:io';
+import 'package:lyrio/utils/artwork_cache.dart';
+import 'package:lyrio/utils/song_database.dart';
 import 'package:metadata_god/metadata_god.dart';
 import '../models/song.dart';
 import '../utils/song_cache.dart';
+import 'dart:typed_data';
 
 class FileService {
   static List<Song> librarySongs = [];
-  static Future<List<Song>> scanMusic(String rootPath) async {
+
+  static final List<String> _allowedExtensions = [
+    ".mp3",
+    ".flac",
+    ".m4a",
+    ".wav",
+  ];
+
+  static final List<String> _allowedFolders = [
+    "Music",
+    "Download",
+    "Downloads",
+    "Audio",
+    "Audios",
+    "Songs",
+  ];
+
+  static Future<void> scanMusicWithCallback(
+    String rootPath, {
+    required Function(String path, int scanned, int found) onScan,
+  }) async {
     final dir = Directory(rootPath);
-    final root = Directory(rootPath);
     List<Song> songs = [];
 
-    if (!root.existsSync()) {
-      return songs;
-    }
+    int scanned = 0;
 
-    final allowedFolders = [
-      'Music',
-      'Downloads',
-      'Audio',
-      'Audios',
-      'songs',
-      'song',
-    ];
+    await for (var entity in dir.list(recursive: true)) {
+      scanned++;
 
-    Future<void> scanFolder(Directory dir) async {
-      final folderName = dir.path.split("/").last;
+      onScan(entity.path, scanned, songs.length);
 
-      if (!allowedFolders.contains(folderName) && dir.path != rootPath) {
-        return;
-      }
-    }
+      print("Leyendo: ${entity.path}");
 
-    try {
-      await for (var entity in dir.list(recursive: true)) {
-        if (entity is File &&
-            (entity.path.endsWith(".mp3") ||
-                entity.path.endsWith(".flac") ||
-                entity.path.endsWith(".m4a") ||
-                entity.path.endsWith(".wav"))) {
-          try {
-            final metadata = await MetadataGod.readMetadata(file: entity.path);
+      if (entity is File &&
+          (entity.path.endsWith(".mp3") ||
+              entity.path.endsWith(".flac") ||
+              entity.path.endsWith(".m4a") ||
+              entity.path.endsWith(".wav"))) {
+        try {
+          final metadata = await MetadataGod.readMetadata(file: entity.path);
 
-            final title =
-                metadata.title ??
-                entity.uri.pathSegments.last.replaceAll(
-                  RegExp(r'\.(mp3|flac|m4a|wav)$'),
-                  '',
-                );
+          final art = metadata.picture?.data;
 
-            final artist = metadata.artist ?? "Unknown Artist";
-            final album = metadata.album ?? "Unknown Album";
-            final durationMs = metadata.durationMs ?? 0;
-            final artworkBytes = metadata.picture?.data;
-
-            songs.add(
-              Song(
-                path: entity.path,
-                title: title,
-                artist: artist,
-                album: album,
-                durationSeconds: (durationMs / 1000).round(),
-                artwork: metadata.picture?.data,
-              ),
-            );
-          } catch (_) {
-            final filename = entity.uri.pathSegments.last;
-            songs.add(
-              Song(
-                path: entity.path,
-                title: filename.replaceAll(
-                  RegExp(r'\.(mp3|flac|m4a|wav)$'),
-                  '',
-                ),
-                artist: "",
-                album: "",
-                durationSeconds: 0,
-                artwork: null,
-              ),
-            );
+          if (metadata.picture?.data != null) {
+            ArtworkCache.save(entity.path, metadata.picture!.data);
           }
-        }
-      }
-    } catch (_) {}
 
-    await scanFolder(root);
+          songs.add(
+            Song(
+              path: entity.path,
+              title:
+                  metadata.title ??
+                  entity.uri.pathSegments.last.replaceAll(
+                    RegExp(r'\.(mp3|flac|m4a|wav)$'),
+                    '',
+                  ),
+              artist: metadata.artist ?? "",
+              album: metadata.album ?? "",
+              durationSeconds: (metadata.durationMs ?? 0) ~/ 1000,
+            ),
+          );
+        } catch (_) {}
+      }
+    }
 
     librarySongs = songs;
-    await SongCache.saveSongs(songs);
-    return songs;
+    await SongDatabase.save(songs);
+    final art = await ArtworkCache.load(songs[0].path);
   }
 
   static Future<void> saveLRC(String songPath, String lyrics) async {
     final file = File(songPath);
     final dir = file.parent.path;
-
     final base = file.uri.pathSegments.last.split('.').first;
     final lrcPath = "$dir/$base.lrc";
 
     final lrcFile = File(lrcPath);
     await lrcFile.writeAsString(lyrics);
+  }
+
+  static Future<Uint8List?> loadArtwork(String path) async {
+    try {
+      final meta = await MetadataGod.readMetadata(file: path);
+      return meta.picture?.data;
+    } catch (_) {
+      return null;
+    }
   }
 }
