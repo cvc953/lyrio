@@ -52,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
     if (_loading) {
       return const GradientBackground(
         child: Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Color(0xFF0D1B2A),
           body: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,

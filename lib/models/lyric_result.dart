@@ -6,6 +6,7 @@ class LyricResult {
   final String artist;
   final String album;
   final double durationSeconds;
+  final bool isInstrumental;
 
   LyricResult({
     required this.id,
@@ -15,6 +16,7 @@ class LyricResult {
     required this.artist,
     required this.album,
     required this.durationSeconds,
+    required this.isInstrumental,
   });
 
   factory LyricResult.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class LyricResult {
       artist: json["artistName"] ?? "",
       album: json["albumName"] ?? "",
       durationSeconds: (json["duration"] ?? 0).toDouble(),
+      isInstrumental: json["instrumental"] ?? false,
     );
   }
 }

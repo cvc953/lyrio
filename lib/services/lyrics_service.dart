@@ -37,6 +37,13 @@ class LyricsService {
         return result.plainLyrics.trim();
       }
 
+      if (result.isInstrumental == true &&
+          result.plainLyrics.isEmpty &&
+          result.syncedLyrics.isEmpty) {
+        print(">>> La canción ${song.title} es instrumental.");
+        return "[Instrumental]";
+      }
+
       return null;
     } catch (e) {
       print(">>> Error en fetchLyrics: $e");
@@ -61,6 +68,16 @@ class LyricsService {
           : result.plainLyrics;
       if (lyrics.trim().isEmpty) return false;
 
+      if (result.isInstrumental &&
+          result.syncedLyrics.isEmpty &&
+          result.plainLyrics.isEmpty) {
+        final file = File(song.path);
+        final base = file.uri.pathSegments.last.split('.').first;
+        final lrcPath = "${file.parent.path}/$base.lrc";
+
+        await File(lrcPath).writeAsString("[Instrumental]");
+        return true;
+      }
       //obtener la ruta del archivo de la cancion
       final file = File(song.path);
       final filenamen = file.uri.pathSegments.last.split('.').first;

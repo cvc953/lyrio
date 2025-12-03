@@ -3,7 +3,6 @@ import 'package:lyrio/utils/artwork_cache.dart';
 import 'package:lyrio/utils/song_database.dart';
 import 'package:metadata_god/metadata_god.dart';
 import '../models/song.dart';
-import '../utils/song_cache.dart';
 import 'dart:typed_data';
 
 class FileService {

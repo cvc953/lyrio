@@ -53,7 +53,7 @@ class _ScanScreenState extends State<ScanScreen> {
   Widget build(BuildContext context) {
     return GradientBackground(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF0D1B2A),
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,

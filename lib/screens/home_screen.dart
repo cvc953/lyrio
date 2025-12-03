@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GradientBackground(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF0D1B2A),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
