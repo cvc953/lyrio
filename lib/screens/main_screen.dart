@@ -72,7 +72,7 @@ class _MainScreenState extends State<MainScreen> {
 
     return GradientBackground(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF0D1B2A),
         body: _pages[_currentIndex],
         bottomNavigationBar: NavigationBarTheme(
           data: NavigationBarThemeData(

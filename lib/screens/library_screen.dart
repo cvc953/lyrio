@@ -166,7 +166,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     final primary = PrimaryScrollController.of(context);
     return GradientBackground(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF0D1B2A),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,

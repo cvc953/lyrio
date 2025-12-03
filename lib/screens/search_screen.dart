@@ -95,7 +95,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return GradientBackground(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF0D1B2A),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
