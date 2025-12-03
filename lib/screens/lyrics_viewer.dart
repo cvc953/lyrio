@@ -1,14 +1,11 @@
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:lyrio/screens/search_screen.dart';
 import 'package:lyrio/utils/artwork_cache.dart';
-import 'package:lyrio/utils/song_database.dart';
 import '../models/song.dart';
 import '../services/lyrics_service.dart';
-import '../services/file_service.dart';
-import '../utils/song_cache.dart';
 import 'dart:typed_data';
-import '../utils/artwork_cache.dart';
 
 class LyricsViewer extends StatefulWidget {
   final Song song;
@@ -24,6 +21,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
   bool loading = true;
   bool downloading = false;
   Uint8List? artwork;
+  bool noLyricsFound = false;
 
   @override
   void initState() {
@@ -61,6 +59,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
         context,
       ).showSnackBar(SnackBar(content: Text("Letra descargada.")));
     } else {
+      setState(() => noLyricsFound = true);
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("No se encontró letra.")));
@@ -160,33 +159,6 @@ class _LyricsViewerState extends State<LyricsViewer> {
                   ),
                 ),
 
-                // Portada
-                /*Hero(
-                  tag: widget.song.path,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: ArtworkCache.load(widget.song.path) != null
-                        ? Image.memory(
-                            artwork!,
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.cover,
-                          )
-                        : Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.white12,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: const Icon(
-                              Icons.music_note,
-                              color: Colors.white70,
-                              size: 80,
-                            ),
-                          ),
-                  ),
-                ),*/
                 const SizedBox(height: 15),
 
                 // Titulo
@@ -206,23 +178,61 @@ class _LyricsViewerState extends State<LyricsViewer> {
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 18, color: Colors.white70),
                 ),
+                Text(
+                  widget.song.album,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16, color: Colors.white54),
+                ),
+                Text(
+                  "${widget.song.durationSeconds ~/ 60}:${(widget.song.durationSeconds % 60).toString().padLeft(2, '0')} min",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16, color: Colors.white54),
+                ),
 
                 const SizedBox(height: 15),
 
                 // Botón descagar letra si no existe LRC
                 downloading
                     ? const CircularProgressIndicator(color: Colors.white)
-                    : ElevatedButton.icon(
-                        onPressed: lyrics != null
-                            ? null
-                            : () => downloadLyrics(),
+                    : noLyricsFound
+                    ? ElevatedButton.icon(
+                        onPressed: () async {
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => SearchScreen(
+                                initialTitle: widget.song.title,
+                                initialAlbum: widget.song.album,
+                                initialArtist: widget.song.artist,
+                              ),
+                            ),
+                          );
+                          if (result != null) {
+                            await LyricsService.saveManualResult(
+                              widget.song,
+                              result,
+                            );
+                            await loadLyrics();
+                          }
+                        },
+                        icon: const Icon(Icons.search, color: Colors.white),
+                        label: const Text(
+                          "Buscar letra manualmente",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueAccent,
                         ),
+                      )
+                    : ElevatedButton.icon(
+                        onPressed: () => downloadLyrics(),
                         icon: const Icon(Icons.download, color: Colors.white),
                         label: const Text(
                           "Descargar letra",
                           style: TextStyle(color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueAccent,
                         ),
                       ),
 

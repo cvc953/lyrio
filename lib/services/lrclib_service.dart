@@ -40,7 +40,7 @@ class LRCLibService {
   }
 
   // Búsqueda alternativa si get no encuentra nada
-  static Future<LyricResult?> getManualLyrics({
+  static Future<List<LyricResult>> getManualLyrics({
     required String artist,
     required String title,
     required String album,
@@ -50,14 +50,13 @@ class LRCLibService {
     final searchUri = Uri.parse("https://lrclib.net/api/search?q=$query");
     final r = await http.get(searchUri);
 
-    if (r.statusCode != 200) return null;
+    if (r.statusCode != 200) return [];
 
     final results = json.decode(r.body);
-    if (results is List && results.isNotEmpty) {
-      final match = results.first;
-      return LyricResult.fromJson(match);
+    if (results is! List) {
+      return [];
     }
 
-    return null;
+    return results.map<LyricResult>((e) => LyricResult.fromJson(e)).toList();
   }
 }
