@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:lyrio/widgets/scan_music.dart';
 import 'package:lyrio/widgets/select_directory.dart';
-import '../utils/permissions.dart';
+import '../services/notifications_settings.dart';
 
-class MoreScreen extends StatelessWidget {
+class MoreScreen extends StatefulWidget {
   const MoreScreen({super.key});
+
+  @override
+  State<MoreScreen> createState() => _MoreScreenState();
+}
+
+class _MoreScreenState extends State<MoreScreen> {
+  bool notificationsEnable = true;
+
+  @override
+  void initState() {
+    super.initState();
+    enableNotifications();
+  }
+
+  void enableNotifications() async {
+    notificationsEnable = await NotificationSettings.isEnabled();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +70,19 @@ class MoreScreen extends StatelessWidget {
           ),
           SizedBox(height: 30),
           ListTile(
-            leading: Icon(Icons.notifications_on, color: Colors.white),
+            leading: notificationsEnable == true
+                ? Icon(Icons.notifications_on, color: Colors.white)
+                : Icon(Icons.notifications_off, color: Colors.white),
             title: Text(
               'Notificaciones',
               style: TextStyle(color: Colors.white),
             ),
-            onTap: () {
-              // Acción al tocar "Biblioteca"
-              final granted = AppPermissions.requestNotification();
+            onTap: () async {
+              // Acción al tocar "Notificaciones"
+              setState(() {
+                notificationsEnable = !notificationsEnable;
+              });
+              await NotificationSettings.setEnabled(notificationsEnable);
             },
           ),
           ListTile(

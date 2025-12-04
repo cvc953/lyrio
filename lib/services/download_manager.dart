@@ -2,6 +2,7 @@ import 'dart:async';
 import '../models/song.dart';
 import 'lyrics_service.dart';
 import '../services/local_notification_service.dart';
+import 'notifications_settings.dart';
 
 class DownloadManager {
   DownloadManager._internal();
@@ -31,15 +32,17 @@ class DownloadManager {
     Future<void> startTask(Song song) async {
       await LyricsService.downloadAndSave(song);
       completed++;
+      bool enabled = await NotificationSettings.isEnabled();
+      _progressController.add(completed / songs.length);
+
+      if (!enabled) return;
 
       final notification = LocalNotificationService();
-
       notification.showNotification(
         id: notificationId,
         progress: completed,
         max: songs.length,
       );
-      _progressController.add(completed / songs.length);
     }
 
     while (pending.isNotEmpty || active.isNotEmpty) {
