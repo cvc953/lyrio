@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lyrio/widgets/scan_music.dart';
 import 'package:lyrio/widgets/select_directory.dart';
+import '../utils/permissions.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -58,6 +59,7 @@ class MoreScreen extends StatelessWidget {
             ),
             onTap: () {
               // Acción al tocar "Biblioteca"
+              final granted = AppPermissions.requestNotification();
             },
           ),
           ListTile(

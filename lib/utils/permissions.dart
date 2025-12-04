@@ -13,4 +13,9 @@ class AppPermissions {
     final storage = await Permission.storage.request();
     return storage.isGranted;
   }
+
+  static Future<bool> requestNotification() async {
+    final notification = await Permission.notification.request();
+    return notification.isGranted;
+  }
 }

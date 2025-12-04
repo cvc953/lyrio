@@ -10,8 +10,8 @@ String pickBestLyrics(String synced, String plain) {
   final regex = RegExp(r'\[\d{2}:\d{2}(?:\.\d{2,3})?\]');
 
   if (synced.isNotEmpty && regex.hasMatch(synced)) {
-    return synced; // 🔥 Preferir la sincronizada
+    return synced; //  Preferir la sincronizada
   }
 
-  return plain; // fallback
+  return plain;
 }
