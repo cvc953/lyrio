@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lyrio/widgets/scan_music.dart';
 import 'package:lyrio/widgets/select_directory.dart';
 import '../services/notifications_settings.dart';
+import '../widgets/toggleNotifications.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({super.key});
@@ -70,7 +71,7 @@ class _MoreScreenState extends State<MoreScreen> {
           ),
           SizedBox(height: 30),
           ListTile(
-            leading: notificationsEnable == true
+            leading: notificationsEnable == false
                 ? Icon(Icons.notifications_on, color: Colors.white)
                 : Icon(Icons.notifications_off, color: Colors.white),
             title: Text(
@@ -79,10 +80,16 @@ class _MoreScreenState extends State<MoreScreen> {
             ),
             onTap: () async {
               // Acción al tocar "Notificaciones"
-              setState(() {
+              showDialog(
+                context: context,
+                builder: (context) => ToggleNotifications(),
+              );
+              await NotificationSettings.setEnabled(notificationsEnable);
+
+              setState(() async {
+                //notificationsEnable = !notificationsEnable;
                 notificationsEnable = !notificationsEnable;
               });
-              await NotificationSettings.setEnabled(notificationsEnable);
             },
           ),
           ListTile(

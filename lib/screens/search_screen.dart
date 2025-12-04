@@ -253,6 +253,18 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 },
               ),
+            if (!isSearching && results.isEmpty && _error != null)
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 20,
+                ),
+                child: Text(
+                  _error!,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+              ),
           ],
         ),
       ),
