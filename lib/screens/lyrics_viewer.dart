@@ -110,7 +110,9 @@ class _LyricsViewerState extends State<LyricsViewer> {
                 ),
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    SizedBox(width: 25),
                     Hero(
                       tag: widget.song.path,
                       child: FutureBuilder<Uint8List?>(
@@ -121,8 +123,8 @@ class _LyricsViewerState extends State<LyricsViewer> {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return Container(
-                              width: 150,
-                              height: 150,
+                              width: 100,
+                              height: 100,
                               decoration: BoxDecoration(
                                 color: Colors.white12,
                                 borderRadius: BorderRadius.circular(20),
@@ -139,15 +141,15 @@ class _LyricsViewerState extends State<LyricsViewer> {
                               borderRadius: BorderRadius.circular(20),
                               child: Image.memory(
                                 art,
-                                width: 150,
-                                height: 150,
+                                width: 100,
+                                height: 100,
                                 fit: BoxFit.cover,
                               ),
                             );
                           }
                           return Container(
-                            width: 150,
-                            height: 150,
+                            width: 100,
+                            height: 100,
                             decoration: BoxDecoration(
                               color: Colors.white12,
                               borderRadius: BorderRadius.circular(20),
@@ -162,44 +164,55 @@ class _LyricsViewerState extends State<LyricsViewer> {
                       ),
                     ),
 
-                    const SizedBox(height: 15),
+                    SizedBox(width: 15),
 
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.song.title,
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+
+                          // Artista
+                          Text(
+                            widget.song.artist,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.white70,
+                            ),
+                          ),
+                          Text(
+                            widget.song.album,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.white54,
+                            ),
+                          ),
+                          Text(
+                            "${widget.song.durationSeconds ~/ 60}:${(widget.song.durationSeconds % 60).toString().padLeft(2, '0')} min",
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.white54,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     // Titulo
-                    Text(
-                      widget.song.title,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-
-                    // Artista
-                    Text(
-                      widget.song.artist,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white70,
-                      ),
-                    ),
-                    Text(
-                      widget.song.album,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white54,
-                      ),
-                    ),
-                    Text(
-                      "${widget.song.durationSeconds ~/ 60}:${(widget.song.durationSeconds % 60).toString().padLeft(2, '0')} min",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white54,
-                      ),
-                    ),
                   ],
                 ),
 
