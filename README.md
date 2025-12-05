@@ -163,3 +163,28 @@ Puedes colaborar mediante:
 * Correcciones de documentación
 
 ---
+
+## 📄 **Licencia**
+
+*(Indica si deseas MIT, Apache 2.0, GPL, o puedo recomendar la más adecuada.)*
+
+---
+
+## 📸 **Capturas (opcional)**
+
+## 📚 Biblioteca
+
+![Biblioteca](docs/screenshots/Biblioteca.jpg)
+
+## 📝 Vista previa
+
+![Preview](docs/screenshots/VisualizacionDeLetra.jpg)
+
+## 🔍 Busqueda Manual
+
+![Manual Search](docs/screenshots/BusquedaManual.jpg)
+
+## 📥 Descarga masiva
+
+![Download All](docs/screenshots/DescargarTodas.jpg)
+---
