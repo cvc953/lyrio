@@ -1,161 +1,165 @@
 
 ---
 
-# 🎵 **Lyrio – Descarga letras sincronizadas (.lrc) para tu música**
+# 🎵 **TimeLyr — Buscador avanzado de letras para tu música local**
 
-### *Un LRCGET moderno para Android, hecho en Flutter*
-
-[![Flutter](https://img.shields.io/badge/Flutter-3.35+-blue?logo=flutter)](https://flutter.dev)
-[![Platform](https://img.shields.io/badge/Platform-Android-green?logo=android)]()
-[![License](https://img.shields.io/badge/License-MIT-yellow)]()
-
-**Lyrio** escanea tu biblioteca musical, obtiene metadata real de los archivos de audio y descarga automáticamente letras sincronizadas (.lrc) usando **LRCLIB**.
-
-Rápido. Simple. Open Source.
+**TimeLyr** es una aplicación móvil desarrollada en **Flutter** que permite obtener, gestionar y visualizar letras de canciones almacenadas en tu dispositivo.
+Analiza tus archivos locales, extrae sus metadatos y descarga letras sincronizadas (LRC) o en texto plano desde **LRCLib**, manteniendo siempre la privacidad del usuario.
 
 ---
 
-## 🔥 **Características principales**
+## ✨ **Características principales**
 
-* 📁 Selector de carpetas compatible con **Android 11+** (SAF)
-* 🔍 Escaneo inteligente de música (`mp3`, `flac`, `m4a`, `wav`)
-* 🧠 Lee metadata **real** con `metadata_god`
-* 🎵 Descarga **automática** de letras sincronizadas desde LRCLIB
-* 📥 **Descargar todas las letras con un solo clic**
-* 💾 Guarda la carpeta seleccionada automáticamente
-* ⏳ Progreso en tiempo real durante descarga masiva
-* 📂 Los `.lrc` se guardan junto a la canción
-* 🎨 Interfaz minimalista y rápida
+* 🔍 **Detección automática de metadatos**
+  Extrae título, artista, álbum y duración sin necesidad de internet.
 
----
+* 🎼 **Compatibilidad completa con archivos LRC**
+  Parser propio, soporte para timestamps y renderizado fluido.
 
-## 🛠 **Tecnologías utilizadas**
+* 📡 **Obtención de letras desde LRCLib API**
+  Peticiones optimizadas según tus metadatos locales.
 
-| Tecnología             | Descripción                 |
-| ---------------------- | --------------------------- |
-| **Flutter 3.35+**      | Framework principal         |
-| **metadata_god**       | Lectura de ID3/FLAC/M4A/WAV |
-| **file_picker**        | Selección de carpetas       |
-| **permission_handler** | Manejo de permisos Android  |
-| **shared_preferences** | Configuración persistente   |
-| **http**               | API de LRCLIB               |
-| **path_provider**      | Rutas internas              |
+* 🚫 **Detección de canciones instrumentales**
+  Si no se encuentra letra, TimeLyr lo marca automáticamente.
+
+* 🖼️ **Caché inteligente de carátulas y datos**
+  Velocidad mejorada para listas grandes.
 
 ---
 
-## 📥 **Instalación**
+## 🚀 **Tecnologías utilizadas**
 
-### 1. Clonar repositorio
-
-```bash
-git clone https://github.com/tuusuario/lyrio.git
-cd lyrio
-```
-
-### 2. Instalar dependencias
-
-```bash
-flutter pub get
-```
-
-### 3. Ejecutar en Android
-
-```bash
-flutter run
-```
+| Componente  | Tecnología                       |
+| ----------- | -------------------------------- |
+| Framework   | Flutter (Dart 3)                 |
+| API         | LRCLib                           |
+| Metadatos   | metadata_god + servicios propios |
+| Parsing LRC | Implementación personalizada     |
+| UI          | Material 3 con temas propios     |
+| Caché       | almacenamiento local optimizado  |
 
 ---
 
-## 📱 **Permisos Android requeridos**
-
-`android/app/src/main/AndroidManifest.xml`:
-
-```xml
-<uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
-<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
- <uses-permission android:name="android.permission.INTERNET"/>
-
-```
-
-✔ Compatible con Android 10–14
-✔ Usa SAF, por lo que funciona incluso con restricciones modernas
-
----
-
-## 🌐 **API utilizada: LRCLIB**
-
-Se utiliza la API pública de LRCLIB:
-
-```
-https://lrclib.net/api/get?artist_name=ARTIST&track_name=TITLE&album_name=ALBUM_NAME&duration=DURATION
-```
-
-Campos importantes:
-
-* `syncedLyrics` → letra con timestamps (para .lrc)
-* `plainLyrics` → letra sin sincronizar
-
----
-
-## 📂 **Estructura del proyecto**
+## 📦 **Estructura del proyecto**
 
 ```
 lib/
- ├── main.dart
- ├── models/
- │     └── song.dart
- ├── screens/
- │     ├── home_screen.dart
- │     └── scan_screen.dart
- ├── services/
- │     ├── file_service.dart
- │     └── lrclib_service.dart
- ├── utils/
- │     ├── permissions.dart
- │     ├── folder_picker.dart
- │     └── app_storage.dart
+├── main.dart
+├── models
+│   ├── lyric_result.dart
+│   └── song.dart
+├── screens
+│   ├── home_screen.dart
+│   ├── library_screen.dart
+│   ├── lyric_preview_screen.dart
+│   ├── lyrics_viewer.dart
+│   ├── main_screen.dart
+│   ├── more_screen.dart
+│   ├── scan_screen.dart
+│   └── search_screen.dart
+├── services
+│   ├── download_manager.dart
+│   ├── file_service.dart
+│   ├── local_notification_service.dart
+│   ├── lrclib_service.dart
+│   ├── lyrics_service.dart
+│   └── notifications_settings.dart
+├── theme
+│   └── app_theme.dart
+├── utils
+│   ├── app_storage.dart
+│   ├── artwork_cache.dart
+│   ├── default_music_path.dart
+│   ├── folder_picker.dart
+│   ├── lyrics_utils.dart
+│   ├── permissions.dart
+│   ├── song_cache.dart
+│   └── song_database.dart
+└── widgets
+    ├── gradient_background.dart
+    ├── scan_music.dart
+    ├── select_directory.dart
+    ├── song_tile.dart
+    └── toggleNotifications.dart
 ```
 
 ---
 
-## 🚀 **Cómo usar Lyrio**
+## 🧪 **Estado del proyecto**
 
-1. Abre la app
-2. Pulsa **“Seleccionar carpeta”**
-3. Elige tu carpeta de música
-4. Escanea tus archivos de audio
-5. Obtén metadata real
-6. Descarga letras:
+TimeLyr actualmente soporta:
 
-   * Individualmente
-   * **O todas con un clic**
-7. Los archivos `.lrc` se guardan automáticamente junto a cada canción
+✔ escaneo de carpetas
+✔ lectura de metadatos locales
+✔ búsqueda automática de letras
+✔ descarga y almacenamiento de LRC
+✔ visualizador avanzado
+✔ detección de canciones instrumentales
+✔ caché de carátulas y canciones
+✔ búsqueda manual
+✔ configuración de notificaciones
+
+Trabajos futuros sugeridos:
+
+* 🎨 más temas personalizables
+* 🧠 mejoras en el algoritmo de coincidencia con la API
+* 🔔 mejor integración con notificaciones de sistema
+* 🔍 buscador por filtros (álbum, género, año…)
+* 🗃️ exportación/importación de letras y configuraciones
 
 ---
 
-## 🧭 **Roadmap**
+## 📥 **Instalación (Android)**
 
-* 🎨 Rediseño completo estilo Musixmatch
-* 🎵 Mostrar carátula del álbum
-* ⚡ Cache de metadata
-* 🔁 Actualización automática de letras
-* ✏️ Editor de `.lrc` integrado
-* ☁️ Integración con Drive / Dropbox
+1. Descarga el APK desde **Releases**.
+2. Instálalo en tu dispositivo Android.
+3. Selecciona la carpeta donde guardas tu música.
+4. TimeLyr analizará tus archivos y buscará letras automáticamente.
+
+---
+
+## 🧰 **Compilar desde código fuente**
+
+Requisitos:
+
+* Flutter SDK 3.19+
+* Android SDK
+* Dart 3.9+
+
+```bash
+git clone https://github.com/cvc953/timelyr.git
+cd timelyr
+flutter pub get
+flutter build apk --release
+```
+
+---
+
+## 🌐 **Cómo funciona TimeLyr internamente**
+
+1. El usuario selecciona su carpeta de música.
+2. TimeLyr escanea los archivos usando `permissions.dart` y `file_service.dart`.
+3. Extrae metadatos con una implementación ligera.
+4. Construye una petición óptima a LRCLib usando:
+
+   * título
+   * artista
+   * álbum
+   * duración
+5. Obtiene letra sincronizada o no sincronizada.
+6. Guarda la letra localmente (`download_manager.dart`).
+7. Si no hay letra → marca la canción como instrumental.
 
 ---
 
 ## 🤝 **Contribuciones**
 
-¡Las contribuciones son bienvenidas!
-Puedes abrir Issues o Pull Requests en GitHub.
+Las contribuciones son bienvenidas.
+Puedes colaborar mediante:
 
----
-
-## 📜 **Licencia**
-
-Distribuido bajo licencia **MIT**.
-Libre para usar, modificar y compartir.
+* Pull requests
+* Reporte de errores
+* Sugerencias de funciones
+* Correcciones de documentación
 
 ---

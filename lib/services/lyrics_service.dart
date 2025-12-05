@@ -4,6 +4,7 @@ import 'file_service.dart';
 import '../models/lyric_result.dart';
 import 'dart:async';
 import 'dart:io';
+import 'package:path/path.dart' as p;
 
 class LyricsService {
   /// Devuelve la letra ideal:
@@ -21,7 +22,7 @@ class LyricsService {
       );
 
       if (result == null) {
-        print(">>> No se encontró letra para ${song.title}");
+        //print(">>> No se encontró letra para ${song.title}");
         return null;
       }
 
@@ -40,13 +41,13 @@ class LyricsService {
       if (result.isInstrumental == true &&
           result.plainLyrics.isEmpty &&
           result.syncedLyrics.isEmpty) {
-        print(">>> La canción ${song.title} es instrumental.");
+        // print(">>> La canción ${song.title} es instrumental.");
         return "[Instrumental]";
       }
 
       return null;
     } catch (e) {
-      print(">>> Error en fetchLyrics: $e");
+      //print(">>> Error en fetchLyrics: $e");
       return null;
     }
   }
@@ -63,6 +64,9 @@ class LyricsService {
 
   static Future<bool> saveManualResult(Song song, LyricResult result) async {
     try {
+      final file = File(song.path);
+      final filename = p.basenameWithoutExtension(file.path);
+
       final String lyrics = result.syncedLyrics.isNotEmpty
           ? result.syncedLyrics
           : result.plainLyrics;
@@ -71,23 +75,20 @@ class LyricsService {
       if (result.isInstrumental &&
           result.syncedLyrics.isEmpty &&
           result.plainLyrics.isEmpty) {
-        final file = File(song.path);
-        final base = file.uri.pathSegments.last.split('.').first;
-        final lrcPath = "${file.parent.path}/$base.lrc";
+        //final base = file.uri.pathSegments.last.split('.').first;
+        final lrcPath = "${file.parent.path}/$filename.lrc";
 
         await File(lrcPath).writeAsString("[Instrumental]");
         return true;
       }
       //obtener la ruta del archivo de la cancion
-      final file = File(song.path);
-      final filenamen = file.uri.pathSegments.last.split('.').first;
-      final lrcPath = "${file.parent.path}/$filenamen.lrc";
+      final lrcPath = "${file.parent.path}/$filename.lrc";
 
       //guardar las letras en el archivo .lrc
       final lrcFile = File(lrcPath);
       await lrcFile.writeAsString(lyrics);
     } catch (e) {
-      print(">>> Error en saveManualResult: $e");
+      // print(">>> Error en saveManualResult: $e");
       return false;
     }
     return true;

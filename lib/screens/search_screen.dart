@@ -25,7 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController artistController = TextEditingController();
 
   bool isSearching = false;
-  String? _lyric;
+  //String? _lyric;
   String? _error;
   List<LyricResult> results = [];
 

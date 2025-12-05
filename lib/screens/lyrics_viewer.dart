@@ -6,6 +6,7 @@ import 'package:lyrio/utils/artwork_cache.dart';
 import '../models/song.dart';
 import '../services/lyrics_service.dart';
 import 'dart:typed_data';
+import 'package:path/path.dart' as p;
 
 class LyricsViewer extends StatefulWidget {
   final Song song;
@@ -32,8 +33,8 @@ class _LyricsViewerState extends State<LyricsViewer> {
   Future<void> loadLyrics() async {
     // Ver si ya existe archivo LRC
     final file = File(widget.song.path);
-    final base = file.uri.pathSegments.last.split('.').first;
-    final lrcPath = "${file.parent.path}/$base.lrc";
+    final filename = p.basenameWithoutExtension(file.path);
+    final lrcPath = "${file.parent.path}/$filename.lrc";
 
     if (File(lrcPath).existsSync()) {
       lyrics = await File(lrcPath).readAsString();

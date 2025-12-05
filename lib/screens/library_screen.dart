@@ -9,6 +9,7 @@ import '../models/song.dart';
 import 'lyrics_viewer.dart';
 import 'dart:typed_data';
 import '../services/download_manager.dart';
+import 'package:path/path.dart' as p;
 
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
@@ -61,8 +62,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   bool hasLrc(Song song) {
     final file = File(song.path);
-    final base = file.uri.pathSegments.last.split('.').first;
-    return File("${file.parent.path}/$base.lrc").existsSync();
+    final filename = p.basenameWithoutExtension(file.path);
+    return File("${file.parent.path}/$filename.lrc").existsSync();
   }
 
   Future<void> downloadOne(Song song) async {

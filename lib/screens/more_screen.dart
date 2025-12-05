@@ -71,7 +71,7 @@ class _MoreScreenState extends State<MoreScreen> {
           ),
           SizedBox(height: 30),
           ListTile(
-            leading: notificationsEnable == false
+            leading: notificationsEnable == true
                 ? Icon(Icons.notifications_on, color: Colors.white)
                 : Icon(Icons.notifications_off, color: Colors.white),
             title: Text(
@@ -80,16 +80,16 @@ class _MoreScreenState extends State<MoreScreen> {
             ),
             onTap: () async {
               // Acción al tocar "Notificaciones"
-              showDialog(
+              final newValue = await showDialog<bool>(
                 context: context,
                 builder: (context) => ToggleNotifications(),
               );
-              await NotificationSettings.setEnabled(notificationsEnable);
-
-              setState(() async {
-                //notificationsEnable = !notificationsEnable;
-                notificationsEnable = !notificationsEnable;
-              });
+              //await NotificationSettings.setEnabled(notificationsEnable);
+              if (newValue != null) {
+                setState(() {
+                  notificationsEnable = newValue;
+                });
+              }
             },
           ),
           ListTile(

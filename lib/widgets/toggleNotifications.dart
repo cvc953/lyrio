@@ -26,7 +26,7 @@ class _ToggleNotificationsState extends State<ToggleNotifications> {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Color(0xFF0D1B2A),
-      title: toggle == true
+      title: toggle != true
           ? Text(
               'Habilitar notificaciones',
               textAlign: TextAlign.center,
@@ -37,7 +37,7 @@ class _ToggleNotificationsState extends State<ToggleNotifications> {
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white),
             ),
-      content: toggle == true
+      content: toggle != true
           ? Text(
               '¿Desea habilitar las notificaciones para letras de canciones y actualizaciones?',
               textAlign: TextAlign.center,
@@ -55,7 +55,7 @@ class _ToggleNotificationsState extends State<ToggleNotifications> {
               toggle = !toggle;
             });
             await NotificationSettings.setEnabled(toggle);
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(toggle);
           },
           child: Text('Sí', style: TextStyle(color: Colors.white)),
         ),

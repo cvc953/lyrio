@@ -59,8 +59,6 @@ class DownloadManager {
       await Future.delayed(const Duration(milliseconds: 20));
     }
 
-    //NotificationService.complete(notificationId);
-
     isRunning = false;
   }
 }

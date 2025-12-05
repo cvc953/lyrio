@@ -4,11 +4,12 @@ import 'package:lyrio/utils/song_database.dart';
 import 'package:metadata_god/metadata_god.dart';
 import '../models/song.dart';
 import 'dart:typed_data';
+import 'package:path/path.dart' as p;
 
 class FileService {
   static List<Song> librarySongs = [];
 
-  static final List<String> _allowedExtensions = [
+  /*static final List<String> _allowedExtensions = [
     ".mp3",
     ".flac",
     ".m4a",
@@ -22,7 +23,7 @@ class FileService {
     "Audio",
     "Audios",
     "Songs",
-  ];
+  ];*/
 
   static Future<void> scanMusicWithCallback(
     String rootPath, {
@@ -48,7 +49,7 @@ class FileService {
         try {
           final metadata = await MetadataGod.readMetadata(file: entity.path);
 
-          final art = metadata.picture?.data;
+          //final art = metadata.picture?.data;
 
           if (metadata.picture?.data != null) {
             ArtworkCache.save(entity.path, metadata.picture!.data);
@@ -74,14 +75,14 @@ class FileService {
 
     librarySongs = songs;
     await SongDatabase.save(songs);
-    final art = await ArtworkCache.load(songs[0].path);
+    //final art = await ArtworkCache.load(songs[0].path);
   }
 
   static Future<void> saveLRC(String songPath, String lyrics) async {
     final file = File(songPath);
     final dir = file.parent.path;
-    final base = file.uri.pathSegments.last.split('.').first;
-    final lrcPath = "$dir/$base.lrc";
+    final filename = p.basenameWithoutExtension(file.path);
+    final lrcPath = "$dir/$filename.lrc";
 
     final lrcFile = File(lrcPath);
     await lrcFile.writeAsString(lyrics);
