@@ -164,27 +164,31 @@ Puedes colaborar mediante:
 
 ---
 
-## 📄 **Licencia**
+## 📄 Licencia
 
-*(Indica si deseas MIT, Apache 2.0, GPL, o puedo recomendar la más adecuada.)*
-
----
+Este proyecto está licenciado bajo la **MIT License**.  
+Puedes ver el archivo completo en [`LICENCIA`](LICENSE).
 
 ## 📸 **Capturas (opcional)**
 
 ## 📚 Biblioteca
 
-![Biblioteca](docs/screenshots/Biblioteca.jpg)
+![Biblioteca](docs/screenshots/Biblioteca.jpeg)
 
 ## 📝 Vista previa
 
-![Preview](docs/screenshots/VisualizacionDeLetra.jpg)
+![Letras](docs/screenshots/VisualizacionDeLetra.jpeg)
 
 ## 🔍 Busqueda Manual
 
-![Manual Search](docs/screenshots/BusquedaManual.jpg)
+![Busqueda manual](docs/screenshots/BusquedaManual.jpeg)
 
 ## 📥 Descarga masiva
 
-![Download All](docs/screenshots/DescargarTodas.jpg)
+![Descargar todas](docs/screenshots/DescargarTodas.jpeg)
+
+## ⚙️ Más / Opciones  
+
+![Más opciones](docs/screenshots/Mas.jpeg)
+
 ---
