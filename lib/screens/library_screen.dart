@@ -42,7 +42,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   Future<void> loadArtworkCache() async {
     for (var song in allSongs) {
-      final art = await ArtworkCache.load(song.path);
+      //final art = await ArtworkCache.load(song.path);
       artworkCache[song.path] = await ArtworkCache.load(song.path);
     }
     setState(() {});
