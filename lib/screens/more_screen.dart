@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lyrio/screens/about_screen.dart';
 import 'package:lyrio/widgets/scan_music.dart';
 import 'package:lyrio/widgets/select_directory.dart';
 import '../services/notifications_settings.dart';
@@ -118,17 +119,14 @@ class _MoreScreenState extends State<MoreScreen> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.help, color: Colors.white),
-            title: Text('Ayuda', style: TextStyle(color: Colors.white)),
-            onTap: () {
-              // Acción al tocar "Ayuda"
-            },
-          ),
-          ListTile(
             leading: Icon(Icons.info, color: Colors.white),
             title: Text('Acerca de', style: TextStyle(color: Colors.white)),
             onTap: () {
               // Acción al tocar "Acerca de"
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const AboutScreen()),
+              );
             },
           ),
         ],

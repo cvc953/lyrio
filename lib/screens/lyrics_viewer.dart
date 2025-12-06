@@ -253,17 +253,6 @@ class _LyricsViewerState extends State<LyricsViewer> {
                         ),
                       ),
 
-                /*ElevatedButton.icon(
-                  onPressed: () => downloadLyrics(),
-                  icon: const Icon(Icons.download, color: Colors.white),
-                  label: const Text(
-                    "Descargar letra",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
-                  ),
-                ),*/
                 const SizedBox(height: 15),
 
                 // Letra

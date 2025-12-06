@@ -60,14 +60,25 @@ class LyricPreviewScreen extends StatelessWidget {
                   color: Colors.white.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: Text(
-                  lyrics,
-                  style: const TextStyle(color: Colors.white, fontSize: 14),
-                ),
+                child: result.isInstrumental != true
+                    ? Text(
+                        lyrics,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      )
+                    : Text(
+                        "Esta canción es instrumental y no contiene letra.",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
               ),
 
+              //if (result.isInstrumental == true)
               const SizedBox(height: 30),
-
               // BOTONES
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

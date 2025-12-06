@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = const [
     LibraryScreen(),
-    SearchScreen(),
+    //SearchScreen(),
     MoreScreen(),
   ];
 
@@ -101,11 +101,11 @@ class _MainScreenState extends State<MainScreen> {
                 selectedIcon: Icon(Icons.library_music, color: Colors.white),
                 label: "Biblioteca",
               ),
-              NavigationDestination(
+              /*NavigationDestination(
                 icon: Icon(Icons.search, color: Colors.white70),
                 selectedIcon: Icon(Icons.search_rounded, color: Colors.white),
                 label: "Buscar",
-              ),
+              ),*/
               NavigationDestination(
                 icon: Icon(Icons.more_horiz, color: Colors.white70),
                 selectedIcon: Icon(Icons.more, color: Colors.white),

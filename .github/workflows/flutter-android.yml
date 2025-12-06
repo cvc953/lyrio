@@ -2,10 +2,10 @@ name: Build Flutter Android APK
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    tags:
+      - 'v*'
 
-jobs:
+    jobs:
   build:
     runs-on: ubuntu-latest
 
@@ -47,11 +47,18 @@ jobs:
             "cmake;3.22.1"
 
       - name: Build APK
-        run: flutter build apk --release
+        run: flutter build apk --release --split-per-abi
  
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
+
+      -name: Push to Releases
+      uses: ncipollo/release-action@v1
+      with:
+          artifacts: "build/app/outputs/apk/release/*"
+          tag: v1.0.${{ github.run_number }}
+          token: ${{ secrets.TOKEN }}
 
