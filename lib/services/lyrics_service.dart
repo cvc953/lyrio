@@ -42,7 +42,7 @@ class LyricsService {
           result.plainLyrics.isEmpty &&
           result.syncedLyrics.isEmpty) {
         // print(">>> La canción ${song.title} es instrumental.");
-        return "[Instrumental]";
+        return "[ar:${song.artist.toString()}]\n[al:${song.album.toString()}]\n[ti:${song.title.toString()}]\n[Instrumental]\n[by:TimeLyr]\n[source:LRCLib.net]";
       }
 
       return null;
@@ -58,7 +58,7 @@ class LyricsService {
 
     if (lyrics == null) return false;
 
-    await FileService.saveLRC(song.path, lyrics);
+    await FileService.saveLRC(song.path, lyrics, song);
     return true;
   }
 
@@ -72,13 +72,17 @@ class LyricsService {
           : result.plainLyrics;
       if (lyrics.trim().isEmpty) return false;
 
-      if (result.isInstrumental &&
-          result.syncedLyrics.isEmpty &&
-          result.plainLyrics.isEmpty) {
+      if (result.isInstrumental ==
+          true //&&
+      //result.syncedLyrics.isEmpty &&
+      // result.plainLyrics.isEmpty
+      ) {
         //final base = file.uri.pathSegments.last.split('.').first;
         final lrcPath = "${file.parent.path}/$filename.lrc";
 
-        await File(lrcPath).writeAsString("[Instrumental]");
+        await File(lrcPath).writeAsString(
+          "[ar:${song.artist.toString()}]\n[al:${song.album.toString()}]\n[ti:${song.title.toString()}]\n[Instrumental]\n[by:TimeLyr]\n[source:LRCLib.net]",
+        );
         return true;
       }
       //obtener la ruta del archivo de la cancion
@@ -86,7 +90,9 @@ class LyricsService {
 
       //guardar las letras en el archivo .lrc
       final lrcFile = File(lrcPath);
-      await lrcFile.writeAsString(lyrics);
+      await lrcFile.writeAsString(
+        '$lyrics\n[ar:${song.artist.toString()}]\n[al:${song.album.toString()}]\n[ti:${song.title.toString()}]\n\n[by:TimeLyr]\n[source:LRCLib.net]',
+      );
     } catch (e) {
       // print(">>> Error en saveManualResult: $e");
       return false;

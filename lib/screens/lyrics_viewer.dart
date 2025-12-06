@@ -232,6 +232,7 @@ class _LyricsViewerState extends State<LyricsViewer> {
                                 initialTitle: widget.song.title,
                                 initialAlbum: widget.song.album,
                                 initialArtist: widget.song.artist,
+                                song: widget.song,
                               ),
                             ),
                           );

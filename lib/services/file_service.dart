@@ -9,22 +9,6 @@ import 'package:path/path.dart' as p;
 class FileService {
   static List<Song> librarySongs = [];
 
-  /*static final List<String> _allowedExtensions = [
-    ".mp3",
-    ".flac",
-    ".m4a",
-    ".wav",
-  ];
-
-  static final List<String> _allowedFolders = [
-    "Music",
-    "Download",
-    "Downloads",
-    "Audio",
-    "Audios",
-    "Songs",
-  ];*/
-
   static Future<void> scanMusicWithCallback(
     String rootPath, {
     required Function(String path, int scanned, int found) onScan,
@@ -39,7 +23,7 @@ class FileService {
 
       onScan(entity.path, scanned, songs.length);
 
-      print("Leyendo: ${entity.path}");
+      //print("Leyendo: ${entity.path}");
 
       if (entity is File &&
           (entity.path.endsWith(".mp3") ||
@@ -78,14 +62,16 @@ class FileService {
     //final art = await ArtworkCache.load(songs[0].path);
   }
 
-  static Future<void> saveLRC(String songPath, String lyrics) async {
+  static Future<void> saveLRC(String songPath, String lyrics, Song song) async {
     final file = File(songPath);
     final dir = file.parent.path;
     final filename = p.basenameWithoutExtension(file.path);
     final lrcPath = "$dir/$filename.lrc";
 
     final lrcFile = File(lrcPath);
-    await lrcFile.writeAsString(lyrics);
+    await lrcFile.writeAsString(
+      '$lyrics\n[ar:${song.artist.toString()}]\n[al:${song.album.toString()}]\n[ti:${song.title.toString()}]\n\n[by:TimeLyr]\n[source:LRCLib.net]',
+    );
   }
 
   static Future<Uint8List?> loadArtwork(String path) async {

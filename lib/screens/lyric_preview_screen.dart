@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:timelyr/models/lyric_result.dart';
 import 'package:timelyr/services/file_service.dart';
+import '../models/song.dart';
 
 class LyricPreviewScreen extends StatelessWidget {
   final LyricResult result;
-  final String? savePath; // ruta del archivo .lrc de la canción original
+  //final String? savePath; // ruta del archivo .lrc de la canción original
+  final Song song;
 
-  const LyricPreviewScreen({super.key, required this.result, this.savePath});
+  const LyricPreviewScreen({
+    super.key,
+    required this.result,
+    //this.savePath,
+    required this.song,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final lyrics = result.syncedLyrics.isNotEmpty
+    /* final lyrics = result.syncedLyrics.isNotEmpty
+
         ? result.syncedLyrics
         : result.plainLyrics;
+*/
+
+    final lyrics = result.isInstrumental == true
+        ? "[ar:${result.artist}]\n[al:${result.album}]\n[ti:${result.title}]\n[Instrumental]\n[by:TimeLyr]\n[source:LRCLib.net]"
+        : (result.syncedLyrics.isNotEmpty
+              ? result.syncedLyrics
+              : result.plainLyrics);
 
     String formatDuration(double seconds) {
       final int total = seconds.floor();
@@ -85,7 +100,14 @@ class LyricPreviewScreen extends StatelessWidget {
                 children: [
                   // Seleccionar esta letra
                   ElevatedButton.icon(
-                    onPressed: () {
+                    onPressed: () async {
+                      await FileService.saveLRC(song.path, lyrics, song);
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Letra guardada como archivo .lrc"),
+                        ),
+                      );
                       Navigator.pop(context, result);
                     },
                     icon: const Icon(Icons.check, color: Colors.white),
@@ -98,20 +120,20 @@ class LyricPreviewScreen extends StatelessWidget {
                     ),
                   ),
 
-                  if (savePath != null)
-                    ElevatedButton.icon(
-                      onPressed: () async {
-                        await FileService.saveLRC(savePath!, lyrics);
-                        // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Letra guardada como archivo .lrc"),
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.save),
-                      label: const Text("Guardar"),
-                    ),
+                  // if (savePath != null)
+                  /*ElevatedButton.icon(
+                    onPressed: () async {
+                      await FileService.saveLRC(savePath!, lyrics);
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Letra guardada como archivo .lrc"),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.save),
+                    label: const Text("Guardar"),
+                  ),*/
                 ],
               ),
             ],

@@ -3,16 +3,19 @@ import 'package:timelyr/models/lyric_result.dart';
 import 'package:timelyr/services/lrclib_service.dart';
 import 'package:timelyr/widgets/gradient_background.dart';
 import 'lyric_preview_screen.dart';
+import '../models/song.dart';
 
 class SearchScreen extends StatefulWidget {
   final String initialTitle;
   final String initialArtist;
   final String initialAlbum;
+  final Song song;
   const SearchScreen({
     super.key,
     this.initialTitle = "",
     this.initialArtist = "",
     this.initialAlbum = "",
+    required this.song,
   });
 
   @override
@@ -241,7 +244,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           MaterialPageRoute(
                             builder: (_) => LyricPreviewScreen(
                               result: item,
-                              savePath: null,
+                              song: widget.song,
                             ),
                           ),
                         );
