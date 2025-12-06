@@ -169,7 +169,7 @@ Puedes colaborar mediante:
 Este proyecto está licenciado bajo la **MIT License**.  
 Puedes ver el archivo completo en [`LICENCIA`](LICENSE).
 
-## 📸 **Capturas (opcional)**
+## 📸 **Capturas**
 
 ## 📚 Biblioteca
 
