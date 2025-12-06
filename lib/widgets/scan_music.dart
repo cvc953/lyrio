@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lyrio/screens/scan_screen.dart';
+import 'package:timelyr/screens/scan_screen.dart';
 import '../utils/default_music_path.dart';
 import 'select_directory.dart';
-import '../screens/library_screen.dart';
 
 class ScanMusic extends StatelessWidget {
   const ScanMusic({super.key});

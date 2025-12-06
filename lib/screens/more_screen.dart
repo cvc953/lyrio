@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lyrio/screens/about_screen.dart';
-import 'package:lyrio/widgets/scan_music.dart';
-import 'package:lyrio/widgets/select_directory.dart';
+import 'package:timelyr/screens/about_screen.dart';
+import 'package:timelyr/widgets/scan_music.dart';
+import 'package:timelyr/widgets/select_directory.dart';
 import '../services/notifications_settings.dart';
 import '../widgets/toggleNotifications.dart';
+import '../utils/permissions.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({super.key});
@@ -81,11 +82,11 @@ class _MoreScreenState extends State<MoreScreen> {
             ),
             onTap: () async {
               // Acción al tocar "Notificaciones"
+              AppPermissions.requestNotification();
               final newValue = await showDialog<bool>(
                 context: context,
                 builder: (context) => ToggleNotifications(),
               );
-              //await NotificationSettings.setEnabled(notificationsEnable);
               if (newValue != null) {
                 setState(() {
                   notificationsEnable = newValue;

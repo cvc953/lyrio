@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metadata_god/metadata_god.dart';
-import 'package:lyrio/screens/home_screen.dart';
-import 'package:lyrio/screens/main_screen.dart';
+import 'package:timelyr/screens/home_screen.dart';
+import 'package:timelyr/screens/main_screen.dart';
 import 'utils/app_storage.dart';
 import 'utils/artwork_cache.dart';
 

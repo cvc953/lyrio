@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lyrio/models/lyric_result.dart';
-import 'package:lyrio/services/file_service.dart';
+import 'package:timelyr/models/lyric_result.dart';
+import 'package:timelyr/services/file_service.dart';
 
 class LyricPreviewScreen extends StatelessWidget {
   final LyricResult result;

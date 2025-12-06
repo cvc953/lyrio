@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:lyrio/utils/artwork_cache.dart';
+import 'package:timelyr/utils/artwork_cache.dart';
 import '../widgets/gradient_background.dart';
 import '../services/file_service.dart';
 import '../services/lyrics_service.dart';

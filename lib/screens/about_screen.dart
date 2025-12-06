@@ -83,7 +83,7 @@ class AboutScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
-                    'Versión de la aplicación: 1.0.0',
+                    'Versión de la aplicación: 1.0.1',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white54, fontSize: 12),
                   ),

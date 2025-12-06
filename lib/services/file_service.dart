@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:lyrio/utils/artwork_cache.dart';
-import 'package:lyrio/utils/song_database.dart';
+import 'package:timelyr/utils/artwork_cache.dart';
+import 'package:timelyr/utils/song_database.dart';
 import 'package:metadata_god/metadata_god.dart';
 import '../models/song.dart';
 import 'dart:typed_data';

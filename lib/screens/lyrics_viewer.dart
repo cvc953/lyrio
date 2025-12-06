@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:lyrio/screens/search_screen.dart';
-import 'package:lyrio/utils/artwork_cache.dart';
+import 'package:timelyr/screens/search_screen.dart';
+import 'package:timelyr/utils/artwork_cache.dart';
 import '../models/song.dart';
 import '../services/lyrics_service.dart';
 import 'dart:typed_data';

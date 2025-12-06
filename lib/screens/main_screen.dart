@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lyrio/utils/song_database.dart';
+import 'package:timelyr/utils/song_database.dart';
 import '../widgets/gradient_background.dart';
 import 'library_screen.dart';
-import 'search_screen.dart';
 import 'more_screen.dart';
 import '../utils/default_music_path.dart';
 import '../utils/app_storage.dart';

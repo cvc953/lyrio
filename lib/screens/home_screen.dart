@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lyrio/utils/app_storage.dart';
-import 'package:lyrio/utils/permissions.dart';
+import 'package:timelyr/utils/app_storage.dart';
+import 'package:timelyr/utils/permissions.dart';
 import '../widgets/gradient_background.dart';
 import 'scan_screen.dart';
 import '../utils/default_music_path.dart';
@@ -17,10 +17,9 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.lyrics_rounded, size: 120, color: Colors.white),
               const SizedBox(height: 20),
               const Text(
-                "Lyrio",
+                "TimeLyr",
                 style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
@@ -59,6 +58,7 @@ class HomeScreen extends StatelessWidget {
                     );
                     return;
                   }
+                  AppPermissions.requestNotification();
 
                   await AppStorage.setFirstRunFalse();
                   Navigator.pushReplacement(

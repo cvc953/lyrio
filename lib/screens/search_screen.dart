@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lyrio/models/lyric_result.dart';
-import 'package:lyrio/services/lrclib_service.dart';
-import 'package:lyrio/widgets/gradient_background.dart';
+import 'package:timelyr/models/lyric_result.dart';
+import 'package:timelyr/services/lrclib_service.dart';
+import 'package:timelyr/widgets/gradient_background.dart';
 import 'lyric_preview_screen.dart';
 
 class SearchScreen extends StatefulWidget {
