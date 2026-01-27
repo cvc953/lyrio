@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:timelyr/models/lyric_result.dart';
 import 'package:timelyr/services/file_service.dart';
 import '../models/song.dart';
+import 'package:path/path.dart' as p;
 
 class LyricPreviewScreen extends StatelessWidget {
   final LyricResult result;
@@ -17,12 +19,6 @@ class LyricPreviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /* final lyrics = result.syncedLyrics.isNotEmpty
-
-        ? result.syncedLyrics
-        : result.plainLyrics;
-*/
-
     final lyrics = result.isInstrumental == true
         ? "[ar:${result.artist}]\n[al:${result.album}]\n[ti:${result.title}]\n[Instrumental]\n[by:TimeLyr]\n[source:LRCLib.net]"
         : (result.syncedLyrics.isNotEmpty
@@ -101,14 +97,66 @@ class LyricPreviewScreen extends StatelessWidget {
                   // Seleccionar esta letra
                   ElevatedButton.icon(
                     onPressed: () async {
-                      await FileService.saveLRC(song.path, lyrics, song);
-                      // ignore: use_build_context_synchronously
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Letra guardada como archivo .lrc"),
-                        ),
-                      );
-                      Navigator.pop(context, result);
+                      // Verificar si ya existe un archivo .lrc
+                      final file = File(song.path);
+                      final filename = p.basenameWithoutExtension(file.path);
+                      final lrcPath = "${file.parent.path}/$filename.lrc";
+
+                      bool shouldSave = true;
+
+                      if (File(lrcPath).existsSync()) {
+                        // Mostrar diálogo de confirmación
+                        final confirmed = await showDialog<bool>(
+                          context: context,
+                          builder: (BuildContext dialogContext) {
+                            return AlertDialog(
+                              backgroundColor: const Color(0xFF1B2838),
+                              title: const Text(
+                                "Reemplazar letra existente",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              content: const Text(
+                                "Esta canción ya tiene letra. ¿Deseas reemplazarla con la nueva letra?",
+                                style: TextStyle(color: Colors.white70),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.of(dialogContext).pop(false),
+                                  child: const Text(
+                                    "Cancelar",
+                                    style: TextStyle(color: Colors.white70),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () =>
+                                      Navigator.of(dialogContext).pop(true),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blueAccent,
+                                  ),
+                                  child: const Text(
+                                    "Reemplazar",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+
+                        shouldSave = confirmed ?? false;
+                      }
+
+                      if (shouldSave) {
+                        await FileService.saveLRC(song.path, lyrics, song);
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Letra guardada como archivo .lrc"),
+                          ),
+                        );
+                        Navigator.pop(context, result);
+                      }
                     },
                     icon: const Icon(Icons.check, color: Colors.white),
                     label: const Text(

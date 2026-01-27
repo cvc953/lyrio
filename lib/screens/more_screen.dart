@@ -51,7 +51,7 @@ class _MoreScreenState extends State<MoreScreen> {
             leading: null,
             title: Center(
               child: Text(
-                'Lyrio',
+                'TimeLyr',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 40,

@@ -100,11 +100,6 @@ class _MainScreenState extends State<MainScreen> {
                 selectedIcon: Icon(Icons.library_music, color: Colors.white),
                 label: "Biblioteca",
               ),
-              /*NavigationDestination(
-                icon: Icon(Icons.search, color: Colors.white70),
-                selectedIcon: Icon(Icons.search_rounded, color: Colors.white),
-                label: "Buscar",
-              ),*/
               NavigationDestination(
                 icon: Icon(Icons.more_horiz, color: Colors.white70),
                 selectedIcon: Icon(Icons.more, color: Colors.white),

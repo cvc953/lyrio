@@ -42,7 +42,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   Future<void> loadArtworkCache() async {
     for (var song in allSongs) {
-      //final art = await ArtworkCache.load(song.path);
+      final art = await ArtworkCache.load(song.path);
       artworkCache[song.path] = await ArtworkCache.load(song.path);
     }
     setState(() {});
@@ -213,38 +213,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [
               SliverAppBar(
-                title: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
-                      ),
-                      child: TextField(
-                        onChanged: filterSongs,
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          hintText: "Buscar canción, artista o álbum...",
-                          hintStyle: const TextStyle(color: Colors.white54),
-                          filled: true,
-                          fillColor: Colors.white12,
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            color: Colors.white70,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: BorderSide.none,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            vertical: 0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
                 backgroundColor: Colors.transparent,
                 pinned: false,
                 floating: true,
@@ -252,6 +220,52 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 automaticallyImplyLeading: false,
                 snap: true,
                 flexibleSpace: FlexibleSpaceBar(),
+
+                title: Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          onChanged: filterSongs,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            hintText: "Buscar canción, artista o álbum...",
+                            hintStyle: const TextStyle(color: Colors.white54),
+                            filled: true,
+                            fillColor: Colors.white12,
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: Colors.white70,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(14),
+                              borderSide: BorderSide.none,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            filteredSongs = List.from(allSongs);
+                            filteredSongs.sort(
+                              (a, b) => a.title.compareTo(b.title),
+                            );
+                          });
+                        },
+                        icon: const Icon(
+                          Icons.filter_list,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ];
           },
@@ -405,8 +419,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                                 size: 28,
                                               )
                                             : downloadingSongs.contains(
-                                                song.path,
-                                              )
+                                                    song.path,
+                                                  ) ||
+                                                  dm.isRunning
                                             ? const SizedBox(
                                                 width: 26,
                                                 height: 26,
