@@ -101,10 +101,11 @@ class LyricPreviewScreen extends StatelessWidget {
                       final file = File(song.path);
                       final filename = p.basenameWithoutExtension(file.path);
                       final lrcPath = "${file.parent.path}/$filename.lrc";
+                      final lrcFile = File(lrcPath);
 
                       bool shouldSave = true;
 
-                      if (File(lrcPath).existsSync()) {
+                      if (lrcFile.existsSync()) {
                         // Mostrar diálogo de confirmación
                         final confirmed = await showDialog<bool>(
                           context: context,
@@ -148,14 +149,34 @@ class LyricPreviewScreen extends StatelessWidget {
                       }
 
                       if (shouldSave) {
-                        await FileService.saveLRC(song.path, lyrics, song);
-                        // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Letra guardada como archivo .lrc"),
-                          ),
-                        );
-                        Navigator.pop(context, result);
+                        try {
+                          // Eliminar archivo existente si existe
+                          if (lrcFile.existsSync()) {
+                            await lrcFile.delete();
+                          }
+                          // Guardar la nueva letra
+                          await lrcFile.writeAsString(
+                            '$lyrics\n[ar:${song.artist.toString()}]\n[al:${song.album.toString()}]\n[ti:${song.title.toString()}]\n\n[by:TimeLyr]\n[source:LRCLib.net]',
+                          );
+                          // ignore: use_build_context_synchronously
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Letra guardada como archivo .lrc"),
+                            ),
+                          );
+                          // ignore: use_build_context_synchronously
+                          Navigator.pop(context, result);
+                        } catch (e) {
+                          // ignore: use_build_context_synchronously
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                "Error al guardar la letra: ${e.toString()}",
+                              ),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
                       }
                     },
                     icon: const Icon(Icons.check, color: Colors.white),
