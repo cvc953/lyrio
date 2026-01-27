@@ -248,21 +248,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 5),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            filteredSongs = List.from(allSongs);
-                            filteredSongs.sort(
-                              (a, b) => a.title.compareTo(b.title),
-                            );
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.filter_list,
-                          color: Colors.white70,
-                        ),
-                      ),
                     ],
                   ),
                 ),
