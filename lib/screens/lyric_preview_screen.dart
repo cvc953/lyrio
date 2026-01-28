@@ -107,6 +107,8 @@ class LyricPreviewScreen extends StatelessWidget {
 
                       if (lrcFile.existsSync()) {
                         // Mostrar diálogo de confirmación
+                        if (!context.mounted) return;
+
                         final confirmed = await showDialog<bool>(
                           context: context,
                           builder: (BuildContext dialogContext) {
@@ -150,23 +152,32 @@ class LyricPreviewScreen extends StatelessWidget {
 
                       if (shouldSave) {
                         try {
-                          // Eliminar archivo existente si existe
-                          if (lrcFile.existsSync()) {
-                            await lrcFile.delete();
-                          }
-                          // Guardar la nueva letra
-                          await lrcFile.writeAsString(
-                            '$lyrics\n[ar:${song.artist.toString()}]\n[al:${song.album.toString()}]\n[ti:${song.title.toString()}]\n\n[by:TimeLyr]\n[source:LRCLib.net]',
+                          // Guardar la nueva letra (sobrescribe si existe)
+                          final lyricsContent =
+                              '$lyrics\n[ar:${song.artist.toString()}]\n[al:${song.album.toString()}]\n[ti:${song.title.toString()}]\n\n[by:TimeLyr]\n[source:LRCLib.net]';
+
+                          // Usar writeAsString con flush
+                          await lrcFile.writeAsString(lyricsContent);
+
+                          // Pequeña espera para asegurar que se escribió
+                          await Future.delayed(
+                            const Duration(milliseconds: 300),
                           );
+
+                          if (!context.mounted) return;
+
                           // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text("Letra guardada como archivo .lrc"),
                             ),
                           );
+
+                          if (!context.mounted) return;
                           // ignore: use_build_context_synchronously
                           Navigator.pop(context, result);
                         } catch (e) {
+                          if (!context.mounted) return;
                           // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
